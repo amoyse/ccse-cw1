@@ -1,0 +1,64 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.0.0
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacificTours.Server", "Server\PacificTours.Server.csproj", "{7A7F6699-EC44-4B47-8887-737452D8F5D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacificTours.Client", "Client\PacificTours.Client.csproj", "{BCD46757-EE10-468E-A452-04A519053D59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacificTours.Shared", "Shared\PacificTours.Shared.csproj", "{C2952843-7BF0-4143-8515-5C002ECC71E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCD46757-EE10-468E-A452-04A519053D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Debug|x64.Build.0 = Debug|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Debug|x86.Build.0 = Debug|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Release|x64.ActiveCfg = Release|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Release|x64.Build.0 = Release|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Release|x86.ActiveCfg = Release|Any CPU
+		{BCD46757-EE10-468E-A452-04A519053D59}.Release|x86.Build.0 = Release|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Debug|x64.Build.0 = Debug|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Debug|x86.Build.0 = Debug|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Release|x64.ActiveCfg = Release|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Release|x64.Build.0 = Release|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Release|x86.ActiveCfg = Release|Any CPU
+		{7A7F6699-EC44-4B47-8887-737452D8F5D4}.Release|x86.Build.0 = Release|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Debug|x64.Build.0 = Debug|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Debug|x86.Build.0 = Debug|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Release|x64.ActiveCfg = Release|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Release|x64.Build.0 = Release|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Release|x86.ActiveCfg = Release|Any CPU
+		{C2952843-7BF0-4143-8515-5C002ECC71E5}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E65A481-1AE0-478D-86B9-093230A8F469}
+	EndGlobalSection
+EndGlobal

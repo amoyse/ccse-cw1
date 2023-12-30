@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj": {}
+  },
+  "projects": {
+    "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj",
+        "projectName": "PacificTours.Shared",
+        "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj",
+        "packagesPath": "/home/alex/.nuget/packages/",
+        "outputPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/alex/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.114/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
