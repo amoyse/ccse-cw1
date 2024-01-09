@@ -1,0 +1,93 @@
+{
+  "Files": [
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/bin/Debug/net7.0/wwwroot/_framework/blazor.webassembly.js",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/obj/Debug/net7.0/build-gz/CqAOHvUj.gz",
+      "PackagePath": "staticwebassets/_framework/blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/obj/Debug/net7.0/scopedcss/bundle/PacificTours.Client.styles.css",
+      "PackagePath": "staticwebassets/PacificTours.Client.styles.css"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/FONT-LICENSE",
+      "PackagePath": "staticwebassets/css/open-iconic"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/ICON-LICENSE",
+      "PackagePath": "staticwebassets/css/open-iconic"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/README.md",
+      "PackagePath": "staticwebassets/css/open-iconic/README.md"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/open-iconic/font/css/open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.eot",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.eot"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.otf",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.otf"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.svg",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.svg"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.ttf"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/css/open-iconic/font/fonts/open-iconic.woff",
+      "PackagePath": "staticwebassets/css/open-iconic/font/fonts/open-iconic.woff"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/icon-192.png",
+      "PackagePath": "staticwebassets/icon-192.png"
+    },
+    {
+      "Id": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.PacificTours.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.build.PacificTours.Client.props",
+      "PackagePath": "build\\PacificTours.Client.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.PacificTours.Client.props",
+      "PackagePath": "buildMultiTargeting\\PacificTours.Client.props"
+    },
+    {
+      "Id": "obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.PacificTours.Client.props",
+      "PackagePath": "buildTransitive\\PacificTours.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

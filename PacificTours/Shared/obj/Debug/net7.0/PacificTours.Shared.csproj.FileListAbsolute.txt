@@ -1,0 +1,12 @@
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/bin/Debug/net7.0/PacificTours.Shared.deps.json
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/bin/Debug/net7.0/PacificTours.Shared.dll
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/bin/Debug/net7.0/PacificTours.Shared.pdb
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/PacificTours.Shared.csproj.AssemblyReference.cache
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/PacificTours.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/PacificTours.Shared.AssemblyInfoInputs.cache
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/PacificTours.Shared.AssemblyInfo.cs
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/PacificTours.Shared.csproj.CoreCompileInputs.cache
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/PacificTours.Shared.dll
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/refint/PacificTours.Shared.dll
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/PacificTours.Shared.pdb
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/obj/Debug/net7.0/ref/PacificTours.Shared.dll
