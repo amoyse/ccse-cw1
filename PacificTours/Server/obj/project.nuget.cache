@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vLsjcKdRFdSPpRF9l8pOHRNE+mAy34wZinn09hhwI9f1qsGpMhh5nvwBQVfasPTnK2j5MOEDc3xDe6ZJ+38B8Q==",
+  "dgSpecHash": "dop8xvrADjlWDfOJlnNdHtyD0HZibIbaYGkCG6hoWVodbuIGYycSw5QhCO8A08zCaZsE0A95Y5hV7Gw143S8Iw==",
   "success": true,
   "projectFilePath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/PacificTours.Server.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,9 @@
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.web/7.0.14/microsoft.aspnetcore.components.web.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.webassembly/7.0.14/microsoft.aspnetcore.components.webassembly.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.webassembly.server/7.0.14/microsoft.aspnetcore.components.webassembly.server.7.0.14.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.0/microsoft.aspnetcore.cryptography.internal.7.0.0.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.0/microsoft.aspnetcore.cryptography.keyderivation.7.0.0.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.0/microsoft.aspnetcore.identity.entityframeworkcore.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.metadata/7.0.14/microsoft.aspnetcore.metadata.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
@@ -39,6 +42,8 @@
     "/home/alex/.nuget/packages/microsoft.extensions.fileproviders.abstractions/7.0.0/microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.extensions.fileproviders.physical/7.0.0/microsoft.extensions.fileproviders.physical.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.extensions.filesystemglobbing/7.0.0/microsoft.extensions.filesystemglobbing.7.0.0.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.extensions.identity.core/7.0.0/microsoft.extensions.identity.core.7.0.0.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.extensions.identity.stores/7.0.0/microsoft.extensions.identity.stores.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.1/microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.extensions.options/7.0.1/microsoft.extensions.options.7.0.1.nupkg.sha512",
