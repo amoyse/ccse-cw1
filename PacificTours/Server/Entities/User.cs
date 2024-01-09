@@ -1,6 +1,7 @@
 namespace PacificTours.Server.Entities;
+using Microsoft.AspNetCore.Identity;
 
-public class Users
+public class User: IdentityUser
 {
    public int UserID { get; set; } 
    public string Name { get; set; } 
