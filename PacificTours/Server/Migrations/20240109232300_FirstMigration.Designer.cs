@@ -12,7 +12,7 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240109185049_FirstMigration")]
+    [Migration("20240109232300_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
