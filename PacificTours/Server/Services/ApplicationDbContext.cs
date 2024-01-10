@@ -66,6 +66,30 @@ public class ApplicationDbContext: IdentityDbContext
             FamilyCost = 155
         });
 
+        builder.Entity<Tour>().HasData(new Tour
+        {
+            TourID = 1,
+            Name = "Real Britain",
+            Duration = 6,
+            Cost = 1200,
+            Spaces = 30
+        });
+        builder.Entity<Tour>().HasData(new Tour
+        {
+            TourID = 2,
+            Name = "Britain and Ireland Explorer",
+            Duration = 16,
+            Cost = 2000,
+            Spaces = 40
+        });
+        builder.Entity<Tour>().HasData(new Tour
+        {
+            TourID = 3,
+            Name = "Best of Britain",
+            Duration = 12,
+            Cost = 2900,
+            Spaces = 30
+        });
 
     }
 }
