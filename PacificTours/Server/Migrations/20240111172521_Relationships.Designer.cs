@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PacificTours.Server.Services;
 
@@ -11,9 +12,11 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240111172521_Relationships")]
+    partial class Relationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6a09b642-9748-4a8d-9bf0-2df3e7bd89b9",
+                            Id = "ba0a534e-40ff-4850-80c8-424b8bdd81c5",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "362b3642-486b-4a0a-a21a-d73a9851c606",
+                            Id = "f3a5b5f1-b45f-452f-b128-f7f861a11159",
                             Name = "client",
                             NormalizedName = "client"
                         });
@@ -187,12 +190,6 @@ namespace PacificTours.Server.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HotelBookingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -201,9 +198,6 @@ namespace PacificTours.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TotalCost")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TourBookingId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -569,7 +563,7 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.HotelBooking", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("HotelBooking")
+                        .WithMany()
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -588,7 +582,7 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("Payment")
+                        .WithMany()
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -599,7 +593,7 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.TourBooking", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("TourBooking")
+                        .WithMany()
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -613,15 +607,6 @@ namespace PacificTours.Server.Migrations
                     b.Navigation("Booking");
 
                     b.Navigation("Tour");
-                });
-
-            modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
-                {
-                    b.Navigation("HotelBooking");
-
-                    b.Navigation("Payment");
-
-                    b.Navigation("TourBooking");
                 });
 #pragma warning restore 612, 618
         }

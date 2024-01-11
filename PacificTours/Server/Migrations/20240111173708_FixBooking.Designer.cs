@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PacificTours.Server.Services;
 
@@ -11,9 +12,11 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240111173708_FixBooking")]
+    partial class FixBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6a09b642-9748-4a8d-9bf0-2df3e7bd89b9",
+                            Id = "222b4733-d23f-4f61-b940-83d0d509ac0c",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "362b3642-486b-4a0a-a21a-d73a9851c606",
+                            Id = "f0f877c9-8c36-4afe-a6ac-602fcad6b2b4",
                             Name = "client",
                             NormalizedName = "client"
                         });
@@ -569,7 +572,7 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.HotelBooking", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("HotelBooking")
+                        .WithMany("HotelBookings")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -588,7 +591,7 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("Payment")
+                        .WithMany("Payments")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -617,9 +620,9 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
                 {
-                    b.Navigation("HotelBooking");
+                    b.Navigation("HotelBookings");
 
-                    b.Navigation("Payment");
+                    b.Navigation("Payments");
 
                     b.Navigation("TourBooking");
                 });
