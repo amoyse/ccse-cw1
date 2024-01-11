@@ -12,9 +12,20 @@
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <input asp-for="Input.Name" class="form-control" autocomplete="name" aria-required="true" />
+                <label asp-for="Input.Name">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.UserName">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PassportNumber" class="form-control" autocomplete="passport-number" aria-required="true" />
+                <label asp-for="Input.PassportNumber">Passport Number</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="phone-number" aria-required="true" />
+                <label asp-for="Input.PhoneNumber">Phone Number</label>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
