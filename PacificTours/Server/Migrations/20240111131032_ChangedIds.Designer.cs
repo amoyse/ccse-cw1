@@ -12,8 +12,8 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240110180818_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240111131032_ChangedIds")]
+    partial class ChangedIds
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dabe70e9-461f-4ba6-814e-26802cf3f31b",
+                            Id = "16c53f39-0a82-495f-aec3-472be49015fd",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "dbefedee-a008-459f-a876-eabe92a92f57",
+                            Id = "1cc05255-d39b-4977-8698-b85aece2a4ff",
                             Name = "client",
                             NormalizedName = "client"
                         });
@@ -178,11 +178,11 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
                 {
-                    b.Property<int>("BookingID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
@@ -200,21 +200,21 @@ namespace PacificTours.Server.Migrations
                     b.Property<int>("TotalCost")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("BookingID");
+                    b.HasKey("Id");
 
                     b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.Hotel", b =>
                 {
-                    b.Property<int>("HotelID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HotelID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("DoubleCost")
                         .HasColumnType("int");
@@ -229,14 +229,14 @@ namespace PacificTours.Server.Migrations
                     b.Property<int>("SingleCost")
                         .HasColumnType("int");
 
-                    b.HasKey("HotelID");
+                    b.HasKey("Id");
 
                     b.ToTable("Hotels");
 
                     b.HasData(
                         new
                         {
-                            HotelID = 1,
+                            Id = 1,
                             DoubleCost = 775,
                             FamilyCost = 950,
                             Name = "Hilton London Hotel",
@@ -244,7 +244,7 @@ namespace PacificTours.Server.Migrations
                         },
                         new
                         {
-                            HotelID = 2,
+                            Id = 2,
                             DoubleCost = 500,
                             FamilyCost = 900,
                             Name = "London Marriott Hotel",
@@ -252,7 +252,7 @@ namespace PacificTours.Server.Migrations
                         },
                         new
                         {
-                            HotelID = 3,
+                            Id = 3,
                             DoubleCost = 120,
                             FamilyCost = 150,
                             Name = "Travelodge Brighton Seafront",
@@ -260,7 +260,7 @@ namespace PacificTours.Server.Migrations
                         },
                         new
                         {
-                            HotelID = 4,
+                            Id = 4,
                             DoubleCost = 400,
                             FamilyCost = 520,
                             Name = "Kings Hotel Brighton",
@@ -268,7 +268,7 @@ namespace PacificTours.Server.Migrations
                         },
                         new
                         {
-                            HotelID = 5,
+                            Id = 5,
                             DoubleCost = 400,
                             FamilyCost = 520,
                             Name = "Leonardo Hotel Brighton",
@@ -276,7 +276,7 @@ namespace PacificTours.Server.Migrations
                         },
                         new
                         {
-                            HotelID = 6,
+                            Id = 6,
                             DoubleCost = 100,
                             FamilyCost = 155,
                             Name = "Nevis Bank Inn, Fort William",
@@ -286,19 +286,19 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("PacificTours.Server.Entities.HotelBooking", b =>
                 {
-                    b.Property<int>("HotelBookingID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HotelBookingID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookingID")
+                    b.Property<int>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HotelID")
+                    b.Property<int>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<string>("RoomType")
@@ -308,23 +308,23 @@ namespace PacificTours.Server.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("HotelBookingID");
+                    b.HasKey("Id");
 
                     b.ToTable("HotelBookings");
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
                 {
-                    b.Property<int>("PaymentID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("BookingID")
+                    b.Property<int>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DatePaid")
@@ -334,18 +334,18 @@ namespace PacificTours.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PaymentID");
+                    b.HasKey("Id");
 
                     b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.Tour", b =>
                 {
-                    b.Property<int>("TourID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TourID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Cost")
                         .HasColumnType("int");
@@ -363,14 +363,14 @@ namespace PacificTours.Server.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("TourID");
+                    b.HasKey("Id");
 
                     b.ToTable("Tour");
 
                     b.HasData(
                         new
                         {
-                            TourID = 1,
+                            Id = 1,
                             Cost = 1200,
                             Duration = 6,
                             Name = "Real Britain",
@@ -379,7 +379,7 @@ namespace PacificTours.Server.Migrations
                         },
                         new
                         {
-                            TourID = 2,
+                            Id = 2,
                             Cost = 2000,
                             Duration = 16,
                             Name = "Britain and Ireland Explorer",
@@ -388,7 +388,7 @@ namespace PacificTours.Server.Migrations
                         },
                         new
                         {
-                            TourID = 3,
+                            Id = 3,
                             Cost = 2900,
                             Duration = 12,
                             Name = "Best of Britain",
@@ -399,13 +399,13 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("PacificTours.Server.Entities.TourBooking", b =>
                 {
-                    b.Property<int>("TourBookingID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TourBookingID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookingID")
+                    b.Property<int>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -414,10 +414,10 @@ namespace PacificTours.Server.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TourID")
+                    b.Property<int>("TourId")
                         .HasColumnType("int");
 
-                    b.HasKey("TourBookingID");
+                    b.HasKey("Id");
 
                     b.ToTable("TourBookings");
                 });
@@ -480,9 +480,6 @@ namespace PacificTours.Server.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()

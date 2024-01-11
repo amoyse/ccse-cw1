@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+
 namespace PacificTours.Server.Entities;
 using Microsoft.AspNetCore.Identity;
 
 public class User: IdentityUser
 {
-   public int UserID { get; set; } 
+   public int Id { get; set; } 
    public string Name { get; set; } 
    public string UserName { get; set; } 
    public string Password { get; set; } 

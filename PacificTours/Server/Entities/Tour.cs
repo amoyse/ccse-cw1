@@ -4,7 +4,7 @@ namespace PacificTours.Server.Entities;
 
 public class Tour
 {
-    public int TourID { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public int Duration { get; set; }
     public int Cost { get; set; }

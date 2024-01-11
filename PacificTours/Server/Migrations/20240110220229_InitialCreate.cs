@@ -267,8 +267,8 @@ namespace PacificTours.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "dabe70e9-461f-4ba6-814e-26802cf3f31b", null, "manager", "manager" },
-                    { "dbefedee-a008-459f-a876-eabe92a92f57", null, "client", "client" }
+                    { "d2bf33d4-6c0d-413c-b18b-aa660a7814b2", null, "manager", "manager" },
+                    { "ea3b361d-35c4-418d-9f51-1c36a9b051bf", null, "client", "client" }
                 });
 
             migrationBuilder.InsertData(
