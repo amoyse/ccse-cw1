@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using NuGet.Protocol;
 using PacificTours.Server.Entities;
 
 namespace PacificTours.Server.Areas.Identity.Pages.Account
@@ -81,7 +82,7 @@ namespace PacificTours.Server.Areas.Identity.Pages.Account
             public string Name { get; set; }
             
             [Required]
-            [Display(Name = "Username")]
+            [Display(Name = "UserName")]
             public string UserName { get; set; }
 
             [Required]
@@ -136,9 +137,11 @@ namespace PacificTours.Server.Areas.Identity.Pages.Account
                     
                 };
 
-                Console.WriteLine("Yeah this worked ish");
+                Console.Write(user.ToJson());
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
+                Console.Write(result.Errors.ToJson());
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
