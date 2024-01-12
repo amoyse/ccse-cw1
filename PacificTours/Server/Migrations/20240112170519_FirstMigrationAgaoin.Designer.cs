@@ -12,8 +12,8 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240111131032_ChangedIds")]
-    partial class ChangedIds
+    [Migration("20240112170519_FirstMigrationAgaoin")]
+    partial class FirstMigrationAgaoin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "16c53f39-0a82-495f-aec3-472be49015fd",
+                            Id = "bf2dc38f-c72c-4531-ad98-3d6cbac12225",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "1cc05255-d39b-4977-8698-b85aece2a4ff",
+                            Id = "fd0806d1-7f83-45d7-92ef-fd6f6c015d5c",
                             Name = "client",
                             NormalizedName = "client"
                         });
@@ -190,6 +190,12 @@ namespace PacificTours.Server.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("HotelBookingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -200,10 +206,16 @@ namespace PacificTours.Server.Migrations
                     b.Property<int>("TotalCost")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("TourBookingId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -310,6 +322,11 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BookingId")
+                        .IsUnique();
+
+                    b.HasIndex("HotelId");
+
                     b.ToTable("HotelBookings");
                 });
 
@@ -335,6 +352,9 @@ namespace PacificTours.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingId")
+                        .IsUnique();
 
                     b.ToTable("Payments");
                 });
@@ -419,6 +439,11 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BookingId")
+                        .IsUnique();
+
+                    b.HasIndex("TourId");
+
                     b.ToTable("TourBookings");
                 });
 
@@ -459,8 +484,8 @@ namespace PacificTours.Server.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("PassportNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("PassportNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -469,8 +494,8 @@ namespace PacificTours.Server.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("PhoneNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -548,6 +573,83 @@ namespace PacificTours.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
+                {
+                    b.HasOne("PacificTours.Server.Entities.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.HotelBooking", b =>
+                {
+                    b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
+                        .WithOne("HotelBooking")
+                        .HasForeignKey("PacificTours.Server.Entities.HotelBooking", "BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PacificTours.Server.Entities.Hotel", "Hotel")
+                        .WithMany()
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+
+                    b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
+                {
+                    b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
+                        .WithOne("Payment")
+                        .HasForeignKey("PacificTours.Server.Entities.Payment", "BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.TourBooking", b =>
+                {
+                    b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
+                        .WithOne("TourBooking")
+                        .HasForeignKey("PacificTours.Server.Entities.TourBooking", "BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PacificTours.Server.Entities.Tour", "Tour")
+                        .WithMany()
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+
+                    b.Navigation("Tour");
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
+                {
+                    b.Navigation("HotelBooking")
+                        .IsRequired();
+
+                    b.Navigation("Payment")
+                        .IsRequired();
+
+                    b.Navigation("TourBooking")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.User", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

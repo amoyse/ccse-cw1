@@ -8,6 +8,6 @@ public class TourBooking
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
 
-    public virtual Booking Booking { get; set; }
     public virtual Tour Tour { get; set; }
+    public virtual Booking Booking { get; set; }
 }

@@ -86,11 +86,11 @@ namespace PacificTours.Server.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "PassportNumber")]
-            public int PassportNumber { get; set; }
+            public string PassportNumber { get; set; }
 
             [Required]
             [Display(Name = "PhoneNumber")]
-            public int PhoneNumber { get; set; }
+            public string PhoneNumber { get; set; }
             
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -125,18 +125,18 @@ namespace PacificTours.Server.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                // var user = CreateUser();
                 
-                // var user = new User()
-                // {
-                //     Name = Input.Name,
-                //     UserName = Input.UserName,
-                //     PhoneNumber = Input.PhoneNumber,
-                //     PassportNumber = Input.PassportNumber,
-                //     
-                // };
+                var user = new User()
+                {
+                    Name = Input.Name,
+                    UserName = Input.UserName,
+                    PhoneNumber = Convert.ToInt64(Input.PhoneNumber),
+                    PassportNumber = Convert.ToInt64(Input.PassportNumber),
+                    
+                };
 
-                await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
+                Console.WriteLine("Yeah this worked ish");
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

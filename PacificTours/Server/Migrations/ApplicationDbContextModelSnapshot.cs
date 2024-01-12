@@ -51,13 +51,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6a09b642-9748-4a8d-9bf0-2df3e7bd89b9",
+                            Id = "bf2dc38f-c72c-4531-ad98-3d6cbac12225",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "362b3642-486b-4a0a-a21a-d73a9851c606",
+                            Id = "fd0806d1-7f83-45d7-92ef-fd6f6c015d5c",
                             Name = "client",
                             NormalizedName = "client"
                         });
@@ -206,10 +206,13 @@ namespace PacificTours.Server.Migrations
                     b.Property<int>("TourBookingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -316,7 +319,8 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookingId");
+                    b.HasIndex("BookingId")
+                        .IsUnique();
 
                     b.HasIndex("HotelId");
 
@@ -346,7 +350,8 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookingId");
+                    b.HasIndex("BookingId")
+                        .IsUnique();
 
                     b.ToTable("Payments");
                 });
@@ -431,7 +436,8 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookingId");
+                    b.HasIndex("BookingId")
+                        .IsUnique();
 
                     b.HasIndex("TourId");
 
@@ -475,8 +481,8 @@ namespace PacificTours.Server.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("PassportNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("PassportNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -485,8 +491,8 @@ namespace PacificTours.Server.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("PhoneNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -566,11 +572,22 @@ namespace PacificTours.Server.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
+                {
+                    b.HasOne("PacificTours.Server.Entities.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PacificTours.Server.Entities.HotelBooking", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("HotelBooking")
-                        .HasForeignKey("BookingId")
+                        .WithOne("HotelBooking")
+                        .HasForeignKey("PacificTours.Server.Entities.HotelBooking", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -588,8 +605,8 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("Payment")
-                        .HasForeignKey("BookingId")
+                        .WithOne("Payment")
+                        .HasForeignKey("PacificTours.Server.Entities.Payment", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -599,8 +616,8 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.TourBooking", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithMany("TourBooking")
-                        .HasForeignKey("BookingId")
+                        .WithOne("TourBooking")
+                        .HasForeignKey("PacificTours.Server.Entities.TourBooking", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -617,11 +634,19 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
                 {
-                    b.Navigation("HotelBooking");
+                    b.Navigation("HotelBooking")
+                        .IsRequired();
 
-                    b.Navigation("Payment");
+                    b.Navigation("Payment")
+                        .IsRequired();
 
-                    b.Navigation("TourBooking");
+                    b.Navigation("TourBooking")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.User", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

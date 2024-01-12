@@ -9,6 +9,6 @@ public class HotelBooking
     public DateTime EndDate { get; set; }
     public string RoomType { get; set; }
     
-    public virtual Booking Booking { get; set; }
     public virtual Hotel Hotel { get; set; }
+    public virtual Booking Booking { get; set; }
 }
