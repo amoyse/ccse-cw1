@@ -51,13 +51,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e10ac4d2-1920-4d11-bce9-a86ac1e83878",
+                            Id = "53c6509a-aec2-44ff-b708-bc699209fcd9",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "e79b0b16-5b4b-44f1-a843-4e73087c26be",
+                            Id = "545e2e90-248a-44d0-a2a7-b45b5eb576d3",
                             Name = "client",
                             NormalizedName = "client"
                         });

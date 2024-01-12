@@ -137,15 +137,12 @@ namespace PacificTours.Server.Areas.Identity.Pages.Account
                     
                 };
 
-                Console.Write(user.ToJson());
                 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                Console.Write(result.Errors.ToJson());
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    Console.WriteLine("Yeah this worked yay");
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -174,7 +171,6 @@ namespace PacificTours.Server.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
-            Console.WriteLine("things didn't work");
             return Page();
         }
 

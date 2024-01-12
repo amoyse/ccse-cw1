@@ -12,7 +12,7 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240112205342_FirstMigrationAgaoin")]
+    [Migration("20240112232818_FirstMigrationAgaoin")]
     partial class FirstMigrationAgaoin
     {
         /// <inheritdoc />
@@ -54,13 +54,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f706a541-cbbc-457b-8c78-a33be8c49dd3",
+                            Id = "53c6509a-aec2-44ff-b708-bc699209fcd9",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "d2f45354-e2fd-463d-8d5f-ae6286e89fcb",
+                            Id = "545e2e90-248a-44d0-a2a7-b45b5eb576d3",
                             Name = "client",
                             NormalizedName = "client"
                         });
