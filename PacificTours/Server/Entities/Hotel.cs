@@ -7,4 +7,6 @@ public class Hotel
     public int SingleCost { get; set; }
     public int DoubleCost { get; set; }
     public int FamilyCost { get; set; }
+    
+    public IEnumerable<HotelBooking>? HotelBookings { get; set; }
 }

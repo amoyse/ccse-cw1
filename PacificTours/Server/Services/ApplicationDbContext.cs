@@ -26,26 +26,26 @@ public class ApplicationDbContext: IdentityDbContext<User>
 
         builder.Entity<IdentityRole>().HasData(manager, client);
 
-        builder.Entity<Booking>()
-            .HasOne<User>(b => b.User)
-            .WithMany(u => u.Bookings)
-            .HasForeignKey(b => b.UserId);
+        // builder.Entity<Booking>()
+        //     .HasOne<User>(b => b.User)
+        //     .WithMany(u => u.Bookings)
+        //     .HasForeignKey(b => b.UserId);
+        //
+        // builder.Entity<Booking>()
+        //     .HasOne<HotelBooking>(b => b.HotelBooking)
+        //     .WithOne(hb => hb.Booking)
+        //     .HasForeignKey<HotelBooking>(hb => hb.BookingId);
+        //
+        // builder.Entity<Booking>()
+        //     .HasOne<TourBooking>(b => b.TourBooking)
+        //     .WithOne(tb => tb.Booking)
+        //     .HasForeignKey<TourBooking>(tb => tb.BookingId);
+        //
+        // builder.Entity<Booking>()
+        //     .HasOne<Payment>(b => b.Payment)
+        //     .WithOne(p => p.Booking)
+        //     .HasForeignKey<Payment>(p => p.BookingId);
         
-        builder.Entity<Booking>()
-            .HasOne<HotelBooking>(b => b.HotelBooking)
-            .WithOne(hb => hb.Booking)
-            .HasForeignKey<HotelBooking>(hb => hb.BookingId);
-        
-        builder.Entity<Booking>()
-            .HasOne<TourBooking>(b => b.TourBooking)
-            .WithOne(tb => tb.Booking)
-            .HasForeignKey<TourBooking>(tb => tb.BookingId);
-        
-        builder.Entity<Booking>()
-            .HasOne<Payment>(b => b.Payment)
-            .WithOne(p => p.Booking)
-            .HasForeignKey<Payment>(p => p.BookingId);
-
         builder.Entity<Hotel>().HasData(new Hotel
         {
             Id = 1,

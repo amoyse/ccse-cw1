@@ -201,9 +201,6 @@ namespace PacificTours.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    HotelBookingId = table.Column<int>(type: "int", nullable: false),
-                    TourBookingId = table.Column<int>(type: "int", nullable: false),
-                    PaymentId = table.Column<int>(type: "int", nullable: false),
                     BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -305,8 +302,8 @@ namespace PacificTours.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "bf2dc38f-c72c-4531-ad98-3d6cbac12225", null, "manager", "manager" },
-                    { "fd0806d1-7f83-45d7-92ef-fd6f6c015d5c", null, "client", "client" }
+                    { "d2f45354-e2fd-463d-8d5f-ae6286e89fcb", null, "client", "client" },
+                    { "f706a541-cbbc-457b-8c78-a33be8c49dd3", null, "manager", "manager" }
                 });
 
             migrationBuilder.InsertData(
@@ -390,8 +387,7 @@ namespace PacificTours.Server.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_BookingId",
                 table: "Payments",
-                column: "BookingId",
-                unique: true);
+                column: "BookingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TourBookings_BookingId",

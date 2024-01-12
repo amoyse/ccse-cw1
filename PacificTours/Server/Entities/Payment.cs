@@ -8,5 +8,5 @@ public class Payment
     public DateTime DatePaid { get; set; }
     public string Status { get; set; }
 
-    public virtual Booking Booking { get; set; }
+    public Booking Booking { get; set; }
 }

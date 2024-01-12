@@ -51,13 +51,13 @@ namespace PacificTours.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bf2dc38f-c72c-4531-ad98-3d6cbac12225",
+                            Id = "f706a541-cbbc-457b-8c78-a33be8c49dd3",
                             Name = "manager",
                             NormalizedName = "manager"
                         },
                         new
                         {
-                            Id = "fd0806d1-7f83-45d7-92ef-fd6f6c015d5c",
+                            Id = "d2f45354-e2fd-463d-8d5f-ae6286e89fcb",
                             Name = "client",
                             NormalizedName = "client"
                         });
@@ -187,12 +187,6 @@ namespace PacificTours.Server.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HotelBookingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -201,9 +195,6 @@ namespace PacificTours.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TotalCost")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TourBookingId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -350,8 +341,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookingId")
-                        .IsUnique();
+                    b.HasIndex("BookingId");
 
                     b.ToTable("Payments");
                 });
@@ -575,7 +565,7 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.User", "User")
-                        .WithMany("Bookings")
+                        .WithMany("UserBookings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -592,7 +582,7 @@ namespace PacificTours.Server.Migrations
                         .IsRequired();
 
                     b.HasOne("PacificTours.Server.Entities.Hotel", "Hotel")
-                        .WithMany()
+                        .WithMany("HotelBookings")
                         .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -605,8 +595,8 @@ namespace PacificTours.Server.Migrations
             modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
                 {
                     b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
-                        .WithOne("Payment")
-                        .HasForeignKey("PacificTours.Server.Entities.Payment", "BookingId")
+                        .WithMany("BookingPayments")
+                        .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -622,7 +612,7 @@ namespace PacificTours.Server.Migrations
                         .IsRequired();
 
                     b.HasOne("PacificTours.Server.Entities.Tour", "Tour")
-                        .WithMany()
+                        .WithMany("TourBookings")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -634,19 +624,26 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
                 {
-                    b.Navigation("HotelBooking")
-                        .IsRequired();
+                    b.Navigation("BookingPayments");
 
-                    b.Navigation("Payment")
-                        .IsRequired();
+                    b.Navigation("HotelBooking");
 
-                    b.Navigation("TourBooking")
-                        .IsRequired();
+                    b.Navigation("TourBooking");
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.Hotel", b =>
+                {
+                    b.Navigation("HotelBookings");
+                });
+
+            modelBuilder.Entity("PacificTours.Server.Entities.Tour", b =>
+                {
+                    b.Navigation("TourBookings");
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.User", b =>
                 {
-                    b.Navigation("Bookings");
+                    b.Navigation("UserBookings");
                 });
 #pragma warning restore 612, 618
         }

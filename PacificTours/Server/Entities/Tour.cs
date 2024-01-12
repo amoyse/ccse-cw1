@@ -10,4 +10,6 @@ public class Tour
     public int Cost { get; set; }
     public int Spaces { get; set; }
     public DateTime StartDate { get; set; }
+    
+    public IEnumerable<TourBooking>? TourBookings { get; set; }
 }
