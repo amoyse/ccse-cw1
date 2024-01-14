@@ -1,15 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "qZZfl6SrpQ252PBXxQA6xB4qJHgZ2o3sowzjdYOE3gXOQl5NU4xZsYjnVibImRS5DhDHFWNZ9bUxW9kX+2qLWA==",
+  "dgSpecHash": "K9vOzlmIE+frBg1PCJ6mhnhtNy0ej7QdHSj1jgxMNTYJdc8iVsWYkst/T0QjrgW2a+5pm4NsrGW2ODdWPeAMeA==",
   "success": true,
   "projectFilePath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/PacificTours.Client.csproj",
   "expectedPackageFiles": [
     "/home/alex/.nuget/packages/microsoft.aspnetcore.authorization/7.0.14/microsoft.aspnetcore.authorization.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components/7.0.14/microsoft.aspnetcore.components.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.analyzers/7.0.14/microsoft.aspnetcore.components.analyzers.7.0.14.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.aspnetcore.components.authorization/7.0.0/microsoft.aspnetcore.components.authorization.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.forms/7.0.14/microsoft.aspnetcore.components.forms.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.web/7.0.14/microsoft.aspnetcore.components.web.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.webassembly/7.0.14/microsoft.aspnetcore.components.webassembly.7.0.14.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.aspnetcore.components.webassembly.authentication/7.0.0/microsoft.aspnetcore.components.webassembly.authentication.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.webassembly.devserver/7.0.14/microsoft.aspnetcore.components.webassembly.devserver.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.metadata/7.0.14/microsoft.aspnetcore.metadata.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",
@@ -31,7 +33,7 @@
     "/home/alex/.nuget/packages/system.io.pipelines/7.0.0/system.io.pipelines.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
-    "/home/alex/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/7.0.14/microsoft.netcore.app.runtime.mono.browser-wasm.7.0.14.nupkg.sha512"
+    "/home/alex/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/7.0.15/microsoft.netcore.app.runtime.mono.browser-wasm.7.0.15.nupkg.sha512"
   ],
   "logs": []
 }

@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v7.0": {
       "PacificTours.Server/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Components.Authorization": "7.0.0",
+          "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "7.0.0",
           "Microsoft.AspNetCore.Components.WebAssembly.Server": "7.0.14",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.0",
           "Microsoft.AspNetCore.Identity.UI": "7.0.15",
@@ -621,6 +623,12 @@
         }
       },
       "Microsoft.AspNetCore.Components.Analyzers/7.0.14": {},
+      "Microsoft.AspNetCore.Components.Authorization/7.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authorization": "7.0.14",
+          "Microsoft.AspNetCore.Components": "7.0.14"
+        }
+      },
       "Microsoft.AspNetCore.Components.Forms/7.0.14": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "7.0.14"
@@ -659,6 +667,18 @@
           "lib/net7.0/Microsoft.AspNetCore.Components.WebAssembly.dll": {
             "assemblyVersion": "7.0.14.0",
             "fileVersion": "7.0.1423.52316"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Components.WebAssembly.Authentication/7.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Authorization": "7.0.0",
+          "Microsoft.AspNetCore.Components.Web": "7.0.14"
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Components.WebAssembly.Authentication.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51819"
           }
         }
       },
@@ -2739,7 +2759,9 @@
       },
       "PacificTours.Client/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Components.Authorization": "7.0.0",
           "Microsoft.AspNetCore.Components.WebAssembly": "7.0.14",
+          "Microsoft.AspNetCore.Components.WebAssembly.Authentication": "7.0.0",
           "PacificTours.Shared": "1.0.0"
         },
         "runtime": {
@@ -3144,6 +3166,13 @@
       "path": "microsoft.aspnetcore.components.analyzers/7.0.14",
       "hashPath": "microsoft.aspnetcore.components.analyzers.7.0.14.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.Components.Authorization/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9YmIsHP+YRhTSsvHcuQkbk5LO322rj4vYgtBulp1UPfhak/cjnmnqAu6Lu7D4ayzAlEEC4KaR86PZjz8PKOWPA==",
+      "path": "microsoft.aspnetcore.components.authorization/7.0.0",
+      "hashPath": "microsoft.aspnetcore.components.authorization.7.0.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Components.Forms/7.0.14": {
       "type": "package",
       "serviceable": true,
@@ -3164,6 +3193,13 @@
       "sha512": "sha512-WKk4+olC9ku2o6iEz5Sy1YLyNJiUJYqWaeZJybHFVpuybcpi5KWSlYTFsJQ1GxkSKHRg6989X2fCU5gcVuI79A==",
       "path": "microsoft.aspnetcore.components.webassembly/7.0.14",
       "hashPath": "microsoft.aspnetcore.components.webassembly.7.0.14.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.WebAssembly.Authentication/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bHJg9l9r89dEUc2v2FoIXJpMcFIPaqW2CR6Wrdfd2B0dFDf0kjnlFlWPsVXIw0crHPV5VXqFQNIgv4FHqrpnLQ==",
+      "path": "microsoft.aspnetcore.components.webassembly.authentication/7.0.0",
+      "hashPath": "microsoft.aspnetcore.components.webassembly.authentication.7.0.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Components.WebAssembly.Server/7.0.14": {
       "type": "package",

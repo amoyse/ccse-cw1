@@ -282,3 +282,4 @@
 /home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll
 /home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
 /home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/obj/Debug/net7.0/PacificTours.Server.MvcApplicationPartsAssemblyInfo.cs
+/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/bin/Debug/net7.0/Microsoft.AspNetCore.Components.WebAssembly.Authentication.dll
