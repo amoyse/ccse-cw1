@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using PacificTours.Server.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Build.Execution;
 using PacificTours.Server.Entities;
 
 var builder = WebApplication.CreateBuilder(args);

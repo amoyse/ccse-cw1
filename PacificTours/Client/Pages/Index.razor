@@ -26,7 +26,8 @@ Welcome to your new app.
 
     private async Task GetStuff()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
+        var authState = await myStateProv.GetAuthenticationStateAsync();
         var user = authState.User;
 
         if (user.Identity.IsAuthenticated)
