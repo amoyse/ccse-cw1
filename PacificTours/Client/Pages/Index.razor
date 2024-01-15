@@ -2,18 +2,29 @@
 @using System.Security.Claims
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
 
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Home</PageTitle>
 
-<h1>@_authMessage</h1>
+@if (_userId == "")
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h1>Welcome to your account, @_userName</h1>
+    <br/>
+    
+    <h4>Your User ID is: @_userId</h4>
+    
+}
 
-<p>@_userId</p>
 
 @code {
 
-    private string _userId;
-    private string _authMessage;
+    private string _userId = "";
+    private string _userName;
     private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
 
     protected override async Task OnInitializedAsync()
@@ -30,13 +41,13 @@
 
         if (user.Identity.Name != "")
         {
-            _authMessage = $"{user.Identity.Name} is authenticated.";
+            _userName = user.Identity.Name;
             _claims = user.Claims;
-            _userId = $"User Id: {_claims.First().Value}";
+            _userId = $"{_claims.First().Value}";
         }
         else
         {
-            _authMessage = "the user is NOT authenticated.";
+            NavigationManager.NavigateTo("/Identity/Account/Register", forceLoad:true);
         }
 
     }
