@@ -18,10 +18,16 @@ Welcome to your new app.
     private string _authMessage;
     private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
 
-    protected override async Task OnParametersSetAsync()
+    // protected override async Task OnParametersSetAsync()
+    // {
+    //     await GetStuff();
+    //     await base.OnParametersSetAsync();
+    // }
+
+    protected override async Task OnInitializedAsync()
     {
         await GetStuff();
-        await base.OnParametersSetAsync();
+        await base.OnInitializedAsync();
     }
 
     private async Task GetStuff()

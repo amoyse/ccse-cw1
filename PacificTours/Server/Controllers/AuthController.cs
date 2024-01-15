@@ -51,7 +51,7 @@ public class AuthController : ControllerBase
             // return Ok(_userManager.GetUserName(User));
 
         }
-        return Problem("User is not signed in.");
+        return Ok("User is not signed in.");
     }
 
 }

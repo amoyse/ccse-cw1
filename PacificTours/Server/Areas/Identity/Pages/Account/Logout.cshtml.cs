@@ -13,6 +13,8 @@ using PacificTours.Server.Entities;
 
 namespace PacificTours.Server.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
+    [IgnoreAntiforgeryToken]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
@@ -33,9 +35,8 @@ namespace PacificTours.Server.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
-
             await _signInManager.SignOutAsync();
             return LocalRedirect("/");
-       }
+      }
     }
 }
