@@ -30,12 +30,11 @@ Welcome to your new app.
         var authState = await myStateProv.GetAuthenticationStateAsync();
         var user = authState.User;
 
-
         if (user.Identity.IsAuthenticated)
         {
             _authMessage = $"{user.Identity.Name} is authenticated.";
             _claims = user.Claims;
-            _userId = $"User Id: {user.FindFirst(c => c.Type == "sub")?.Value}";
+            _userId = $"User Id: {_claims.First().Value}";
         }
         else
         {

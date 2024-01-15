@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using String = System.String;
 
 namespace PacificTours.Client;
 
@@ -17,21 +18,28 @@ public class CustomAuthenticationStateProvider: AuthenticationStateProvider
         var httpClient = new HttpClient();
 
         // var authUser = JsonSerializer.Deserialize<IEnumerable<Claim>>(await httpClient.GetStringAsync(("https://localhost:7293/api/Auth")));
-        var userName = await httpClient.GetStringAsync("https://localhost:7293/api/Auth");
-        Console.WriteLine(userName);
+        var userDictString = await httpClient.GetStringAsync("https://localhost:7293/api/Auth");
         
-        // var identity = new ClaimsIdentity(userName);
+        var userId = "";
+        var userName = "";
+
+        if (userDictString != "User is not signed in.")
+        {
+            var dictionary = JsonSerializer.Deserialize<Dictionary<String, String>>(userDictString);
+            
+            userId = dictionary["userId"];
+            userName = dictionary["userName"];
+            
+        }
         
         var identity = new ClaimsIdentity(new []
         {
+            new Claim(ClaimTypes.NameIdentifier, userId),
             new Claim(ClaimTypes.Name, userName),
-        }, "My username auth type");
+        }, "My username and id auth type");
         
         var user = new ClaimsPrincipal(identity);
-
+        
         return await Task.FromResult(new AuthenticationState(user));
-
-
-        // var user = await 
     }
 }

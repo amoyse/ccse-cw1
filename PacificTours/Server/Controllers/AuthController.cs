@@ -40,7 +40,15 @@ public class AuthController : ControllerBase
             // });
             // return Ok(json);
 
-            return Ok(_userManager.GetUserName(User));
+            var userDict = new Dictionary<String, String>()
+            {
+                { "userId", _userManager.GetUserId(User) },
+                { "userName", _userManager.GetUserName(User) }
+            };
+            
+
+            return Ok(userDict);
+            // return Ok(_userManager.GetUserName(User));
 
         }
         return Problem("User is not signed in.");
