@@ -8,8 +8,6 @@
 
 <h1>@_authMessage</h1>
 
-Welcome to your new app.
-
 <p>@_userId</p>
 
 @code {
@@ -17,12 +15,6 @@ Welcome to your new app.
     private string _userId;
     private string _authMessage;
     private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
-
-    // protected override async Task OnParametersSetAsync()
-    // {
-    //     await GetStuff();
-    //     await base.OnParametersSetAsync();
-    // }
 
     protected override async Task OnInitializedAsync()
     {
@@ -36,7 +28,7 @@ Welcome to your new app.
         var authState = await myStateProv.GetAuthenticationStateAsync();
         var user = authState.User;
 
-        if (user.Identity.IsAuthenticated)
+        if (user.Identity.Name != "")
         {
             _authMessage = $"{user.Identity.Name} is authenticated.";
             _claims = user.Claims;

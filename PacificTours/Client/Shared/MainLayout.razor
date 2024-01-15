@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="page">
     <div class="sidebar">
@@ -7,8 +8,18 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="/Identity/Account/Register" >Register</a>
-            <a href="/Identity/Account/Login" >Log In / Log Out</a>
+            <a href="/Identity/Account/Register">Register</a>
+            @if (_isAuth)
+            {
+                <a href="/Identity/Account/Logout">Log Out</a>
+            }
+            else
+            {
+                <a href="/Identity/Account/Login">Log In</a>
+            }
+            
+            @* Rudimentary padding *@
+            <a href="#" ></a>
         </div>
         
         <article class="content px-4">
@@ -16,3 +27,33 @@
         </article>
     </main>
 </div>
+
+@code {
+
+    private bool _isAuth;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetStuff();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetStuff()
+    {
+        var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
+        var authState = await myStateProv.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.Name != "")
+        {
+            _isAuth = true;
+        }
+        else
+        {
+            _isAuth = false;
+        }
+
+    }
+    
+
+}
