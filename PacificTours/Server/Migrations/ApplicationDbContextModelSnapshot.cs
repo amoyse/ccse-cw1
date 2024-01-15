@@ -47,20 +47,6 @@ namespace PacificTours.Server.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "53c6509a-aec2-44ff-b708-bc699209fcd9",
-                            Name = "manager",
-                            NormalizedName = "manager"
-                        },
-                        new
-                        {
-                            Id = "545e2e90-248a-44d0-a2a7-b45b5eb576d3",
-                            Name = "client",
-                            NormalizedName = "client"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -451,6 +437,9 @@ namespace PacificTours.Server.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")

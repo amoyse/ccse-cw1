@@ -18,14 +18,6 @@ public class ApplicationDbContext: IdentityDbContext<User>
     {
         base.OnModelCreating(builder);
 
-        var manager = new IdentityRole("manager");
-        manager.NormalizedName = "manager";
-        
-        var client = new IdentityRole("client");
-        client.NormalizedName = "client";
-
-        builder.Entity<IdentityRole>().HasData(manager, client);
-
         // builder.Entity<Booking>()
         //     .HasOne<User>(b => b.User)
         //     .WithMany(u => u.Bookings)

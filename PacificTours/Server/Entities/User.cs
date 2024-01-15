@@ -15,7 +15,9 @@ public class User: IdentityUser
    public string Password { get; set; } = "";
    
    public long PhoneNumber { get; set; } 
-   public long PassportNumber { get; set; } 
+   public long PassportNumber { get; set; }
+
+   public bool IsAdmin { get; set; } = false;
    
    public IEnumerable<Booking>? UserBookings { get; set; }
    

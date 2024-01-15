@@ -37,6 +37,7 @@ namespace PacificTours.Server.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<long>(type: "bigint", nullable: false),
                     PassportNumber = table.Column<long>(type: "bigint", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -295,15 +296,6 @@ namespace PacificTours.Server.Migrations
                         principalTable: "Tour",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "53c6509a-aec2-44ff-b708-bc699209fcd9", null, "manager", "manager" },
-                    { "545e2e90-248a-44d0-a2a7-b45b5eb576d3", null, "client", "client" }
                 });
 
             migrationBuilder.InsertData(
