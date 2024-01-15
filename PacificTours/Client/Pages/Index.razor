@@ -30,6 +30,7 @@ Welcome to your new app.
         var authState = await myStateProv.GetAuthenticationStateAsync();
         var user = authState.User;
 
+
         if (user.Identity.IsAuthenticated)
         {
             _authMessage = $"{user.Identity.Name} is authenticated.";

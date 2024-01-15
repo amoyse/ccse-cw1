@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using PacificTours.Server.Entities;
 using PacificTours.Server.Services;
+using String = System.String;
 
 namespace PacificTours.Server.Controllers;
 
