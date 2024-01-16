@@ -47,7 +47,8 @@ else
         }
         else
         {
-            NavigationManager.NavigateTo("/Identity/Account/Register", forceLoad:true);
+            // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
+            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad:true);
         }
 
     }

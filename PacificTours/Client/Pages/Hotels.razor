@@ -1,6 +1,51 @@
 @page "/Hotels"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
 <h3>Hotels</h3>
 
+<br/>
+
+<div class="row">
+    <div class="col-sm-1">
+        <button class="btn btn-primary">All Hotels</button>
+    </div>
+    <div class="col-sm-4">
+        <div class="col-sm2">
+            <p>Or select a date</p>
+        </div>
+        <div class="col-sm2">
+            <InputDate TValue="DateOnly" @bind-Value="date1" Placeholder="Enter Date"/>
+        </div>
+    </div>
+</div>
+
+
 @code {
+
+    private string _userId = "";
+    private string _userName;
     
+    private DateOnly date1 = DateOnly.FromDateTime(DateTime.Now.AddDays(1));
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetStuff();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetStuff()
+    {
+        var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
+        var authState = await myStateProv.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.Name == "")
+        {
+            // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
+            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
+        }
+
+    }
+
 }
