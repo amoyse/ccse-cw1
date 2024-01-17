@@ -1,8 +1,60 @@
+@using PacificTours.Shared.Entities
+@inject HttpClient Http
+
 <h3>HotelSearch</h3>
 
 <InputDate TValue="DateOnly" @bind-Value="_date1" Placeholder="Enter Date"/>
+<button class="btn btn-primary" @onclick="GetHotelsBetweenDates">Submit</button>
+
+<br/>
+
+@if (_display)
+{
+    @if (_hotels is null)
+    {
+        <span>Loading Hotels...</span>
+    }
+    else
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Cost of Single Room (£)</th>
+                <th>Cost of Double Room (£)</th>
+                <th>Cost of Family Room (£)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var hotel in _hotels)
+            {
+                <tr>
+                    <td width="15%">@hotel.Name</td>
+                    <td width="9%">@hotel.SingleCost</td>
+                    <td width="9%">@hotel.DoubleCost</td>
+                    <td width="9%">@hotel.FamilyCost</td>
+                    @* <td><button @onclick="(() => BookHotel(hotel.Id))" class="btn btn-primary">Book</button></td> *@
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+}
+
 
 @code {
     private DateOnly _date1 = DateOnly.FromDateTime(DateTime.Now.AddDays(1));
+
+    private bool _display = false;
+    List<Hotel>? _hotels;
     
+    private async Task GetHotelsBetweenDates()
+    {
+        _display = true;
+        var result = await Http.GetFromJsonAsync<List<Hotel>>("/api/HotelSearch");
+        if (result != null)
+        {
+            _hotels = result;
+        }
+    }
 }

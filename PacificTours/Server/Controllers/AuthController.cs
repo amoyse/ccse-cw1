@@ -29,7 +29,6 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet]
-    // public async Task<ActionResult<IEnumerable<Claim>>> GetAuthState()
     public async Task<ActionResult<String>> GetAuthState()
     {
         if (_signInManager.IsSignedIn(User))
@@ -48,7 +47,6 @@ public class AuthController : ControllerBase
             
 
             return Ok(userDict);
-            // return Ok(_userManager.GetUserName(User));
 
         }
         return Ok("User is not signed in.");

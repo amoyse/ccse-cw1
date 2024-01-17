@@ -3,7 +3,7 @@
 
 <h3>All Hotels</h3>
 
-@if (hotels is null)
+@if (_hotels is null)
 {
     <span>Loading Hotels...</span>
 }
@@ -19,13 +19,13 @@ else
         </tr>
         </thead>
         <tbody>
-            @foreach (var hotel in hotels)
+            @foreach (var hotel in _hotels)
             {
                 <tr>
-                    <td width="10%">@hotel.Name</td>
-                    <td width="5%">@hotel.SingleCost</td>
-                    <td width="5%">@hotel.DoubleCost</td>
-                    <td width="5%">@hotel.FamilyCost</td>
+                    <td width="15%">@hotel.Name</td>
+                    <td width="9%">@hotel.SingleCost</td>
+                    <td width="9%">@hotel.DoubleCost</td>
+                    <td width="9%">@hotel.FamilyCost</td>
                     <td><button @onclick="(() => BookHotel(hotel.Id))" class="btn btn-primary">Book</button></td>
                 </tr>
             }
@@ -35,19 +35,20 @@ else
 
 
 @code {
-    List<Hotel>? hotels;
+    List<Hotel>? _hotels;
 
     protected override async Task OnInitializedAsync()
     {
         var result = await Http.GetFromJsonAsync<List<Hotel>>("/api/AllHotels");
         if (result != null)
         {
-            hotels = result;
+            _hotels = result;
         }
     }
 
     void BookHotel(int id)
     {
+        
         
         
     }
