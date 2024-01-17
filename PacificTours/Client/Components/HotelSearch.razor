@@ -7,7 +7,7 @@
 <InputDate TValue="DateTime" @bind-Value="_date2" Placeholder="Enter End Date"/>
 <button class="btn btn-primary" @onclick="GetHotelsBetweenDates">Submit</button>
 
-<br/>
+<br/><br/>
 
 @if (_display)
 {
@@ -34,7 +34,7 @@
                     <td width="9%">@hotel.SingleCost</td>
                     <td width="9%">@hotel.DoubleCost</td>
                     <td width="9%">@hotel.FamilyCost</td>
-                    @* <td><button @onclick="(() => BookHotel(hotel.Id))" class="btn btn-primary">Book</button></td> *@
+                    <td><button @onclick="(() => BookHotel(hotel.Id))" class="btn btn-primary">Book</button></td>
                 </tr>
             }
             </tbody>
@@ -52,18 +52,17 @@
     
     private async Task GetHotelsBetweenDates()
     {
-        Console.WriteLine(_date1);
         _display = true;
-        var package = (_date1, _date2);
         var result = await Http.GetFromJsonAsync<List<Hotel>>($"/api/HotelSearch/GetDates?startDate={_date1:yyyy-MM-dd}&endDate={_date2:yyyy-MM-dd}");
-        // var result = await Http.GetFromJsonAsync<List<Hotel>>($"/api/HotelSearch{package}");
-        
-        Console.WriteLine(result.First().Name);
-        Console.WriteLine(result.First().FamilyCost);
         
         if (result != null)
         {
             _hotels = result;
         }
+    }
+
+    void BookHotel(int id)
+    {
+        
     }
 }

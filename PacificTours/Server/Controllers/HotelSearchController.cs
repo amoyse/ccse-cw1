@@ -19,37 +19,28 @@ public class HotelSearchController : ControllerBase
     [HttpGet("GetDates")]
     public async Task<ActionResult<List<Hotel>>> GetAvailableHotels(DateTime startDate, DateTime endDate)
     {
-        // var list = _context.Database.SqlQuery<string>(
-        //     $"SELECT H.Id, H.Name, CASE WHEN SR.Count < 20 THEN H.SingleCost ELSE NULL END AS SingleCost, CASE WHEN DR.Count < 20 THEN H.DoubleCost ELSE NULL END AS DoubleCost CASE WHEN"
-        //     );
-        
-        Console.WriteLine(startDate);
-        
         DateTime inputStartDate = startDate;
         DateTime inputEndDate = endDate;
         
-        Console.WriteLine(inputStartDate.ToString());
-        Console.WriteLine(inputEndDate.ToString());
-
         var list = await _context.Hotels.Select(hotel => new
             {
-                HotelId = hotel.Id,
-                HotelName = hotel.Name,
+                Id = hotel.Id,
+                Name = hotel.Name,
                 
                 // checks if number of single rooms booked between two dates given is less than 20
                 // if it is, return single room cost, if not return null for single room value
-                SingleRoomCost = _context.HotelBookings
+                SingleCost = _context.HotelBookings
                     .Count(booking => booking.HotelId == hotel.Id && booking.RoomType == "Single" && 
                                       booking.StartDate <= inputEndDate && booking.EndDate >= inputStartDate) < 20 
-                    ? hotel.SingleCost : (decimal?) null,
-                DoubleRoomCost = _context.HotelBookings
+                    ? hotel.SingleCost : (int?) null,
+                DoubleCost = _context.HotelBookings
                     .Count(booking => booking.HotelId == hotel.Id && booking.RoomType == "Double" && 
                                       booking.StartDate <= inputEndDate && booking.EndDate >= inputStartDate) < 20 
-                    ? hotel.DoubleCost : (decimal?) null,
-                FamilyRoomCost = _context.HotelBookings
+                    ? hotel.DoubleCost : (int?) null,
+                FamilyCost = _context.HotelBookings
                     .Count(booking => booking.HotelId == hotel.Id && booking.RoomType == "Family" && 
                                       booking.StartDate <= inputEndDate && booking.EndDate >= inputStartDate) < 20 
-                    ? hotel.FamilyCost : (decimal?) null
+                    ? hotel.FamilyCost : (int?) null
             })
             .ToListAsync();
         
