@@ -29,11 +29,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await GetStuff();
+        await AuthUser();
         await base.OnInitializedAsync();
     }
 
-    private async Task GetStuff()
+    private async Task AuthUser()
     {
         var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
         var authState = await myStateProv.GetAuthenticationStateAsync();

@@ -18,6 +18,9 @@
             <div class="col-sm-2">
                 <InputDate TValue="DateOnly" @bind-Value="date1" Placeholder="Enter Date"/>
             </div>
+            <div class="col-sm-2 offset-sm-1">
+                <button class="btn btn-primary" onclick="">Submit</button>
+            </div>
         </div>
     </div>
 </div>
@@ -32,11 +35,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await GetStuff();
+        await AuthUser();
         await base.OnInitializedAsync();
     }
 
-    private async Task GetStuff()
+    private async Task AuthUser()
     {
         var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
         var authState = await myStateProv.GetAuthenticationStateAsync();
@@ -48,6 +51,16 @@
             NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
         }
 
+    }
+
+    private async Task GetAllHotels()
+    {
+        
+    }
+
+    private async Task GetHotelsAvailableOn()
+    {
+        
     }
 
 }
