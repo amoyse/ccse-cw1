@@ -16,15 +16,20 @@ public class HotelSearchController : ControllerBase
         _context = context;
     }
     
-    [HttpGet]
-    public async Task<ActionResult<List<Hotel>>> GetAvailableHotels()
+    [HttpGet("GetDates")]
+    public async Task<ActionResult<List<Hotel>>> GetAvailableHotels(DateTime startDate, DateTime endDate)
     {
         // var list = _context.Database.SqlQuery<string>(
         //     $"SELECT H.Id, H.Name, CASE WHEN SR.Count < 20 THEN H.SingleCost ELSE NULL END AS SingleCost, CASE WHEN DR.Count < 20 THEN H.DoubleCost ELSE NULL END AS DoubleCost CASE WHEN"
         //     );
         
-        DateTime inputStartDate = DateTime.Today;
-        DateTime inputEndDate = DateTime.MaxValue;
+        Console.WriteLine(startDate);
+        
+        DateTime inputStartDate = startDate;
+        DateTime inputEndDate = endDate;
+        
+        Console.WriteLine(inputStartDate.ToString());
+        Console.WriteLine(inputEndDate.ToString());
 
         var list = await _context.Hotels.Select(hotel => new
             {
