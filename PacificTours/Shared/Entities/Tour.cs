@@ -1,6 +1,6 @@
 using System.Security.Principal;
 
-namespace PacificTours.Server.Entities;
+namespace PacificTours.Shared.Entities;
 
 public class Tour
 {

@@ -1,4 +1,4 @@
-namespace PacificTours.Server.Entities;
+namespace PacificTours.Shared.Entities;
 
 public class Payment
 {

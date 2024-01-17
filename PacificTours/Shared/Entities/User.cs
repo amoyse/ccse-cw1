@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace PacificTours.Server.Entities;
+namespace PacificTours.Shared.Entities;
 using Microsoft.AspNetCore.Identity;
 
 public class User: IdentityUser

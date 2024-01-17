@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using PacificTours.Server.Entities;
+using PacificTours.Shared.Entities;
 
 namespace PacificTours.Server.Areas.Identity.Pages.Account
 {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
-using PacificTours.Server.Entities;
+using PacificTours.Shared.Entities;
 using PacificTours.Server.Services;
 using String = System.String;
 

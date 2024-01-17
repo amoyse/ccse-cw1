@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Identity;
-using PacificTours.Server.Entities;
+using PacificTours.Shared.Entities;
 
 namespace PacificTours.Server.Services;
 using Microsoft.EntityFrameworkCore;

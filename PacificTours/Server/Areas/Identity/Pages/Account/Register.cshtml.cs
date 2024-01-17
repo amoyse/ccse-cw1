@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using NuGet.Protocol;
-using PacificTours.Server.Entities;
+using PacificTours.Shared.Entities;
 
 namespace PacificTours.Server.Areas.Identity.Pages.Account
 {

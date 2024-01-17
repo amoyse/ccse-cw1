@@ -1,7 +1,7 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PacificTours.Server.Entities;
+namespace PacificTours.Shared.Entities;
 
 public class Booking
 {
