@@ -14,7 +14,15 @@
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-fufgcHvsaxvMQe0xlebCB4KKK5bHbz+G6MV9j6Ofd2c=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-5mV7NKOLnKHO3CRk8pySXNbPq+UdrKOgJpjib9h5p14=",
       "Microsoft.AspNetCore.Components.WebAssembly.Authentication.dll": "sha256-nPvEoLopX88anBlJcTsVx5N+4nsI3XvM6q2ReYc0194=",
+      "Microsoft.AspNetCore.Cryptography.Internal.dll": "sha256-GjasYPKOrGjjG86TUOqcviJhl+XXHcsbnXYQtqbp8AI=",
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": "sha256-J9fz3Df17CBeDNUFJeEhxD+5s6oK2+tVHu\/0XIwlGzo=",
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": "sha256-BdPQXxyT0wkSFF8is4Ap1WZKWI9rsMM4lkcyBZL7jcM=",
       "Microsoft.AspNetCore.Metadata.dll": "sha256-buRnUKP2Y+yAMrKqT4KYoO4XIXWzcrFuuyI8SeadeTU=",
+      "Microsoft.EntityFrameworkCore.dll": "sha256-fkB0k4ufcfowVFOPu44Q5vIgndrRW59pKZEwCgkVvBE=",
+      "Microsoft.EntityFrameworkCore.Abstractions.dll": "sha256-ki3HFT2MaMyFEpujQHD8LVuUNXYs+YaeJN+0Gr+Z0kY=",
+      "Microsoft.EntityFrameworkCore.Relational.dll": "sha256-rYh1dfpwtMLvmtKSqlJKBXHbScSem78+I9lRNY5k+qY=",
+      "Microsoft.Extensions.Caching.Abstractions.dll": "sha256-tiD1Xg\/wcoUkJVBDtLfs5EiB1IwSUm0d\/lPffRVbKOc=",
+      "Microsoft.Extensions.Caching.Memory.dll": "sha256-xNEDLuTrpWv6Lq76qNCi\/PYwN6Ev6cjFAzNQPsAKMfg=",
       "Microsoft.Extensions.Configuration.dll": "sha256-PqQvp77oZ4+uuy2ElXk8AU9I6RfZSf18UGTrd4rulOo=",
       "Microsoft.Extensions.Configuration.Abstractions.dll": "sha256-CnS3b9EMFQmETBUVEgtcron4DBsfFdcVt3zfCP6Uflg=",
       "Microsoft.Extensions.Configuration.Binder.dll": "sha256-7GY9+7Cm0Z8DJ+JCFwgCx9OfFtUvXlFHaaLlBYmXfIE=",
@@ -25,6 +33,8 @@
       "Microsoft.Extensions.FileProviders.Abstractions.dll": "sha256-Zt6OY6gg\/1Tzt9oFOQBkezPvUVkFK4dyM6Pfk+MTUvg=",
       "Microsoft.Extensions.FileProviders.Physical.dll": "sha256-9xkIbIienaRj9Td2MyWYzL9JmVx6CKbGCPrvJ1Pxfn8=",
       "Microsoft.Extensions.FileSystemGlobbing.dll": "sha256-Gm0yiS5fySh2nZXdCRKZIbASK8sSukwjogLc+a9EBZY=",
+      "Microsoft.Extensions.Identity.Core.dll": "sha256-4piYo9cLEtAVDMa6Li2qBYhmo6r25E4pE9neINS1574=",
+      "Microsoft.Extensions.Identity.Stores.dll": "sha256-gXBvW+5qTl47I5wszt5mLhMN6pykQqoUYTJQ7w9gdQo=",
       "Microsoft.Extensions.Logging.dll": "sha256-WMsuY8rhtg+vvssGFSR7ZLKhqYPAzOi538IXMoiJ6bI=",
       "Microsoft.Extensions.Logging.Abstractions.dll": "sha256-7mzUlhcvGxpAVO4h\/Tka7P\/8IXF9ZsHkGt0fp5aufkU=",
       "Microsoft.Extensions.Options.dll": "sha256-gcHJrSv1wTqvF9SyWTEKcbiShn4mkgfnm9+tRQr4OqY=",
@@ -200,15 +210,15 @@
       "mscorlib.dll": "sha256-fVDx40u1vKqhdy509hDF73SIx6C5q5Mst93LwfZWVQY=",
       "netstandard.dll": "sha256-ohOFXxRJKiyPbitdA1y5ebD9fSAGELDRVmhDM2nVdtA=",
       "System.Private.CoreLib.dll": "sha256-7Y6AhJbgMptcdman3NtSEbcJV520wGmyxB8QvZwrUmc=",
-      "PacificTours.Shared.dll": "sha256-aB1BXWNPxUKQPzLTDUuNq1NQY3KpHhrQLYFSFC87TiY=",
-      "PacificTours.Client.dll": "sha256-ENXQXaXs2TX1VSDoRX26\/WrBPT3Cy0mR7Vghl\/U7VoY="
+      "PacificTours.Shared.dll": "sha256-t3+9kGCkxiJfsE6pXmOCk3ODVx+PD40zIJzTd0zvPpk=",
+      "PacificTours.Client.dll": "sha256-eYaXdqQwWk8tK\/FBTVGWDTl8UwYjpYSfCE7y6Uj7kaw="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "PacificTours.Shared.pdb": "sha256-DEbls7EXdwY+OZ1xvr5BWvuOGFOCqvjo1rzyqOqDtqQ=",
-      "PacificTours.Client.pdb": "sha256-HZGkHTm5fxDT7sj0pAONlViVEemziR4UaCjgLsezkio="
+      "PacificTours.Shared.pdb": "sha256-7XlgVE4xuB\/dY61wv98ve905BMnofozUsumn8ex+M\/8=",
+      "PacificTours.Client.pdb": "sha256-yezyvShulQ9KtPsjicGwWW7qqEO9J+O7IfJ0VUxJRus="
     },
     "runtime": {
       "dotnet.7.0.15.jclya2w13v.js": "sha256-MHuxwxeVFybuBBTAWeZrvoStZpW+H4ThSaRcFvrfqXM=",

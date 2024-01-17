@@ -191,7 +191,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Bookings", (string)null);
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.Hotel", b =>
@@ -217,7 +217,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hotels");
+                    b.ToTable("Hotels", (string)null);
 
                     b.HasData(
                         new
@@ -301,7 +301,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("HotelBookings");
+                    b.ToTable("HotelBookings", (string)null);
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
@@ -329,7 +329,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasIndex("BookingId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.Tour", b =>
@@ -358,7 +358,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tour");
+                    b.ToTable("Tour", (string)null);
 
                     b.HasData(
                         new
@@ -417,7 +417,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasIndex("TourId");
 
-                    b.ToTable("TourBookings");
+                    b.ToTable("TourBookings", (string)null);
                 });
 
             modelBuilder.Entity("PacificTours.Server.Entities.User", b =>

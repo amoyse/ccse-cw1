@@ -1,8 +1,55 @@
+@using PacificTours.Shared.Entities
+@inject HttpClient Http
 
 <h3>All Hotels</h3>
 
+@if (hotels is null)
+{
+    <span>Loading Hotels...</span>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Cost of Single Room (£)</th>
+            <th>Cost of Double Room (£)</th>
+            <th>Cost of Family Room (£)</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var hotel in hotels)
+            {
+                <tr>
+                    <td width="10%">@hotel.Name</td>
+                    <td width="5%">@hotel.SingleCost</td>
+                    <td width="5%">@hotel.DoubleCost</td>
+                    <td width="5%">@hotel.FamilyCost</td>
+                    <td><button @onclick="(() => BookHotel(hotel.Id))" class="btn btn-primary">Book</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 
 @code {
-    
+    List<Hotel>? hotels;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<List<Hotel>>("/api/AllHotels");
+        if (result != null)
+        {
+            hotels = result;
+        }
+    }
+
+    void BookHotel(int id)
+    {
+        
+        
+    }
+
 }
