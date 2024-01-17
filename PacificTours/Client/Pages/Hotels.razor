@@ -1,4 +1,5 @@
 @page "/Hotels"
+@using PacificTours.Client.Components
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
@@ -6,33 +7,29 @@
 
 <br/>
 
-<div class="row">
-    <div class="col-sm-1">
-        <button class="btn btn-primary">All Hotels</button>
-    </div>
-    <div class="col-sm-4">
-        <div class="row">
-            <div class="col-sm-2">
-                <p>Or select a date</p>
-            </div>
-            <div class="col-sm-2">
-                <InputDate TValue="DateOnly" @bind-Value="date1" Placeholder="Enter Date"/>
-            </div>
-            <div class="col-sm-2 offset-sm-1">
-                <button class="btn btn-primary" onclick="">Submit</button>
-            </div>
-        </div>
-    </div>
+<div>
+    <button class="btn btn-primary" @onclick="ShowAll">All Hotels</button>
+    <button class="btn btn-primary" @onclick="ShowSearch">Hotel Search</button>
 </div>
+<br/><br/>
+
+@if (_showAll)
+{
+    <AllHotels />
+}
+else if (_showSearch)
+{
+    <HotelSearch />
+}
 
 
 @code {
 
     private string _userId = "";
     private string _userName;
+    private bool _showAll;
+    private bool _showSearch;
     
-    private DateOnly date1 = DateOnly.FromDateTime(DateTime.Now.AddDays(1));
-
     protected override async Task OnInitializedAsync()
     {
         await AuthUser();
@@ -50,17 +47,18 @@
             // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
             NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
         }
-
     }
 
-    private async Task GetAllHotels()
+    private void ShowAll()
     {
-        
-    }
+        _showAll = true;
+        _showSearch = false;
 
-    private async Task GetHotelsAvailableOn()
+    }
+    private void ShowSearch()
     {
-        
-    }
+        _showAll = false;
+        _showSearch = true;
 
+    }
 }

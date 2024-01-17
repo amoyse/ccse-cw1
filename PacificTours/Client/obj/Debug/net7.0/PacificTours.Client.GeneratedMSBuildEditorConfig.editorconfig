@@ -20,6 +20,18 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Components/AllHotels.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BbGxIb3RlbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Components/HotelSearch.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Ib3RlbFNlYXJjaC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/Hotel.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG90ZWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/Hotels.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG90ZWxzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

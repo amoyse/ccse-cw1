@@ -1,0 +1,8 @@
+<h3>HotelSearch</h3>
+
+<InputDate TValue="DateOnly" @bind-Value="_date1" Placeholder="Enter Date"/>
+
+@code {
+    private DateOnly _date1 = DateOnly.FromDateTime(DateTime.Now.AddDays(1));
+    
+}
