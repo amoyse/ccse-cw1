@@ -1,0 +1,69 @@
+@using PacificTours.Shared.Entities
+@inject HttpClient Http
+
+<h3>TourSearch</h3>
+
+<InputDate TValue="DateTime" @bind-Value="_date1" Placeholder="Enter Start Date"/>
+<button class="btn btn-primary" @onclick="GetHotelsBetweenDates">Submit</button>
+
+<br/><br/>
+
+@if (_display)
+{
+    @if (_tours is null)
+    {
+        <span>Loading Tours...</span>
+    }
+    else
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Duration</th>
+                <th>Cost (£)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var tour in _tours)
+            {
+                <tr>
+                    @if (tour.Name != "")
+                    {
+                        <td width="15%">@tour.Name</td>
+                        <td width="15%">@tour.Duration</td>
+                        <td width="15%">@tour.Cost</td>
+                        <td><button @onclick="(() => BookTour(tour.Id))" class="btn btn-primary">Book Tour</button>
+                        </td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+}
+
+
+@code {
+    private DateTime _date1 = DateTime.Now.AddDays(1);
+
+    private bool _display = false;
+    List<Tour>? _tours;
+    
+    private async Task GetHotelsBetweenDates()
+    {
+        _display = true;
+        var result = await Http.GetFromJsonAsync<List<Tour>>($"/api/HotelSearch/GetDates?startDate={_date1:yyyy-MM-dd}");
+        
+        if (result != null)
+        {
+            _tours = result;
+        }
+    }
+
+    void BookTour(int id)
+    {
+        
+        
+    }
+}

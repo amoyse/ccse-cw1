@@ -1,25 +1,25 @@
-@page "/Hotels"
+@page "/Tours"
 @using PacificTours.Client.Components
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
-<h3>Hotels</h3>
+<h3>Tours</h3>
 
 <br/>
 
 <div>
-    <button class="btn btn-primary" @onclick="ShowAll">All Hotels</button>
-    <button class="btn btn-primary" @onclick="ShowSearch">Search Availability</button>
+    <button class="btn btn-primary" @onclick="ShowAll">All Tours</button>
+    <button class="btn btn-primary" @onclick="ShowSearch">Tour Search</button>
 </div>
 <br/><br/>
 
 @if (_showAll)
 {
-    <AllHotels />
+    <AllTours />
 }
 else if (_showSearch)
 {
-    <HotelSearch />
+    <TourSearch />
 }
 
 
