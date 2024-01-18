@@ -1,7 +1,7 @@
 @using PacificTours.Shared.Entities
 @inject HttpClient Http
 
-<h3>TourSearch</h3>
+<h3>Search Tour Availability</h3>
 
 <InputDate TValue="DateTime" @bind-Value="_date1" Placeholder="Enter Start Date"/>
 <button class="btn btn-primary" @onclick="GetToursOnDate">Submit</button>
@@ -21,7 +21,7 @@
             <tr>
                 <th>Name</th>
                 <th>Duration</th>
-                <th>Cost (£)</th>
+                <th>Cost</th>
             </tr>
             </thead>
             <tbody>
@@ -30,10 +30,10 @@
                 <tr>
                     @if (tour.Name != "")
                     {
-                        <td width="15%">@tour.Name</td>
-                        <td width="15%">@tour.Duration</td>
-                        <td width="15%">@tour.Cost</td>
-                        <td><button @onclick="(() => BookTour(tour.Id))" class="btn btn-primary">Book Tour</button>
+                        <td width="18%">@tour.Name</td>
+                        <td width="10%">@tour.Duration days</td>
+                        <td width="10%">£@tour.Cost</td>
+                        <td width="10%"><button @onclick="(() => BookTour(tour.Id))" class="btn btn-primary">Book Tour</button>
                         </td>
                     }
                 </tr>
@@ -53,7 +53,7 @@
     private async Task GetToursOnDate()
     {
         _display = true;
-        var result = await Http.GetFromJsonAsync<List<Tour>>($"/api/GetTours/GetDates?startDate={_date1:yyyy-MM-dd}");
+        var result = await Http.GetFromJsonAsync<List<Tour>>($"/api/TourSearch/GetDates?startDate={_date1:yyyy-MM-dd}");
         
         if (result != null)
         {

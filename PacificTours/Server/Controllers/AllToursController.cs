@@ -19,9 +19,9 @@ public class AllToursController : ControllerBase
     
     // Send back a list of all hotels, and their attributes
     [HttpGet]
-    public async Task<ActionResult<List<Tour>>> GetAllHotels()
+    public async Task<ActionResult<List<Tour>>> GetAllTours()
     {
-        var list = await _context.Hotels.ToListAsync();
+        var list = await _context.Tours.ToListAsync();
         return Ok(list);
     }
     

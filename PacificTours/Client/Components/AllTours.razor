@@ -14,16 +14,16 @@ else
         <tr>
             <th>Name</th>
             <th>Duration</th>
-            <th>Cost (£)</th>
+            <th>Cost</th>
         </tr>
         </thead>
         <tbody>
             @foreach (var tour in _tours)
             {
                 <tr>
-                    <td width="15%">@tour.Name</td>
-                    <td width="9%">@tour.Duration</td>
-                    <td width="9%">@tour.Cost</td>
+                    <td width="12%">@tour.Name</td>
+                    <td width="10%">@tour.Duration days</td>
+                    <td width="10%">£@tour.Cost</td>
                 </tr>
             }
         </tbody>

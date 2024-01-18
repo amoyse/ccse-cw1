@@ -21,16 +21,20 @@
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Cost of Single Room (£)</th>
-                <th>Cost of Double Room (£)</th>
-                <th>Cost of Family Room (£)</th>
+                <th>Cost of Single Room</th>
+                <th>Cost of Double Room</th>
+                <th>Cost of Family Room</th>
             </tr>
             </thead>
             <tbody>
             @foreach (var hotel in _hotels)
             {
                 <tr>
-                    @if (hotel.Name != "")
+                    @if (hotel.SingleCost == 0 && hotel.DoubleCost == 0 && hotel.FamilyCost == 0)
+                    {
+                        // don't show any hotel details if no costs have been sent back
+                    }
+                    else
                     {
                         <td width="15%">@hotel.Name</td>
                         @if (hotel.SingleCost == 0)
@@ -40,7 +44,7 @@
                         }
                         else
                         {
-                            <td width="9%">@hotel.SingleCost</td>
+                            <td width="9%">£@hotel.SingleCost</td>
                             
                         }
                         @if (hotel.DoubleCost == 0)
@@ -50,7 +54,7 @@
                         }
                         else
                         {
-                            <td width="9%">@hotel.DoubleCost</td>
+                            <td width="9%">£@hotel.DoubleCost</td>
                             
                         }
                         @if (hotel.FamilyCost == 0)
@@ -60,13 +64,14 @@
                         }
                         else
                         {
-                            <td width="9%">@hotel.FamilyCost</td>
+                            <td width="9%">£@hotel.FamilyCost</td>
                             
                         }
                         <td><button @onclick="(() => BookSingle(hotel.Id))" class="btn btn-primary">Book Single Room</button>
                             <button @onclick="(() => BookDouble(hotel.Id))" class="btn btn-primary">Book Double Room</button>
                             <button @onclick="(() => BookFamily(hotel.Id))" class="btn btn-primary">Book Family Room</button>
                         </td>
+                        
                     }
                 </tr>
             }
