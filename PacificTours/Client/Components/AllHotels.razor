@@ -26,7 +26,10 @@ else
                     <td width="9%">@hotel.SingleCost</td>
                     <td width="9%">@hotel.DoubleCost</td>
                     <td width="9%">@hotel.FamilyCost</td>
-                    <td><button @onclick="(() => BookHotel(hotel.Id))" class="btn btn-primary">Book</button></td>
+                    <td><button @onclick="(() => BookSingle(hotel.Id))" class="btn btn-primary">Book Single Room</button>
+                        <button @onclick="(() => BookDouble(hotel.Id))" class="btn btn-primary">Book Double Room</button>
+                        <button @onclick="(() => BookFamily(hotel.Id))" class="btn btn-primary">Book Family Room</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -46,9 +49,18 @@ else
         }
     }
 
-    void BookHotel(int id)
+    void BookSingle(int id)
     {
         
+        
+    }
+    void BookDouble(int id)
+    {
+        
+        
+    }
+    void BookFamily(int id)
+    {
         
         
     }

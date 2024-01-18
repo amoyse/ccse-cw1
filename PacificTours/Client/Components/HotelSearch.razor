@@ -30,11 +30,44 @@
             @foreach (var hotel in _hotels)
             {
                 <tr>
-                    <td width="15%">@hotel.Name</td>
-                    <td width="9%">@hotel.SingleCost</td>
-                    <td width="9%">@hotel.DoubleCost</td>
-                    <td width="9%">@hotel.FamilyCost</td>
-                    <td><button @onclick="(() => BookHotel(hotel.Id))" class="btn btn-primary">Book</button></td>
+                    @if (hotel.Name != "")
+                    {
+                        <td width="15%">@hotel.Name</td>
+                        @if (hotel.SingleCost == 0)
+                        {
+                            <td width="9%">Not available</td>
+                            
+                        }
+                        else
+                        {
+                            <td width="9%">@hotel.SingleCost</td>
+                            
+                        }
+                        @if (hotel.DoubleCost == 0)
+                        {
+                            <td width="9%">Not available</td>
+                            
+                        }
+                        else
+                        {
+                            <td width="9%">@hotel.DoubleCost</td>
+                            
+                        }
+                        @if (hotel.FamilyCost == 0)
+                        {
+                            <td width="9%">Not available</td>
+                            
+                        }
+                        else
+                        {
+                            <td width="9%">@hotel.FamilyCost</td>
+                            
+                        }
+                        <td><button @onclick="(() => BookSingle(hotel.Id))" class="btn btn-primary">Book Single Room</button>
+                            <button @onclick="(() => BookDouble(hotel.Id))" class="btn btn-primary">Book Double Room</button>
+                            <button @onclick="(() => BookFamily(hotel.Id))" class="btn btn-primary">Book Family Room</button>
+                        </td>
+                    }
                 </tr>
             }
             </tbody>
@@ -61,8 +94,19 @@
         }
     }
 
-    void BookHotel(int id)
+    void BookSingle(int id)
     {
+        
+        
+    }
+    void BookDouble(int id)
+    {
+        
+        
+    }
+    void BookFamily(int id)
+    {
+        
         
     }
 }
