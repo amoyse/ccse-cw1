@@ -4,7 +4,7 @@
 <h3>TourSearch</h3>
 
 <InputDate TValue="DateTime" @bind-Value="_date1" Placeholder="Enter Start Date"/>
-<button class="btn btn-primary" @onclick="GetHotelsBetweenDates">Submit</button>
+<button class="btn btn-primary" @onclick="GetToursOnDate">Submit</button>
 
 <br/><br/>
 
@@ -50,10 +50,10 @@
     private bool _display = false;
     List<Tour>? _tours;
     
-    private async Task GetHotelsBetweenDates()
+    private async Task GetToursOnDate()
     {
         _display = true;
-        var result = await Http.GetFromJsonAsync<List<Tour>>($"/api/HotelSearch/GetDates?startDate={_date1:yyyy-MM-dd}");
+        var result = await Http.GetFromJsonAsync<List<Tour>>($"/api/GetTours/GetDates?startDate={_date1:yyyy-MM-dd}");
         
         if (result != null)
         {

@@ -12,7 +12,7 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115152712_FirstMigrationAgaoin")]
+    [Migration("20240118230322_FirstMigrationAgaoin")]
     partial class FirstMigrationAgaoin
     {
         /// <inheritdoc />
@@ -162,7 +162,7 @@ namespace PacificTours.Server.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Booking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,7 +197,7 @@ namespace PacificTours.Server.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Hotel", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Hotel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,7 +273,7 @@ namespace PacificTours.Server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.HotelBooking", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.HotelBooking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -307,7 +307,7 @@ namespace PacificTours.Server.Migrations
                     b.ToTable("HotelBookings");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Payment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -335,7 +335,7 @@ namespace PacificTours.Server.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Tour", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Tour", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -361,7 +361,7 @@ namespace PacificTours.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tour");
+                    b.ToTable("Tours");
 
                     b.HasData(
                         new
@@ -393,7 +393,7 @@ namespace PacificTours.Server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.TourBooking", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.TourBooking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -423,7 +423,7 @@ namespace PacificTours.Server.Migrations
                     b.ToTable("TourBookings");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.User", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -514,7 +514,7 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("PacificTours.Server.Entities.User", null)
+                    b.HasOne("PacificTours.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -523,7 +523,7 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("PacificTours.Server.Entities.User", null)
+                    b.HasOne("PacificTours.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -538,7 +538,7 @@ namespace PacificTours.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PacificTours.Server.Entities.User", null)
+                    b.HasOne("PacificTours.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -547,16 +547,16 @@ namespace PacificTours.Server.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("PacificTours.Server.Entities.User", null)
+                    b.HasOne("PacificTours.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Booking", b =>
                 {
-                    b.HasOne("PacificTours.Server.Entities.User", "User")
+                    b.HasOne("PacificTours.Shared.Entities.User", "User")
                         .WithMany("UserBookings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -565,15 +565,15 @@ namespace PacificTours.Server.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.HotelBooking", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.HotelBooking", b =>
                 {
-                    b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
+                    b.HasOne("PacificTours.Shared.Entities.Booking", "Booking")
                         .WithOne("HotelBooking")
-                        .HasForeignKey("PacificTours.Server.Entities.HotelBooking", "BookingId")
+                        .HasForeignKey("PacificTours.Shared.Entities.HotelBooking", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PacificTours.Server.Entities.Hotel", "Hotel")
+                    b.HasOne("PacificTours.Shared.Entities.Hotel", "Hotel")
                         .WithMany("HotelBookings")
                         .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -584,9 +584,9 @@ namespace PacificTours.Server.Migrations
                     b.Navigation("Hotel");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Payment", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Payment", b =>
                 {
-                    b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
+                    b.HasOne("PacificTours.Shared.Entities.Booking", "Booking")
                         .WithMany("BookingPayments")
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -595,15 +595,15 @@ namespace PacificTours.Server.Migrations
                     b.Navigation("Booking");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.TourBooking", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.TourBooking", b =>
                 {
-                    b.HasOne("PacificTours.Server.Entities.Booking", "Booking")
+                    b.HasOne("PacificTours.Shared.Entities.Booking", "Booking")
                         .WithOne("TourBooking")
-                        .HasForeignKey("PacificTours.Server.Entities.TourBooking", "BookingId")
+                        .HasForeignKey("PacificTours.Shared.Entities.TourBooking", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PacificTours.Server.Entities.Tour", "Tour")
+                    b.HasOne("PacificTours.Shared.Entities.Tour", "Tour")
                         .WithMany("TourBookings")
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -614,7 +614,7 @@ namespace PacificTours.Server.Migrations
                     b.Navigation("Tour");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Booking", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Booking", b =>
                 {
                     b.Navigation("BookingPayments");
 
@@ -623,17 +623,17 @@ namespace PacificTours.Server.Migrations
                     b.Navigation("TourBooking");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Hotel", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Hotel", b =>
                 {
                     b.Navigation("HotelBookings");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.Tour", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.Tour", b =>
                 {
                     b.Navigation("TourBookings");
                 });
 
-            modelBuilder.Entity("PacificTours.Server.Entities.User", b =>
+            modelBuilder.Entity("PacificTours.Shared.Entities.User", b =>
                 {
                     b.Navigation("UserBookings");
                 });

@@ -24,7 +24,6 @@ else
                     <td width="15%">@tour.Name</td>
                     <td width="9%">@tour.Duration</td>
                     <td width="9%">@tour.Cost</td>
-                    <td><button @onclick="(() => BookTour(tour.Id))" class="btn btn-primary">Book Tour</button></td>
                 </tr>
             }
         </tbody>
@@ -37,7 +36,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await Http.GetFromJsonAsync<List<Tour>>("/api/AllTour");
+        var result = await Http.GetFromJsonAsync<List<Tour>>("/api/AllTours");
         if (result != null)
         {
             _tours = result;

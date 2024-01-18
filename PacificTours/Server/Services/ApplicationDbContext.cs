@@ -118,7 +118,7 @@ public class ApplicationDbContext: IdentityDbContext<User>
 
     public DbSet<User> Users { get; set; }
     public DbSet<Hotel> Hotels { get; set; }
-    public DbSet<Tour> Tour { get; set; }
+    public DbSet<Tour> Tours { get; set; }
     public DbSet<HotelBooking> HotelBookings { get; set; }
     public DbSet<TourBooking> TourBookings { get; set; }
     public DbSet<Booking> Bookings { get; set; }

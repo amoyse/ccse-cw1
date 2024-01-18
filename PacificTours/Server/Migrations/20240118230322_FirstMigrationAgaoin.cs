@@ -73,7 +73,7 @@ namespace PacificTours.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tour",
+                name: "Tours",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -86,7 +86,7 @@ namespace PacificTours.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tour", x => x.Id);
+                    table.PrimaryKey("PK_Tours", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -291,9 +291,9 @@ namespace PacificTours.Server.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TourBookings_Tour_TourId",
+                        name: "FK_TourBookings_Tours_TourId",
                         column: x => x.TourId,
-                        principalTable: "Tour",
+                        principalTable: "Tours",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -312,7 +312,7 @@ namespace PacificTours.Server.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Tour",
+                table: "Tours",
                 columns: new[] { "Id", "Cost", "Duration", "Name", "Spaces", "StartDate" },
                 values: new object[,]
                 {
@@ -430,7 +430,7 @@ namespace PacificTours.Server.Migrations
                 name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "Tour");
+                name: "Tours");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
