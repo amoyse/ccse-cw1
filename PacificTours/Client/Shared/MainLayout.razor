@@ -8,13 +8,13 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="/Identity/Account/Register">Register</a>
             @if (_isAuth)
             {
                 <a href="/Identity/Account/Logout">Log Out</a>
             }
             else
             {
+                <a href="/Identity/Account/Register">Register</a>
                 <a href="/Identity/Account/Login">Log In</a>
             }
             
