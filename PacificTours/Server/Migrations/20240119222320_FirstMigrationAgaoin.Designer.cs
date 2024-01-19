@@ -12,7 +12,7 @@ using PacificTours.Server.Services;
 namespace PacificTours.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240118230322_FirstMigrationAgaoin")]
+    [Migration("20240119222320_FirstMigrationAgaoin")]
     partial class FirstMigrationAgaoin
     {
         /// <inheritdoc />
@@ -171,12 +171,6 @@ namespace PacificTours.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("BookingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")

@@ -27,6 +27,12 @@ public class BookingController : ControllerBase
         {
             var tour = _context.Tours.Find(bookingInfo.Id);
             
+            
+            var tourBooking = new TourBooking
+            {
+                Id = tour.Id,
+                
+            };
 
         }
         else
