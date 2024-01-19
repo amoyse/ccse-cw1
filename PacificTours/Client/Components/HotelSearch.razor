@@ -6,7 +6,7 @@
 <InputDate TValue="DateTime" @bind-Value="_date1" Placeholder="Enter Start Date"/>
 
 @* prevent user from entering a date before the previous date, or on the same day *@
-<InputDate TValue="DateTime" @bind-Value="_date2" EnableMinMax="true" Min="@_date1.AddDays(1)" Placeholder="Enter End Date"/>
+<InputDate TValue="DateTime" @bind-Value="_date2" min="@_date1.AddDays(1).ToString("yyyy-MM-dd")"  Placeholder="Enter End Date"/>
 <button class="btn btn-primary" @onclick="GetHotelsBetweenDates">Submit</button>
 
 <br/><br/>
