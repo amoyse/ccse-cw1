@@ -26,30 +26,74 @@ public class BookingController : ControllerBase
     [HttpPost("AddTourBooking")]
     public async Task<ActionResult<Booking>> AddTourBooking(TourBookingInfoDto tourBookingInfo)
     {
-        
         var tour = _context.Tours.Find(tourBookingInfo.Id);
+        TourBooking tourBooking;
 
-        Booking newBooking = new Booking
-        {
-            Id = _context.Bookings.Count() + 1,
-            UserId = _userManager.GetUserId(User),
-            BookingDate = DateTime.Now,
-            TotalCost = tour.Cost,
-            Status = "Reserved"
-        };
-
-        _context.Bookings.Add(newBooking);
+        var booking = _context.Bookings.Find(_userManager.GetUserId(User));
         
-        var tourBooking = new TourBooking
+        if (booking is not null)
         {
-            Id = _context.TourBookings.Count() + 1,
-            BookingId = newBooking.Id,
-            TourId = tourBookingInfo.Id,
-            StartDate = tourBookingInfo.StartDate,
-            EndDate = tourBookingInfo.StartDate.AddDays(tour.Duration)
-        };
+            if (booking.Status == "In Progress")
+            {
+                booking.TotalCost += tour.Cost;
+                
+                tourBooking = new TourBooking
+                {
+                    Id = _context.TourBookings.Count() + 1,
+                    BookingId = booking.Id,
+                    TourId = tourBookingInfo.Id,
+                    StartDate = tourBookingInfo.StartDate,
+                    EndDate = tourBookingInfo.StartDate.AddDays(tour.Duration)
+                };
+            }
+            else
+            {
+                Booking newBooking = new Booking
+                {
+                    Id = _context.Bookings.Count() + 1,
+                    UserId = _userManager.GetUserId(User),
+                    BookingDate = DateTime.Now,
+                    TotalCost = tour.Cost,
+                    Status = "Reserved"
+                };
+
+                _context.Bookings.Add(newBooking);
+                
+                tourBooking = new TourBooking
+                {
+                    Id = _context.TourBookings.Count() + 1,
+                    BookingId = newBooking.Id,
+                    TourId = tourBookingInfo.Id,
+                    StartDate = tourBookingInfo.StartDate,
+                    EndDate = tourBookingInfo.StartDate.AddDays(tour.Duration)
+                };
+            }
+        }
+        else
+        {
+            Booking newBooking = new Booking
+            {
+                Id = _context.Bookings.Count() + 1,
+                UserId = _userManager.GetUserId(User),
+                BookingDate = DateTime.Now,
+                TotalCost = tour.Cost,
+                Status = "In Progress"
+            };
+
+            _context.Bookings.Add(newBooking);
+            
+            tourBooking = new TourBooking
+            {
+                Id = _context.TourBookings.Count() + 1,
+                BookingId = newBooking.Id,
+                TourId = tourBookingInfo.Id,
+                StartDate = tourBookingInfo.StartDate,
+                EndDate = tourBookingInfo.StartDate.AddDays(tour.Duration)
+            };
+        }
 
         _context.TourBookings.Add(tourBooking);
+        await _context.SaveChangesAsync();
 
         return Ok();
     }
@@ -59,29 +103,8 @@ public class BookingController : ControllerBase
     public async Task<ActionResult<Booking>> AddHotelBooking(HotelBookingInfoDto hotelBookingInfo)
     {
         
-        var tour = _context.Tours.Find(hotelBookingInfo.Id);
+        var hotel = _context.Hotels.Find(hotelBookingInfo.Id);
 
-        Booking newBooking = new Booking
-        {
-            Id = _context.Bookings.Count() + 1,
-            UserId = _userManager.GetUserId(User),
-            BookingDate = DateTime.Now,
-            TotalCost = tour.Cost,
-            Status = "Reserved"
-        };
-
-        _context.Bookings.Add(newBooking);
-        
-        var tourBooking = new TourBooking
-        {
-            Id = _context.TourBookings.Count() + 1,
-            BookingId = newBooking.Id,
-            TourId = hotelBookingInfo.Id,
-            StartDate = hotelBookingInfo.StartDate,
-            EndDate = hotelBookingInfo.EndDate
-        };
-
-        _context.TourBookings.Add(tourBooking);
 
         return Ok();
     }
