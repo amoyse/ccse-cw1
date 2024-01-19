@@ -36,7 +36,7 @@
                         <td width="18%">@tour.Name</td>
                         <td width="10%">@tour.Duration days</td>
                         <td width="10%">£@tour.Cost</td>
-                        <td width="10%"><button @onclick="(() => BookTour(tour.Id, tour.StartDate, tour.StartDate))" class="btn btn-primary">Book Tour</button>
+                        <td width="10%"><button @onclick="(() => BookTour(tour.Id, tour.StartDate))" class="btn btn-primary">Book Tour</button>
                         </td>
                     }
                 </tr>
@@ -64,15 +64,14 @@
         }
     }
 
-    private async Task BookTour(int id, DateTime startDate, DateTime endDate)
+    private async Task BookTour(int id, DateTime startDate)
     {
 
-        BookingInfoDto bookingInfo = new BookingInfoDto
+        TourBookingInfoDto tourBookingInfo = new TourBookingInfoDto
         {
             Id = id, 
             StartDate = startDate, 
-            EndDate = endDate
         };
-        var result = await Http.PostAsJsonAsync("/api/Booking", bookingInfo);
+        var result = await Http.PostAsJsonAsync("/api/Booking/AddTourBooking", tourBookingInfo);
     }
 }
