@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using PacificTours.Server.Services;
 using PacificTours.Shared.Entities;
 using PacificTours.Shared;
@@ -27,6 +28,7 @@ public class BookingController : ControllerBase
     [HttpGet("TourBookingInfo")]
     public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo()
     {
+        Console.WriteLine("about to jump out of the window why isn't this working");
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
         
@@ -34,7 +36,7 @@ public class BookingController : ControllerBase
         var tourBooking = tourBookings.FirstOrDefault();
         if (tourBooking is null)
         {
-            return Ok(null);
+            return Ok(tourBooking);
         }
         var tour = await _context.Tours.FindAsync(tourBooking.TourId);
 
@@ -56,9 +58,40 @@ public class BookingController : ControllerBase
     {
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
-        Console.WriteLine("we got to hotelbookinginfo");
+        
         var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == _booking.Id).ToListAsync();
-        return Ok(hotelBookings);
+        var hotelBooking = hotelBookings.FirstOrDefault();
+        
+        if (hotelBooking is null)
+        {
+            return Ok(hotelBooking.ToJson());
+        }
+        var hotel = await _context.Hotels.FindAsync(hotelBooking.HotelId);
+
+        int roomCost = 0;
+        if (hotelBooking.RoomType == "Single")
+        {
+            roomCost = hotel.SingleCost;
+        }
+        else if (hotelBooking.RoomType == "Double")
+        {
+            roomCost = hotel.DoubleCost;
+        }
+        else if (hotelBooking.RoomType == "Family")
+        {
+            roomCost = hotel.FamilyCost;
+        }
+
+        var hotelBookingInfo = new HotelBookingInfoDto()
+        {
+            Id = hotelBooking.Id,
+            StartDate = hotelBooking.StartDate,
+            Name = hotel.Name,
+            EndDate = hotelBooking.EndDate,
+            RoomCost = roomCost,
+            RoomType = hotelBooking.RoomType
+        };
+        return Ok(hotelBookingInfo);
     }
 
     [HttpPost("AddTourBooking")]
@@ -115,10 +148,9 @@ public class BookingController : ControllerBase
     }
     
     
-    [HttpPost("AddHotelBooking")]
+    [HttpPost("HotelBooking")]
     public async Task<ActionResult<Booking>> AddHotelBooking(HotelBookingInfoDto hotelBookingInfo)
     {
-        
         HotelBooking hotelBooking;
 
         // check if there is currently a booking in progress that hasn't been reserved
@@ -148,6 +180,7 @@ public class BookingController : ControllerBase
                 EndDate = hotelBookingInfo.EndDate,
                 RoomType = hotelBookingInfo.RoomType
             };
+            Console.WriteLine(_userManager.GetUserId(User));
             
             Booking newBooking = new Booking
             {

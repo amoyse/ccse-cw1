@@ -36,7 +36,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await Http.GetFromJsonAsync<List<Tour>>("/api/AllTours");
+        var result = await Http.GetFromJsonAsync<List<Tour>>("api/Tours");
         if (result != null)
         {
             _tours = result;

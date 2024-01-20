@@ -18,6 +18,4 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStat
 
 builder.Services.AddApiAuthorization();
 
-
-
 await builder.Build().RunAsync();

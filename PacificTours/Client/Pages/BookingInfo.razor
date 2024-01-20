@@ -5,38 +5,40 @@
 
 <h3>Booking Info</h3>
 
-@if (_hotelBooking is null && _tourInfo is null)
+@if (_hotelInfo is null && _tourInfo is null)
 {
     Console.WriteLine("booking is null");
     <span>Loading Booking Info...</span>
     <br/>
-    
-    <div style="display:block; width:100%;">
-        <div style="width:50%; float: left; display: inline-block;">
-            <h5>Hotel Booking</h5>
-            <div>Name: </div>
-            <div>Room Type: </div>
-            <div>Cost: </div>
-        </div>
-        <div style="width:50%; float: left; display: inline-block;">
-            <h5>Tour Booking</h5>
-            <div>Name: </div>
-            <div>Duration: </div>
-            <div>Cost: </div>
-        </div>
-    </div>
 }
 else
 {
-    @if (_hotelBooking is not null)
+    @if (_hotelInfo is not null && _tourInfo is not null)
+    {
+        <div style="display:block; width:100%;">
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Hotel Booking</h5>
+                <div>Name: @_hotelInfo.Name</div>
+                <div>Room Type: @_hotelInfo.RoomType</div>
+                <div>Cost: £@_hotelInfo.RoomCost</div>
+            </div>
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Tour Booking</h5>
+                <div>Name: @_tourInfo.Name</div>
+                <div>Duration: @_tourInfo.Duration days</div>
+                <div>Cost: £@_tourInfo.Cost</div>
+            </div>
+        </div>
+    }
+    else if (_hotelInfo is not null)
     {
         Console.WriteLine("hotel booking not null but tour is");
         <div style="display:block; width:100%;">
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Hotel Booking</h5>
-                <div>Name:</div>
-                <div>Room Type: </div>
-                <div>Cost: </div>
+                <div>Name: @_hotelInfo.Name</div>
+                <div>Room Type: @_hotelInfo.RoomType</div>
+                <div>Cost: £@_hotelInfo.RoomCost</div>
             </div>
         </div>
     }
@@ -47,8 +49,8 @@ else
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Tour Booking</h5>
                 <div>Name: @_tourInfo.Name</div>
-                <div>Duration: @_tourInfo.Duration</div>
-                <div>Cost: @_tourInfo.Cost</div>
+                <div>Duration: @_tourInfo.Duration days</div>
+                <div>Cost: £@_tourInfo.Cost</div>
             </div>
         </div>
     } 
@@ -56,19 +58,22 @@ else
 
 @code {
 
-    HotelBooking? _hotelBooking;
-
     TourBookingInfoDto? _tourInfo;
+    HotelBookingInfoDto? _hotelInfo;
 
     protected override async Task OnInitializedAsync()
     {
-        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("/api/Booking/TourBookingInfo");
-        // var hotelResult = await Http.GetFromJsonAsync<List<HotelBooking>>("/api/Booking/HotelBookingInfo");
-        HotelBookingInfoDto? hotelResult = null;
+        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
+        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
         if (tourResult != null)
         {
             _tourInfo = tourResult;
         }
+
+        if (hotelResult != null)
+        {
+            _hotelInfo = hotelResult;
+        }
     }
-    
 }
+    
