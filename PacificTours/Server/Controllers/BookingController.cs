@@ -28,15 +28,19 @@ public class BookingController : ControllerBase
     [HttpGet("TourBookingInfo")]
     public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo()
     {
-        Console.WriteLine("about to jump out of the window why isn't this working");
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
+        
+        if (_booking is null)
+        {
+            return Ok(bookings.ToJson());
+        }
         
         var tourBookings = await _context.TourBookings.Where(tb => tb.BookingId == _booking.Id).ToListAsync();
         var tourBooking = tourBookings.FirstOrDefault();
         if (tourBooking is null)
         {
-            return Ok(tourBooking);
+            return Ok(tourBooking.ToJson());
         }
         var tour = await _context.Tours.FindAsync(tourBooking.TourId);
 
@@ -58,6 +62,11 @@ public class BookingController : ControllerBase
     {
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
+        
+        if (_booking is null)
+        {
+            return Ok(bookings.ToJson());
+        }
         
         var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == _booking.Id).ToListAsync();
         var hotelBooking = hotelBookings.FirstOrDefault();
@@ -113,7 +122,6 @@ public class BookingController : ControllerBase
                 
             tourBooking = new TourBooking
             {
-                Id = _context.TourBookings.Count() + 1,
                 BookingId = booking.Id,
                 TourId = tourBookingInfo.Id,
                 StartDate = tourBookingInfo.StartDate,

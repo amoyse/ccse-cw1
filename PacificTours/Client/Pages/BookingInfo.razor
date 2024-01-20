@@ -7,7 +7,7 @@
 
 @if (_hotelInfo is null && _tourInfo is null)
 {
-    Console.WriteLine("booking is null");
+    <br/>
     <span>Loading Booking Info...</span>
     <br/>
 }
@@ -15,6 +15,7 @@ else
 {
     @if (_hotelInfo is not null && _tourInfo is not null)
     {
+        <br/>
         <div style="display:block; width:100%;">
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Hotel Booking</h5>
@@ -32,7 +33,7 @@ else
     }
     else if (_hotelInfo is not null)
     {
-        Console.WriteLine("hotel booking not null but tour is");
+        <br/>
         <div style="display:block; width:100%;">
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Hotel Booking</h5>
@@ -40,11 +41,14 @@ else
                 <div>Room Type: @_hotelInfo.RoomType</div>
                 <div>Cost: £@_hotelInfo.RoomCost</div>
             </div>
+            <div style="width:50%; float: left; display: inline-block;">
+                <div>No Tour booking. If you add a Tour and create a package, you'll receive a discount.</div>
+            </div>
         </div>
     }
     else if (_tourInfo is not null)
     {
-        Console.WriteLine("tour booking not null but hotel is");
+        <br/>
         <div style="display:block; width:100%;">
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Tour Booking</h5>
@@ -52,28 +56,65 @@ else
                 <div>Duration: @_tourInfo.Duration days</div>
                 <div>Cost: £@_tourInfo.Cost</div>
             </div>
+            <div style="width:50%; float: left; display: inline-block;">
+                <div>No Hotel booking. If you add a Hotel and create a package, you'll receive a discount.</div>
+            </div>
         </div>
     } 
+    <br/><br/><br/><br/><br/><br/><br/>
+    <div>Total Cost: £@_totalCost</div>
+    <br/>
+    <button class="btn btn-primary" @onclick="ReserveBooking">Reserve Booking</button>
 }
+
 
 @code {
 
     TourBookingInfoDto? _tourInfo;
     HotelBookingInfoDto? _hotelInfo;
+    private int _totalCost = 0;
 
     protected override async Task OnInitializedAsync()
     {
         var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
         var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
+
         if (tourResult != null)
         {
             _tourInfo = tourResult;
+            _totalCost += _tourInfo.Cost ?? default(int);
         }
-
         if (hotelResult != null)
         {
             _hotelInfo = hotelResult;
+            _totalCost += _hotelInfo.RoomCost;
         }
+        if (_tourInfo is not null && _hotelInfo is not null)
+        {
+            CalcDiscount(_hotelInfo.RoomType);
+        }
+    }
+
+    private void CalcDiscount(string roomType)
+    {
+        if (roomType == "Single")
+        {
+            _totalCost = (int)(_totalCost * 0.9);
+        } 
+        else if (roomType == "Double")
+        {
+            _totalCost = (int)(_totalCost * 0.8);
+        }
+        else if (roomType == "Family")
+        {
+            _totalCost = (int)(_totalCost * 0.6);
+        }
+    }
+    
+    
+    private async Task ReserveBooking()
+    {
+
     }
 }
     
