@@ -22,25 +22,41 @@ public class BookingController : ControllerBase
         _context = context;
         _userManager = userManager;
     }
-
-    private async void SetBookingInProgress()
+    
+    
+    [HttpGet("TourBookingInfo")]
+    public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo()
     {
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
-    }
-    
-    [HttpGet("TourBookingInfo")]
-    public async Task<ActionResult<List<Booking>>> GetTourBookingInfo()
-    {
-        SetBookingInProgress();
+        
         var tourBookings = await _context.TourBookings.Where(tb => tb.BookingId == _booking.Id).ToListAsync();
-        return Ok(tourBookings);
+        var tourBooking = tourBookings.FirstOrDefault();
+        if (tourBooking is null)
+        {
+            return Ok(null);
+        }
+        var tour = await _context.Tours.FindAsync(tourBooking.TourId);
+
+        var tourBookingInfo = new TourBookingInfoDto
+        {
+            Id = tourBooking.Id,
+            StartDate = tourBooking.StartDate,
+            Name = tour.Name,
+            Duration = tour.Duration,
+            Cost = tour.Cost,
+
+        };
+        
+        return Ok(tourBookingInfo);
     }
 
     [HttpGet("HotelBookingInfo")]
-    public async Task<ActionResult<List<Booking>>> GetHotelBookingInfo()
+    public async Task<ActionResult<List<HotelBooking>>> GetHotelBookingInfo()
     {
-        SetBookingInProgress();
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        _booking = bookings.FirstOrDefault();
+        Console.WriteLine("we got to hotelbookinginfo");
         var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == _booking.Id).ToListAsync();
         return Ok(hotelBookings);
     }
@@ -52,7 +68,8 @@ public class BookingController : ControllerBase
         TourBooking tourBooking;
 
         // check if there is currently a booking in progress that hasn't been reserved
-        SetBookingInProgress();
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        _booking = bookings.FirstOrDefault();
         var booking = _booking;
         
         if (booking is not null)
@@ -105,7 +122,8 @@ public class BookingController : ControllerBase
         HotelBooking hotelBooking;
 
         // check if there is currently a booking in progress that hasn't been reserved
-        SetBookingInProgress();
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        _booking = bookings.FirstOrDefault();
         var booking = _booking;
         
         if (booking is not null)

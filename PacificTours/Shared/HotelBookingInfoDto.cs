@@ -7,4 +7,5 @@ public class HotelBookingInfoDto
     public DateTime EndDate { get; set; }
     public int RoomCost { get; set; }
     public string RoomType { get; set; }
+    public string Name { get; set; }
 }

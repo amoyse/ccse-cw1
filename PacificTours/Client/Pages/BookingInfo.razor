@@ -1,10 +1,11 @@
 @page "/BookingInfo"
 @using PacificTours.Shared.Entities
+@using PacificTours.Shared
 @inject HttpClient Http
 
 <h3>Booking Info</h3>
 
-@if (_hotelBooking is null && _tourBooking is null)
+@if (_hotelBooking is null && _tourInfo is null)
 {
     Console.WriteLine("booking is null");
     <span>Loading Booking Info...</span>
@@ -39,15 +40,15 @@ else
             </div>
         </div>
     }
-    else if (_tourBooking is not null)
+    else if (_tourInfo is not null)
     {
         Console.WriteLine("tour booking not null but hotel is");
         <div style="display:block; width:100%;">
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Tour Booking</h5>
-                <div>Name: </div>
-                <div>Duration: </div>
-                <div>Cost: </div>
+                <div>Name: @_tourInfo.Name</div>
+                <div>Duration: @_tourInfo.Duration</div>
+                <div>Cost: @_tourInfo.Cost</div>
             </div>
         </div>
     } 
@@ -56,19 +57,17 @@ else
 @code {
 
     HotelBooking? _hotelBooking;
-    TourBooking? _tourBooking;
+
+    TourBookingInfoDto? _tourInfo;
 
     protected override async Task OnInitializedAsync()
     {
-        var tourResult = await Http.GetFromJsonAsync<List<TourBooking>>("/api/Booking/TourBookingInfo");
-        var hotelResult = await Http.GetFromJsonAsync<List<HotelBooking>>("/api/Booking/HotelBookingInfo");
+        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("/api/Booking/TourBookingInfo");
+        // var hotelResult = await Http.GetFromJsonAsync<List<HotelBooking>>("/api/Booking/HotelBookingInfo");
+        HotelBookingInfoDto? hotelResult = null;
         if (tourResult != null)
         {
-            _tourBooking = tourResult.First();
-        }
-        if (hotelResult != null)
-        {
-            _hotelBooking = hotelResult.First();
+            _tourInfo = tourResult;
         }
     }
     
