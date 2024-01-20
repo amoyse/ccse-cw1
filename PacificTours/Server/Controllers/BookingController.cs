@@ -15,6 +15,7 @@ public class BookingController : ControllerBase
     
     private readonly ApplicationDbContext _context;
     private readonly UserManager<User> _userManager;
+    private Booking? _booking;
 
     public BookingController(ApplicationDbContext context, UserManager<User> userManager)
     {
@@ -22,19 +23,26 @@ public class BookingController : ControllerBase
         _userManager = userManager;
     }
 
-    private Booking GetBookingInProgress()
+    private async void SetBookingInProgress()
     {
-        var bookings = _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress");
-        var booking = bookings.FirstOrDefault();
-        return booking;
-        
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        _booking = bookings.FirstOrDefault();
+    }
+    
+    [HttpGet("TourBookingInfo")]
+    public async Task<ActionResult<List<Booking>>> GetTourBookingInfo()
+    {
+        SetBookingInProgress();
+        var tourBookings = await _context.TourBookings.Where(tb => tb.BookingId == _booking.Id).ToListAsync();
+        return Ok(tourBookings);
     }
 
-    [HttpGet("BookingInfo")]
-    public async Task<ActionResult<Booking>> GetBookingInfo()
+    [HttpGet("HotelBookingInfo")]
+    public async Task<ActionResult<List<Booking>>> GetHotelBookingInfo()
     {
-        var booking = GetBookingInProgress();
-        return Ok(booking);
+        SetBookingInProgress();
+        var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == _booking.Id).ToListAsync();
+        return Ok(hotelBookings);
     }
 
     [HttpPost("AddTourBooking")]
@@ -44,7 +52,8 @@ public class BookingController : ControllerBase
         TourBooking tourBooking;
 
         // check if there is currently a booking in progress that hasn't been reserved
-        var booking = GetBookingInProgress();
+        SetBookingInProgress();
+        var booking = _booking;
         
         if (booking is not null)
         {
@@ -96,7 +105,8 @@ public class BookingController : ControllerBase
         HotelBooking hotelBooking;
 
         // check if there is currently a booking in progress that hasn't been reserved
-        var booking = GetBookingInProgress();
+        SetBookingInProgress();
+        var booking = _booking;
         
         if (booking is not null)
         {

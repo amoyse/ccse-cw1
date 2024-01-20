@@ -7,16 +7,35 @@ namespace PacificTours.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TourSearchController : ControllerBase
+public class ToursController : ControllerBase
 {
-    
     private readonly ApplicationDbContext _context;
 
-    public TourSearchController(ApplicationDbContext context)
+    public ToursController(ApplicationDbContext context)
     {
         _context = context;
     }
+    
+    
+    // Send back a list of all tours, and their attributes
+    [HttpGet]
+    public async Task<ActionResult<List<Tour>>> GetAllTours()
+    {
+        var list = await _context.Tours.ToListAsync();
+        return Ok(list);
+    }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<List<Tour>>> GetTourDetails(int id)
+    {
+        var tourDetails = await _context.Tours.FindAsync(id);
+        if (tourDetails == null)
+        {
+            return NotFound("This tour does not exist!");
+        }
+        return Ok(tourDetails);
+    }
+    
     [HttpGet("GetDates")]
     public async Task<ActionResult<List<Tour>>> GetAvailableTours(DateTime startDate)
     {
@@ -39,5 +58,5 @@ public class TourSearchController : ControllerBase
         return Ok(list);
         
     }
-
+    
 }

@@ -210,15 +210,15 @@
       "mscorlib.dll": "sha256-fVDx40u1vKqhdy509hDF73SIx6C5q5Mst93LwfZWVQY=",
       "netstandard.dll": "sha256-ohOFXxRJKiyPbitdA1y5ebD9fSAGELDRVmhDM2nVdtA=",
       "System.Private.CoreLib.dll": "sha256-7Y6AhJbgMptcdman3NtSEbcJV520wGmyxB8QvZwrUmc=",
-      "PacificTours.Shared.dll": "sha256-gQRrHbD8i+BuG7pv8CUA31oyTgqxqaZhlnEJuxzb+iU=",
-      "PacificTours.Client.dll": "sha256-MfsAgJ7ptAkESs1CzyjmG49YzTJVjCMHObTGvUHAahk="
+      "PacificTours.Shared.dll": "sha256-QQWaDhJnQxG8kYY5oBD8Y0AtO4v6UmtB7KFONEwDcHU=",
+      "PacificTours.Client.dll": "sha256-GqFH3+qN\/+cySPO2XBnHkW0gTaBO5136tvxAGlCryLI="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "PacificTours.Shared.pdb": "sha256-xp6RRsh8+R1JpVahgQuCfXmYiLub11MeJoUYL5W4G1o=",
-      "PacificTours.Client.pdb": "sha256-DwNtN\/qQMNuP5rjzXIS3\/CPK39emCaS8PtNqvlQBGUk="
+      "PacificTours.Shared.pdb": "sha256-HqehebefbRP0rrwothsOS3jVONobFlVyV4p9cz6TeXg=",
+      "PacificTours.Client.pdb": "sha256-CC0LHmj1TjtgTIQ+k7f6RWbI2lh4NxkDQeyZ+TTigDI="
     },
     "runtime": {
       "dotnet.7.0.15.jclya2w13v.js": "sha256-MHuxwxeVFybuBBTAWeZrvoStZpW+H4ThSaRcFvrfqXM=",

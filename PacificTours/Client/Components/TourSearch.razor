@@ -57,7 +57,7 @@
     private async Task GetToursOnDate()
     {
         _display = true;
-        var result = await Http.GetFromJsonAsync<List<Tour>>($"/api/TourSearch/GetDates?startDate={_date1:yyyy-MM-dd}");
+        var result = await Http.GetFromJsonAsync<List<Tour>>($"/api/Tours/GetDates?startDate={_date1:yyyy-MM-dd}");
         
         if (result != null)
         {

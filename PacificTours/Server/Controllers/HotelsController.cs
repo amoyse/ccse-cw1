@@ -7,14 +7,35 @@ namespace PacificTours.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class HotelSearchController : ControllerBase
+public class HotelsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
 
-    public HotelSearchController(ApplicationDbContext context)
+    public HotelsController(ApplicationDbContext context)
     {
         _context = context;
     }
+    
+    
+    // Send back a list of all hotels, and their attributes
+    [HttpGet]
+    public async Task<ActionResult<List<Hotel>>> GetAllHotels()
+    {
+        var list = await _context.Hotels.ToListAsync();
+        return Ok(list);
+    }
+    
+    [HttpGet("{id}")]
+    public async Task<ActionResult<List<Hotel>>> GetHotelDetails(int id)
+    {
+        var hotelDetails = await _context.Hotels.FindAsync(id);
+        if (hotelDetails == null)
+        {
+            return NotFound("This hotel does not exist!");
+        }
+        return Ok(hotelDetails);
+    }
+    
     
     [HttpGet("GetDates")]
     public async Task<ActionResult<List<Hotel>>> GetAvailableHotels(DateTime startDate, DateTime endDate)
@@ -46,4 +67,5 @@ public class HotelSearchController : ControllerBase
         
         return Ok(list);
     }
+    
 }

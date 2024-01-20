@@ -99,7 +99,7 @@
     private async Task GetHotelsBetweenDates()
     {
         _display = true;
-        var result = await Http.GetFromJsonAsync<List<Hotel>>($"/api/HotelSearch/GetDates?startDate={_date1:yyyy-MM-dd}&endDate={_date2:yyyy-MM-dd}");
+        var result = await Http.GetFromJsonAsync<List<Hotel>>($"/api/Hotels/GetDates?startDate={_date1:yyyy-MM-dd}&endDate={_date2:yyyy-MM-dd}");
         
         if (result != null)
         {

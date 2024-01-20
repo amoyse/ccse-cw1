@@ -4,38 +4,71 @@
 
 <h3>Booking Info</h3>
 
-@if (_booking is null)
+@if (_hotelBooking is null && _tourBooking is null)
 {
+    Console.WriteLine("booking is null");
     <span>Loading Booking Info...</span>
+    <br/>
+    
+    <div style="display:block; width:100%;">
+        <div style="width:50%; float: left; display: inline-block;">
+            <h5>Hotel Booking</h5>
+            <div>Name: </div>
+            <div>Room Type: </div>
+            <div>Cost: </div>
+        </div>
+        <div style="width:50%; float: left; display: inline-block;">
+            <h5>Tour Booking</h5>
+            <div>Name: </div>
+            <div>Duration: </div>
+            <div>Cost: </div>
+        </div>
+    </div>
 }
 else
 {
-    @if (_booking.HotelBooking is not null && _booking.TourBooking is not null)
+    @if (_hotelBooking is not null)
     {
-        
-        
+        Console.WriteLine("hotel booking not null but tour is");
+        <div style="display:block; width:100%;">
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Hotel Booking</h5>
+                <div>Name:</div>
+                <div>Room Type: </div>
+                <div>Cost: </div>
+            </div>
+        </div>
     }
-    else if (_booking.HotelBooking is not null)
+    else if (_tourBooking is not null)
     {
-        
+        Console.WriteLine("tour booking not null but hotel is");
+        <div style="display:block; width:100%;">
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Tour Booking</h5>
+                <div>Name: </div>
+                <div>Duration: </div>
+                <div>Cost: </div>
+            </div>
+        </div>
     } 
-    else if (_booking.TourBooking is not null)
-    {
-        
-    }
 }
-
 
 @code {
 
-    Booking? _booking;
+    HotelBooking? _hotelBooking;
+    TourBooking? _tourBooking;
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await Http.GetFromJsonAsync<Booking>("/api/Booking/BookingInfo");
-        if (result != null)
+        var tourResult = await Http.GetFromJsonAsync<List<TourBooking>>("/api/Booking/TourBookingInfo");
+        var hotelResult = await Http.GetFromJsonAsync<List<HotelBooking>>("/api/Booking/HotelBookingInfo");
+        if (tourResult != null)
         {
-            _booking = result;
+            _tourBooking = tourResult.First();
+        }
+        if (hotelResult != null)
+        {
+            _hotelBooking = hotelResult.First();
         }
     }
     
