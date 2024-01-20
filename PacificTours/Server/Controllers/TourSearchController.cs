@@ -20,7 +20,6 @@ public class TourSearchController : ControllerBase
     [HttpGet("GetDates")]
     public async Task<ActionResult<List<Tour>>> GetAvailableTours(DateTime startDate)
     {
-        Console.WriteLine("made it here");
         DateTime inputStartDate = startDate;
         
         var list = await _context.Tours.Select(tour => new

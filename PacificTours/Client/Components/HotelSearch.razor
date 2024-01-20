@@ -1,4 +1,5 @@
 @using PacificTours.Shared.Entities
+@using PacificTours.Shared
 @inject HttpClient Http
 
 <h3>Search Hotel Availability</h3>
@@ -69,9 +70,9 @@
                             <td width="9%">£@hotel.FamilyCost</td>
                             
                         }
-                        <td><button @onclick="(() => BookSingle(hotel.Id))" class="btn btn-primary">Book Single Room</button>
-                            <button @onclick="(() => BookDouble(hotel.Id))" class="btn btn-primary">Book Double Room</button>
-                            <button @onclick="(() => BookFamily(hotel.Id))" class="btn btn-primary">Book Family Room</button>
+                        <td><button @onclick="(() => BookRoom(hotel.Id, hotel.SingleCost))" class="btn btn-primary">Book Single Room</button>
+                            <button @onclick="(() => BookRoom(hotel.Id, hotel.DoubleCost))" class="btn btn-primary">Book Double Room</button>
+                            <button @onclick="(() => BookRoom(hotel.Id, hotel.FamilyCost))" class="btn btn-primary">Book Family Room</button>
                         </td>
                         
                     }
@@ -101,20 +102,16 @@
         }
     }
 
-    void BookSingle(int id)
+    private async Task BookRoom(int id, int RoomCost)
     {
-        
-        
-        
-    }
-    void BookDouble(int id)
-    {
-        
-        
-    }
-    void BookFamily(int id)
-    {
-        
-        
+
+        HotelBookingInfoDto hotelBookingInfo = new HotelBookingInfoDto
+        {
+            Id = id, 
+            StartDate = _date1, 
+            EndDate = _date2, 
+            RoomCost = RoomCost
+        };
+        var result = await Http.PostAsJsonAsync("/api/Booking/AddHotelBooking", hotelBookingInfo);
     }
 }
