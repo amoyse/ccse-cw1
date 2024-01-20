@@ -3,6 +3,7 @@
 @using System.Runtime.InteropServices.JavaScript
 @using PacificTours.Client.Pages
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 
 <h3>Search Tour Availability</h3>
 
@@ -73,6 +74,7 @@
             StartDate = startDate, 
         };
         
-        var result = await Http.PostAsJsonAsync("api/Booking/AddTourBooking", tourBookingInfo);
+        await Http.PostAsJsonAsync("api/Booking/AddTourBooking", tourBookingInfo);
+        NavigationManager.NavigateTo("/BookingInfo");
     }
 }

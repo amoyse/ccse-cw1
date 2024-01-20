@@ -1,7 +1,42 @@
 @page "/BookingInfo"
+@using PacificTours.Shared.Entities
+@inject HttpClient Http
 
 <h3>Booking Info</h3>
 
+@if (_booking is null)
+{
+    <span>Loading Booking Info...</span>
+}
+else
+{
+    @if (_booking.HotelBooking is not null && _booking.TourBooking is not null)
+    {
+        
+        
+    }
+    else if (_booking.HotelBooking is not null)
+    {
+        
+    } 
+    else if (_booking.TourBooking is not null)
+    {
+        
+    }
+}
+
+
 @code {
+
+    Booking? _booking;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<Booking>("/api/Booking/BookingInfo");
+        if (result != null)
+        {
+            _booking = result;
+        }
+    }
     
 }

@@ -22,14 +22,29 @@ public class BookingController : ControllerBase
         _userManager = userManager;
     }
 
+    private Booking GetBookingInProgress()
+    {
+        var bookings = _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress");
+        var booking = bookings.FirstOrDefault();
+        return booking;
+        
+    }
+
+    [HttpGet("BookingInfo")]
+    public async Task<ActionResult<Booking>> GetBookingInfo()
+    {
+        var booking = GetBookingInProgress();
+        return Ok(booking);
+    }
+
     [HttpPost("AddTourBooking")]
     public async Task<ActionResult<Booking>> AddTourBooking(TourBookingInfoDto tourBookingInfo)
     {
         var tour = await _context.Tours.FindAsync(tourBookingInfo.Id);
         TourBooking tourBooking;
 
-        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        var booking = bookings.FirstOrDefault();
+        // check if there is currently a booking in progress that hasn't been reserved
+        var booking = GetBookingInProgress();
         
         if (booking is not null)
         {
@@ -63,9 +78,8 @@ public class BookingController : ControllerBase
                 Status = "In Progress",
                 TourBooking = tourBooking
             };
-
-            _context.Bookings.Add(newBooking);
             
+            _context.Bookings.Add(newBooking);
         }
 
         _context.TourBookings.Add(tourBooking);
@@ -79,12 +93,10 @@ public class BookingController : ControllerBase
     public async Task<ActionResult<Booking>> AddHotelBooking(HotelBookingInfoDto hotelBookingInfo)
     {
         
-        var hotel = await _context.Hotels.FindAsync(hotelBookingInfo.Id);
-
         HotelBooking hotelBooking;
 
-        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        var booking = bookings.FirstOrDefault();
+        // check if there is currently a booking in progress that hasn't been reserved
+        var booking = GetBookingInProgress();
         
         if (booking is not null)
         {
@@ -92,11 +104,11 @@ public class BookingController : ControllerBase
                 
             hotelBooking = new HotelBooking
             {
-                Id = _context.TourBookings.Count() + 1,
                 BookingId = booking.Id,
                 HotelId = hotelBookingInfo.Id,
                 StartDate = hotelBookingInfo.StartDate,
-                EndDate = hotelBookingInfo.EndDate
+                EndDate = hotelBookingInfo.EndDate,
+                RoomType = hotelBookingInfo.RoomType
             };
         }
         else
@@ -105,7 +117,8 @@ public class BookingController : ControllerBase
             {
                 HotelId = hotelBookingInfo.Id,
                 StartDate = hotelBookingInfo.StartDate,
-                EndDate = hotelBookingInfo.EndDate
+                EndDate = hotelBookingInfo.EndDate,
+                RoomType = hotelBookingInfo.RoomType
             };
             
             Booking newBooking = new Booking
@@ -116,9 +129,7 @@ public class BookingController : ControllerBase
                 Status = "In Progress",
                 HotelBooking = hotelBooking
             };
-
             _context.Bookings.Add(newBooking);
-            
         }
 
         _context.HotelBookings.Add(hotelBooking);

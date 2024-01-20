@@ -1,6 +1,7 @@
 @using PacificTours.Shared.Entities
 @using PacificTours.Shared
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 
 <h3>Search Hotel Availability</h3>
 
@@ -70,9 +71,9 @@
                             <td width="9%">£@hotel.FamilyCost</td>
                             
                         }
-                        <td><button @onclick="(() => BookRoom(hotel.Id, hotel.SingleCost))" class="btn btn-primary">Book Single Room</button>
-                            <button @onclick="(() => BookRoom(hotel.Id, hotel.DoubleCost))" class="btn btn-primary">Book Double Room</button>
-                            <button @onclick="(() => BookRoom(hotel.Id, hotel.FamilyCost))" class="btn btn-primary">Book Family Room</button>
+                        <td><button @onclick="(() => BookRoom(hotel.Id, hotel.SingleCost, _single))" class="btn btn-primary">Book Single Room</button>
+                            <button @onclick="(() => BookRoom(hotel.Id, hotel.DoubleCost, _double))" class="btn btn-primary">Book Double Room</button>
+                            <button @onclick="(() => BookRoom(hotel.Id, hotel.FamilyCost, _family))" class="btn btn-primary">Book Family Room</button>
                         </td>
                         
                     }
@@ -88,6 +89,10 @@
     private DateTime _date1 = DateTime.Now.AddDays(1);
     private DateTime _date2 = DateTime.Now.AddDays(1);
 
+    private string _single = "Single";
+    private string _double = "Double";
+    private string _family = "Family";
+
     private bool _display = false;
     List<Hotel>? _hotels;
     
@@ -102,7 +107,7 @@
         }
     }
 
-    private async Task BookRoom(int id, int RoomCost)
+    private async Task BookRoom(int id, int roomCost, string roomType)
     {
 
         HotelBookingInfoDto hotelBookingInfo = new HotelBookingInfoDto
@@ -110,8 +115,10 @@
             Id = id, 
             StartDate = _date1, 
             EndDate = _date2, 
-            RoomCost = RoomCost
+            RoomCost = roomCost,
+            RoomType = roomType
         };
-        var result = await Http.PostAsJsonAsync("/api/Booking/AddHotelBooking", hotelBookingInfo);
+        await Http.PostAsJsonAsync("/api/Booking/AddHotelBooking", hotelBookingInfo);
+        NavigationManager.NavigateTo("/BookingInfo");
     }
 }
