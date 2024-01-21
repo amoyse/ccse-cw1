@@ -56,7 +56,6 @@ else
     }
     
 
-
     private async Task AuthUser()
     {
         var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
@@ -74,7 +73,6 @@ else
             // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
             NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad:true);
         }
-
     }
 
 }

@@ -287,5 +287,14 @@ public class BookingController : ControllerBase
         await _context.SaveChangesAsync();
         return Ok();
     }
+
+
+    [HttpPost("ReserveBooking")]
+    public async Task<ActionResult<Booking>> ReserveBooking(int id)
+    {
+
+        return Ok();
+    }
+    
     
 }

@@ -1,0 +1,86 @@
+@page "/Payment"
+@using PacificTours.Shared
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+<h3>Payment</h3>
+
+<div>To reserve, you must pay a 20% deposit on £@_totalCost</div>
+<br/>
+
+<button class="btn btn-primary" @onclick="() => Aash()">Pay £@_toPay and reserve</button>
+
+
+@code {
+    private int _totalCost = 0;
+    private int _toPay = 0;
+    TourBookingInfoDto? _tourInfo;
+    HotelBookingInfoDto? _hotelInfo;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await AuthUser();
+        
+        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
+        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
+
+        if (tourResult is null && hotelResult is null)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        if (tourResult is not null)
+        {
+            _tourInfo = tourResult;
+            _totalCost += _tourInfo.Cost ?? default(int);
+        }
+        if (hotelResult is not null)
+        {
+            _hotelInfo = hotelResult;
+            _totalCost += _hotelInfo.RoomCost;
+        }
+        if (_tourInfo is not null && _hotelInfo is not null)
+        {
+            CalcDiscount(_hotelInfo.RoomType);
+        }
+
+        _toPay = (int) (_totalCost * 0.2);
+        await base.OnInitializedAsync();
+    }
+
+    private async Task AuthUser()
+    {
+        var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
+        var authState = await myStateProv.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.Name == "")
+        {
+            // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
+            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
+        }
+    }
+
+    private async Task Aash()
+    {
+        
+        Console.WriteLine("aash pressed");
+        
+    }
+    
+    private void CalcDiscount(string roomType)
+    {
+        if (roomType == "Single")
+        {
+            _totalCost = (int)(_totalCost * 0.9);
+        } 
+        else if (roomType == "Double")
+        {
+            _totalCost = (int)(_totalCost * 0.8);
+        }
+        else if (roomType == "Family")
+        {
+            _totalCost = (int)(_totalCost * 0.6);
+        }
+    }
+}
