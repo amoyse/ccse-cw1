@@ -71,10 +71,13 @@
                             <td width="9%">£@hotel.FamilyCost</td>
                             
                         }
-                        <td><button @onclick="(() => BookRoom(hotel.Id, hotel.SingleCost, _single))" class="btn btn-primary">Book Single Room</button>
-                            <button @onclick="(() => BookRoom(hotel.Id, hotel.DoubleCost, _double))" class="btn btn-primary">Book Double Room</button>
-                            <button @onclick="(() => BookRoom(hotel.Id, hotel.FamilyCost, _family))" class="btn btn-primary">Book Family Room</button>
-                        </td>
+                        @if (_hotelInfo is null)
+                        {
+                            <td><button @onclick="(() => BookRoom(hotel.Id, hotel.SingleCost, _single))" class="btn btn-primary">Book Single Room</button>
+                                <button @onclick="(() => BookRoom(hotel.Id, hotel.DoubleCost, _double))" class="btn btn-primary">Book Double Room</button>
+                                <button @onclick="(() => BookRoom(hotel.Id, hotel.FamilyCost, _family))" class="btn btn-primary">Book Family Room</button>
+                            </td>
+                        }
                         
                     }
                 </tr>
@@ -94,7 +97,21 @@
     private string _family = "Family";
 
     private bool _display = false;
+    
     List<Hotel>? _hotels;
+    
+    
+    HotelBookingInfoDto? _hotelInfo;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
+
+        if (hotelResult != null)
+        {
+            _hotelInfo = hotelResult;
+        }
+    }
     
     private async Task GetHotelsBetweenDates()
     {

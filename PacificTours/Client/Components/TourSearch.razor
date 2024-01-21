@@ -37,8 +37,12 @@
                         <td width="18%">@tour.Name</td>
                         <td width="10%">@tour.Duration days</td>
                         <td width="10%">£@tour.Cost</td>
-                        <td width="10%"><button @onclick="(() => BookTour(tour.Id, _date1))" class="btn btn-primary">Book Tour</button>
-                        </td>
+                        @if (_tourInfo is null)
+                        {
+                            <td width="10%">
+                                <button @onclick="(() => BookTour(tour.Id, _date1))" class="btn btn-primary">Book Tour</button>
+                            </td>
+                        }
                     }
                 </tr>
             }
@@ -53,6 +57,19 @@
 
     private bool _display = false;
     List<Tour>? _tours;
+    
+    
+    TourBookingInfoDto? _tourInfo;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
+
+        if (tourResult != null)
+        {
+            _tourInfo = tourResult;
+        }
+    }
     
     private async Task GetToursOnDate()
     {
