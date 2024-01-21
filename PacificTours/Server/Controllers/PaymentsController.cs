@@ -22,9 +22,25 @@ public class PaymentsController : ControllerBase
         _userManager = userManager;
     }
     
-    [HttpPost("AddPayment")]
-    public async Task AddPayment(int id)
+    [HttpPost("ReserveBooking")]
+    public async Task ReserveBooking(PaymentInfoDto paymentInfo)
     {
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        var booking = bookings.FirstOrDefault();
 
+        var payment = new Payment
+        {
+            BookingId = booking.Id,
+            Amount = paymentInfo.Amount,
+            DatePaid = DateTime.Now,
+            Status = "Reservation"
+        };
+
+        booking.TotalCost -= paymentInfo.Amount;
+        booking.Status = "Reserved";
+
+        _context.Payments.Add(payment);
+        _context.Bookings.Update(booking);
+        await _context.SaveChangesAsync();
     }
 }

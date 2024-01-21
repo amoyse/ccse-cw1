@@ -22,7 +22,9 @@ else
                 <h5>Hotel Booking</h5>
                 <div>Name: @_hotelInfo.Name</div>
                 <div>Room Type: @_hotelInfo.RoomType</div>
-                <div>Cost: £@_hotelInfo.RoomCost</div>
+                <div>Start Date: @_startDate</div>
+                <div>End Date: @_endDate</div>
+                <div>Cost per night: £@_hotelInfo.RoomCost</div>
                 <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
             </div>
             <div style="width:50%; float: left; display: inline-block;">
@@ -42,7 +44,9 @@ else
                 <h5>Hotel Booking</h5>
                 <div>Name: @_hotelInfo.Name</div>
                 <div>Room Type: @_hotelInfo.RoomType</div>
-                <div>Cost: £@_hotelInfo.RoomCost</div>
+                <div>Start Date: @_startDate</div>
+                <div>End Date: @_endDate</div>
+                <div>Cost per night: £@_hotelInfo.RoomCost</div>
                 <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
             </div>
             <div style="width:50%; float: left; display: inline-block;">
@@ -66,7 +70,7 @@ else
             </div>
         </div>
     } 
-    <br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <div>Total Cost: £@_totalCost</div>
     <br/>
     <button class="btn btn-primary" @onclick="ReserveBooking">Reserve Booking</button>
@@ -80,47 +84,28 @@ else
     private int _totalCost = 0;
     private string _hotel = "hotel";
     private string _tour = "tour";
+    private DateOnly _startDate;
+    private DateOnly _endDate;
 
     protected override async Task OnInitializedAsync()
     {
         var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
         var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
+        _totalCost = await Http.GetFromJsonAsync<int>("api/Booking/GetTotalCost");
 
         if (tourResult is null && hotelResult is null)
         {
             NavigationManager.NavigateTo("/");
         }
-
         if (tourResult != null)
         {
             _tourInfo = tourResult;
-            _totalCost += _tourInfo.Cost ?? default(int);
         }
         if (hotelResult != null)
         {
             _hotelInfo = hotelResult;
-            _totalCost += _hotelInfo.RoomCost;
-        }
-        if (_tourInfo is not null && _hotelInfo is not null)
-        {
-            CalcDiscount(_hotelInfo.RoomType);
-        }
-        
-    }
-
-    private void CalcDiscount(string roomType)
-    {
-        if (roomType == "Single")
-        {
-            _totalCost = (int)(_totalCost * 0.9);
-        } 
-        else if (roomType == "Double")
-        {
-            _totalCost = (int)(_totalCost * 0.8);
-        }
-        else if (roomType == "Family")
-        {
-            _totalCost = (int)(_totalCost * 0.6);
+            _startDate = DateOnly.FromDateTime(_hotelInfo.StartDate);
+            _endDate = DateOnly.FromDateTime(_hotelInfo.EndDate);
         }
     }
     

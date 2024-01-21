@@ -24,6 +24,7 @@
         
         var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
         var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
+        _totalCost = await Http.GetFromJsonAsync<int>("api/Booking/GetTotalCost");
 
         if (tourResult is null && hotelResult is null)
         {
@@ -32,16 +33,10 @@
         if (tourResult is not null)
         {
             _tourInfo = tourResult;
-            _totalCost += _tourInfo.Cost ?? default(int);
         }
         if (hotelResult is not null)
         {
             _hotelInfo = hotelResult;
-            _totalCost += _hotelInfo.RoomCost;
-        }
-        if (_tourInfo is not null && _hotelInfo is not null)
-        {
-            CalcDiscount(_hotelInfo.RoomType);
         }
 
         _toPay = (int) (_totalCost * 0.2);
@@ -63,24 +58,13 @@
 
     private async Task Aash()
     {
+        var paymentInfo = new PaymentInfoDto
+        {
+            Amount = _toPay,
+        };
         
-        Console.WriteLine("aash pressed");
+        await Http.PostAsJsonAsync("/api/Payments/ReserveBooking", paymentInfo);
+        NavigationManager.NavigateTo("/");
         
-    }
-    
-    private void CalcDiscount(string roomType)
-    {
-        if (roomType == "Single")
-        {
-            _totalCost = (int)(_totalCost * 0.9);
-        } 
-        else if (roomType == "Double")
-        {
-            _totalCost = (int)(_totalCost * 0.8);
-        }
-        else if (roomType == "Family")
-        {
-            _totalCost = (int)(_totalCost * 0.6);
-        }
     }
 }

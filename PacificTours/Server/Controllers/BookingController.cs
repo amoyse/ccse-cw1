@@ -23,7 +23,18 @@ public class BookingController : ControllerBase
         _context = context;
         _userManager = userManager;
     }
-    
+
+    [HttpGet("GetTotalCost")]
+    public async Task<ActionResult<int>> GetTotalCost()
+    {
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        var booking = bookings.FirstOrDefault();
+        if (booking is null)
+        {
+            return Ok(0);
+        }
+        return Ok(booking.TotalCost);
+    }
     
     [HttpGet("TourBookingInfo")]
     public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo()
@@ -118,8 +129,26 @@ public class BookingController : ControllerBase
         
         if (booking is not null)
         {
+            var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == booking.Id).ToListAsync();
+            var hotelBooking = hotelBookings.FirstOrDefault();
             booking.TotalCost += tour.Cost;
-                
+            if (hotelBooking is not null)
+            {
+                var hotel = await _context.Hotels.FindAsync(hotelBooking.HotelId);
+                if (hotelBooking.RoomType == "Single")
+                {
+                    booking.TotalCost = (int)(booking.TotalCost * 0.9);
+                }
+                else if (hotelBooking.RoomType == "Double")
+                {
+                    booking.TotalCost = (int)(booking.TotalCost * 0.8);
+                }
+                else
+                {
+                    booking.TotalCost = (int)(booking.TotalCost * 0.6);
+                }
+            }
+
             _context.Bookings.Update(booking);
                 
             tourBooking = new TourBooking
@@ -167,11 +196,30 @@ public class BookingController : ControllerBase
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
         var booking = _booking;
-        var totalRoomCost = (hotelBookingInfo.RoomCost * (hotelBookingInfo.EndDate - hotelBookingInfo.StartDate).Days);
+        var totalRoomCost = (hotelBookingInfo.RoomCost * ((hotelBookingInfo.EndDate - hotelBookingInfo.StartDate).Days + 1));
         
         if (booking is not null)
         {
             booking.TotalCost += totalRoomCost;
+            
+            var tourBookings = await _context.TourBookings.Where(tb => tb.BookingId == booking.Id).ToListAsync();
+            var tourBooking = tourBookings.FirstOrDefault();
+            
+            if (tourBooking is not null)
+            {
+                if (hotelBookingInfo.RoomType == "Single")
+                {
+                    booking.TotalCost = (int)(booking.TotalCost * 0.9);
+                }
+                else if (hotelBookingInfo.RoomType == "Double")
+                {
+                    booking.TotalCost = (int)(booking.TotalCost * 0.8);
+                }
+                else
+                {
+                    booking.TotalCost = (int)(booking.TotalCost * 0.6);
+                }
+            }
             
             _context.Bookings.Update(booking);
                 
@@ -232,15 +280,15 @@ public class BookingController : ControllerBase
             var hotel = await _context.Hotels.FindAsync(hotelBooking.HotelId);
             if (hotelBooking.RoomType == "Single")
             {
-                booking.TotalCost = hotel.SingleCost;
+                booking.TotalCost = (hotel.SingleCost * ((hotelBooking.EndDate - hotelBooking.StartDate).Days + 1));
             }
             else if (hotelBooking.RoomType == "Double")
             {
-                booking.TotalCost = hotel.DoubleCost;
+                booking.TotalCost = (hotel.DoubleCost * ((hotelBooking.EndDate - hotelBooking.StartDate).Days + 1));
             }
             else
             {
-                booking.TotalCost = hotel.FamilyCost;
+                booking.TotalCost = (hotel.FamilyCost * ((hotelBooking.EndDate - hotelBooking.StartDate).Days + 1));
             }
             _context.Bookings.Update(booking);
         }
@@ -288,13 +336,4 @@ public class BookingController : ControllerBase
         return Ok();
     }
 
-
-    [HttpPost("ReserveBooking")]
-    public async Task<ActionResult<Booking>> ReserveBooking(int id)
-    {
-
-        return Ok();
-    }
-    
-    
 }
