@@ -70,11 +70,6 @@ public class BookingController : ControllerBase
             return Ok(hotelBookingInfoNull.ToJson());
         }
         
-        // if (_booking is null)
-        // {
-        //     return Ok(bookings.ToJson());
-        // }
-        
         var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == _booking.Id).ToListAsync();
         var hotelBooking = hotelBookings.FirstOrDefault();
         
@@ -176,6 +171,8 @@ public class BookingController : ControllerBase
         if (booking is not null)
         {
             booking.TotalCost += hotelBookingInfo.RoomCost;
+            
+            _context.Bookings.Update(booking);
                 
             hotelBooking = new HotelBooking
             {
@@ -211,6 +208,82 @@ public class BookingController : ControllerBase
         _context.HotelBookings.Add(hotelBooking);
         await _context.SaveChangesAsync();
 
+        return Ok();
+    }
+
+    [HttpDelete("DeleteTour")]
+    public async Task<ActionResult<Booking>> RemoveTourBooking(int id)
+    {
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        var booking = bookings.FirstOrDefault();
+        
+        var tourBooking = await _context.TourBookings.FindAsync(id);
+        if (tourBooking == null)
+        {
+            return NotFound("This tour booking does not exist!");
+        }
+
+        // Set the total cost back to the cost of just the current booked hotel (if hotel is booked)
+        var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == booking.Id).ToListAsync();
+        var hotelBooking = hotelBookings.FirstOrDefault();
+        if (hotelBooking is not null)
+        {
+            var hotel = await _context.Hotels.FindAsync(hotelBooking.HotelId);
+            if (hotelBooking.RoomType == "Single")
+            {
+                booking.TotalCost = hotel.SingleCost;
+            }
+            else if (hotelBooking.RoomType == "Double")
+            {
+                booking.TotalCost = hotel.DoubleCost;
+            }
+            else
+            {
+                booking.TotalCost = hotel.FamilyCost;
+            }
+            _context.Bookings.Update(booking);
+        }
+        else
+        {
+            _context.Bookings.Remove(booking);
+            await _context.SaveChangesAsync();
+        }
+        
+        _context.TourBookings.Remove(tourBooking);
+        await _context.SaveChangesAsync();
+        return Ok();
+
+    }
+    
+    [HttpDelete("DeleteHotel")]
+    public async Task<ActionResult<Booking>> RemoveHotelBooking(int id)
+    {
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        var booking = bookings.FirstOrDefault();
+        
+        var hotelBooking = await _context.HotelBookings.FindAsync(id);
+        if (hotelBooking == null)
+        {
+            return NotFound("This hotel booking does not exist!");
+        }
+
+        // Set the total cost back to the cost of just the current booked tour (if tour is booked)
+        var tourBookings = await _context.TourBookings.Where(tb => tb.BookingId == booking.Id).ToListAsync();
+        var tourBooking = tourBookings.FirstOrDefault();
+        if (tourBooking is not null)
+        {
+            var tour = await _context.Tours.FindAsync(tourBooking.TourId);
+            booking.TotalCost = tour.Cost;
+        }
+        else
+        {
+            _context.Bookings.Remove(booking);
+            await _context.SaveChangesAsync();
+        }
+        
+        _context.Bookings.Update(booking);
+        _context.HotelBookings.Remove(hotelBooking);
+        await _context.SaveChangesAsync();
         return Ok();
     }
     
