@@ -167,10 +167,11 @@ public class BookingController : ControllerBase
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
         var booking = _booking;
+        var totalRoomCost = (hotelBookingInfo.RoomCost * (hotelBookingInfo.EndDate - hotelBookingInfo.StartDate).Days);
         
         if (booking is not null)
         {
-            booking.TotalCost += hotelBookingInfo.RoomCost;
+            booking.TotalCost += totalRoomCost;
             
             _context.Bookings.Update(booking);
                 
@@ -198,7 +199,7 @@ public class BookingController : ControllerBase
             {
                 UserId = _userManager.GetUserId(User),
                 BookingDate = DateTime.Now,
-                TotalCost = hotelBookingInfo.RoomCost,
+                TotalCost = totalRoomCost,
                 Status = "In Progress",
                 HotelBooking = hotelBooking
             };
