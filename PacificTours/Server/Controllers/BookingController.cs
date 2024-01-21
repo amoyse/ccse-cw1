@@ -33,7 +33,8 @@ public class BookingController : ControllerBase
         
         if (_booking is null)
         {
-            return Ok(bookings.ToJson());
+            TourBookingInfoDto tourBookingInfoNull = null;
+            return Ok(tourBookingInfoNull.ToJson());
         }
         
         var tourBookings = await _context.TourBookings.Where(tb => tb.BookingId == _booking.Id).ToListAsync();
@@ -65,8 +66,14 @@ public class BookingController : ControllerBase
         
         if (_booking is null)
         {
-            return Ok(bookings.ToJson());
+            HotelBookingInfoDto hotelBookingInfoNull = null;
+            return Ok(hotelBookingInfoNull.ToJson());
         }
+        
+        // if (_booking is null)
+        // {
+        //     return Ok(bookings.ToJson());
+        // }
         
         var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == _booking.Id).ToListAsync();
         var hotelBooking = hotelBookings.FirstOrDefault();

@@ -1,5 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using PacificTours.Shared
+@inherits LayoutComponentBase
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject HttpClient Http
 
 <div class="page">
     <div class="sidebar">
@@ -31,14 +33,14 @@
 @code {
 
     private bool _isAuth;
-
+    
     protected override async Task OnInitializedAsync()
     {
-        await GetStuff();
+        await AuthUser();
         await base.OnInitializedAsync();
     }
 
-    private async Task GetStuff()
+    private async Task AuthUser()
     {
         var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
         var authState = await myStateProv.GetAuthenticationStateAsync();
@@ -52,8 +54,6 @@
         {
             _isAuth = false;
         }
-
     }
-    
 
 }
