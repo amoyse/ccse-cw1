@@ -1,46 +1,70 @@
 @page "/Payment"
+@page "/Payment/{Id:int}"
 @using PacificTours.Shared
+@using PacificTours.Shared.Entities
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
 
 <h3>Payment</h3>
 
-<div>To reserve, you must pay a 20% deposit on £@_totalCost</div>
-<br/>
+@if (_booking?.Status == "In Progress")
+{
+    <div>To reserve, you must pay a 20% deposit on £@_booking.TotalCost</div>
+    <br/>
 
-<button class="btn btn-primary" @onclick="() => Pay()">Pay £@_toPay and reserve</button>
+    <button class="btn btn-primary" @onclick="() => Reserve()">Pay £@_toPay and reserve</button>
+}
+else if (_booking?.Status == "Reserved")
+{
+    <br/>
+    <button class="btn btn-primary" @onclick="() => Confirm()">Pay £@_toPay and reserve</button>
+}
 
 
 @code {
-    private int _totalCost = 0;
-    private int _toPay = 0;
-    TourBookingInfoDto? _tourInfo;
-    HotelBookingInfoDto? _hotelInfo;
+    [Parameter]
+    public int? Id { get; set; }
     
-    protected override async Task OnInitializedAsync()
+    private Booking? _booking;
+    private int _toPay = 0;
+    
+    protected override async Task OnParametersSetAsync()
     {
-        await AuthUser();
+        if (Id is not null)
+        {
+            await AuthUser();
         
-        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
-        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
-        _totalCost = await Http.GetFromJsonAsync<int>("api/Booking/GetTotalCost");
+            var authorized = await Http.GetFromJsonAsync<bool>($"api/Auth/IsAuthorized?id={Id}");
+            if (!authorized)
+            {
+                NavigationManager.NavigateTo("/");
+            }
+        
+            var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>($"api/Booking/TourBookingInfo?id={Id}");
+            var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>($"api/Booking/HotelBookingInfo?id={Id}");
+            var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
 
-        if (tourResult is null && hotelResult is null)
+            if (tourResult is null && hotelResult is null && _booking is null)
+            {
+                NavigationManager.NavigateTo("/");
+            }
+
+            if (_booking?.Status == "In Progress")
+            {
+                _toPay = (int) (_booking.TotalCost * 0.2);
+            }
+            else
+            {
+                _toPay = _booking.TotalCost;
+            }
+        }
+        else
         {
             NavigationManager.NavigateTo("/");
-        }
-        if (tourResult is not null)
-        {
-            _tourInfo = tourResult;
-        }
-        if (hotelResult is not null)
-        {
-            _hotelInfo = hotelResult;
+            
         }
 
-        _toPay = (int) (_totalCost * 0.2);
-        await base.OnInitializedAsync();
     }
 
     private async Task AuthUser()
@@ -48,7 +72,7 @@
         var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
         var authState = await myStateProv.GetAuthenticationStateAsync();
         var user = authState.User;
-
+    
         if (user.Identity.Name == "")
         {
             // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
@@ -56,7 +80,7 @@
         }
     }
 
-    private async Task Pay()
+    private async Task Reserve()
     {
         var paymentInfo = new PaymentInfoDto
         {
@@ -65,6 +89,16 @@
         
         await Http.PostAsJsonAsync("/api/Payments/ReserveBooking", paymentInfo);
         NavigationManager.NavigateTo("/");
+    }
+    
+    private async Task Confirm()
+    {
+        var paymentInfo = new PaymentInfoDto
+        {
+            Amount = _toPay,
+        };
         
+        await Http.PostAsJsonAsync("/api/Payments/ConfirmBooking", paymentInfo);
+        NavigationManager.NavigateTo("/");
     }
 }

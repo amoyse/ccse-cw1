@@ -43,4 +43,26 @@ public class PaymentsController : ControllerBase
         _context.Bookings.Update(booking);
         await _context.SaveChangesAsync();
     }
+    
+    [HttpPost("ConfirmBooking")]
+    public async Task ConfirmBooking(PaymentInfoDto paymentInfo)
+    {
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "Reserved").ToListAsync();
+        var booking = bookings.FirstOrDefault();
+
+        var payment = new Payment
+        {
+            BookingId = booking.Id,
+            Amount = paymentInfo.Amount,
+            DatePaid = DateTime.Now,
+            Status = "Confirmation"
+        };
+
+        booking.TotalCost -= paymentInfo.Amount;
+        booking.Status = "Confirmed";
+
+        _context.Payments.Add(payment);
+        _context.Bookings.Update(booking);
+        await _context.SaveChangesAsync();
+    }
 }
