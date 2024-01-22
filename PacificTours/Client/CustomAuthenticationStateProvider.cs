@@ -18,7 +18,7 @@ public class CustomAuthenticationStateProvider: AuthenticationStateProvider
         var httpClient = new HttpClient();
 
         // var authUser = JsonSerializer.Deserialize<IEnumerable<Claim>>(await httpClient.GetStringAsync(("https://localhost:7293/api/Auth")));
-        var userDictString = await httpClient.GetStringAsync("https://localhost:7293/api/Auth");
+        var userDictString = await httpClient.GetStringAsync("https://localhost:7293/api/Auth/GetAuthState");
         
         var userId = "";
         var userName = "";

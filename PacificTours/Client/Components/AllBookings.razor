@@ -1,5 +1,6 @@
 @using PacificTours.Shared.Entities
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 
 
 <h3>Your Bookings</h3>
@@ -27,7 +28,7 @@ else
                     <td width="12%">@booking.BookingDate</td>
                     <td width="12%">@booking.Status</td>
                     <td width="10%">
-                        <button @onclick="() => ViewBooking()" class="btn btn-primary">View Booking</button>
+                        <button @onclick="(() => ViewBooking(booking.Id))" class="btn btn-primary">View Booking</button>
                     </td>
                 </tr>
             }
@@ -48,9 +49,9 @@ else
         }
     }
 
-    private void ViewBooking()
+    private void ViewBooking(int id)
     {
-        
+        NavigationManager.NavigateTo($"/BookingInfo/{id}");
     }
     
 }

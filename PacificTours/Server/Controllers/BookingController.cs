@@ -24,16 +24,15 @@ public class BookingController : ControllerBase
         _userManager = userManager;
     }
 
-    [HttpGet("GetTotalCost")]
-    public async Task<ActionResult<int>> GetTotalCost()
+    [HttpGet("GetBookingInfo")]
+    public async Task<ActionResult<Booking>> GetBookingInfo(int id)
     {
-        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        var booking = bookings.FirstOrDefault();
-        if (booking is null)
-        {
-            return Ok(0);
-        }
-        return Ok(booking.TotalCost);
+        var booking = await _context.Bookings.FindAsync(id);
+        // if (booking is null)
+        // {
+        //     return Ok(booking.ToJson());
+        // }
+        return Ok(booking.ToJson());
     }
 
     [HttpGet("GetAllUsersBookings")]
@@ -46,10 +45,12 @@ public class BookingController : ControllerBase
 
 
     [HttpGet("TourBookingInfo")]
-    public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo()
+    public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo(int id)
     {
-        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        _booking = bookings.FirstOrDefault();
+        // var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        // _booking = bookings.FirstOrDefault();
+
+        _booking = await _context.Bookings.FindAsync(id);
         
         if (_booking is null)
         {
@@ -79,10 +80,11 @@ public class BookingController : ControllerBase
     }
 
     [HttpGet("HotelBookingInfo")]
-    public async Task<ActionResult<List<HotelBooking>>> GetHotelBookingInfo()
+    public async Task<ActionResult<List<HotelBooking>>> GetHotelBookingInfo(int id)
     {
-        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        _booking = bookings.FirstOrDefault();
+        // var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        // _booking = bookings.FirstOrDefault();
+        _booking = await _context.Bookings.FindAsync(id);
         
         if (_booking is null)
         {

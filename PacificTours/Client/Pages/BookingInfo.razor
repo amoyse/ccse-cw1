@@ -1,4 +1,5 @@
 @page "/BookingInfo"
+@page "/BookingInfo/{Id:int}"
 @using PacificTours.Shared.Entities
 @using PacificTours.Shared
 @inject HttpClient Http
@@ -78,10 +79,13 @@ else
 
 
 @code {
+    [Parameter]
+    public int? Id { get; set; }
 
     TourBookingInfoDto? _tourInfo;
     HotelBookingInfoDto? _hotelInfo;
     private int _totalCost = 0;
+    private string _bookingStatus = "";
     private string _hotel = "hotel";
     private string _tour = "tour";
     private DateOnly _startDate;
@@ -89,9 +93,17 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
-        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
-        _totalCost = await Http.GetFromJsonAsync<int>("api/Booking/GetTotalCost");
+        var authorized = await Http.GetFromJsonAsync<bool>($"api/Auth/IsAuthorized?id={Id}");
+        if (!authorized)
+        {
+            Console.WriteLine(authorized);
+            NavigationManager.NavigateTo("/");
+        }
+        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>($"api/Booking/TourBookingInfo?id={Id}");
+        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>($"api/Booking/HotelBookingInfo?id={Id}");
+        var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
+        _totalCost = bookingResult.TotalCost;
+        _bookingStatus = bookingResult.Status;
 
         if (tourResult is null && hotelResult is null)
         {
