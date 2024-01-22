@@ -35,7 +35,16 @@ public class BookingController : ControllerBase
         }
         return Ok(booking.TotalCost);
     }
-    
+
+    [HttpGet("GetAllUsersBookings")]
+    public async Task<ActionResult<List<Booking>>> GetAllUsersBookings()
+    {
+        string[] statuses = { "In Progress", "Reserved", "Confirmed", "Cancelled"}; 
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && statuses.Contains(b.Status)).ToListAsync();
+        return Ok(bookings);
+    }
+
+
     [HttpGet("TourBookingInfo")]
     public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo()
     {

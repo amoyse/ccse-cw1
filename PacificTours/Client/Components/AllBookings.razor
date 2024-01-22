@@ -1,0 +1,56 @@
+@using PacificTours.Shared.Entities
+@inject HttpClient Http
+
+
+<h3>Your Bookings</h3>
+
+
+@if (_bookings is null)
+{
+    <span>Loading Hotels...</span>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Booking Id</th>
+            <th>Date Booked</th>
+            <th>Booking Status</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in _bookings)
+            {
+                <tr>
+                    <td width="8%">@booking.Id</td>
+                    <td width="12%">@booking.BookingDate</td>
+                    <td width="12%">@booking.Status</td>
+                    <td width="10%">
+                        <button @onclick="() => ViewBooking()" class="btn btn-primary">View Booking</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<Booking>? _bookings;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<List<Booking>>("api/Booking/GetAllUsersBookings");
+        if (result != null)
+        {
+            _bookings = result;
+        }
+    }
+
+    private void ViewBooking()
+    {
+        
+    }
+    
+}

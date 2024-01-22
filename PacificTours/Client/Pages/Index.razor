@@ -1,5 +1,7 @@
 ﻿@page "/"
 @using System.Security.Claims
+@using PacificTours.Shared.Entities
+@using PacificTours.Client.Components
 @using PacificTours.Shared
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -19,9 +21,10 @@ else
     
     <h4>Your User ID is: @_userId</h4>
     
-    @if (_tourInfo is not null || _hotelInfo is not null)
+    <br/><br/><br/><br/>
+    @if (_showBookings)
     {
-        <a class="btn btn-primary" href="/BookingInfo">View Booking Info</a>
+        <AllBookings /> 
     }
     
 }
@@ -32,26 +35,18 @@ else
     private string _userId = "";
     private string _userName;
     private IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
+    private bool _showBookings;
     
-    TourBookingInfoDto? _tourInfo;
-    HotelBookingInfoDto? _hotelInfo;
 
     protected override async Task OnInitializedAsync()
     {
         await AuthUser();
-        
-        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>("api/Booking/TourBookingInfo");
-        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>("api/Booking/HotelBookingInfo");
+        var bookingResult = await Http.GetFromJsonAsync<List<Booking>>("api/Booking/GetAllUsersBookings");
 
-        if (tourResult != null)
+        if (bookingResult is not null)
         {
-            _tourInfo = tourResult;
+            _showBookings = true;
         }
-        if (hotelResult != null)
-        {
-            _hotelInfo = hotelResult;
-        }
-        
         await base.OnInitializedAsync();
     }
     

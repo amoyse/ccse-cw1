@@ -9,7 +9,7 @@
 <div>To reserve, you must pay a 20% deposit on £@_totalCost</div>
 <br/>
 
-<button class="btn btn-primary" @onclick="() => Aash()">Pay £@_toPay and reserve</button>
+<button class="btn btn-primary" @onclick="() => Pay()">Pay £@_toPay and reserve</button>
 
 
 @code {
@@ -56,7 +56,7 @@
         }
     }
 
-    private async Task Aash()
+    private async Task Pay()
     {
         var paymentInfo = new PaymentInfoDto
         {
