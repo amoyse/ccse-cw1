@@ -43,7 +43,7 @@ else
         await AuthUser();
         var bookingResult = await Http.GetFromJsonAsync<List<Booking>>("api/Booking/GetAllUsersBookings");
 
-        if (bookingResult is not null)
+        if (bookingResult is not null && bookingResult.First().Status != "Voided")
         {
             _showBookings = true;
         }
