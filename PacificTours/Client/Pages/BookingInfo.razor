@@ -15,6 +15,9 @@
 }
 else
 {
+    <br/>
+    <h4>Booking Status: @_booking.Status</h4>
+    <br/>
     @if (_hotelInfo is not null && _tourInfo is not null)
     {
         <br/>
@@ -26,14 +29,20 @@ else
                 <div>Start Date: @_startDate</div>
                 <div>End Date: @_endDate</div>
                 <div>Cost per night: £@_hotelInfo.RoomCost</div>
-                <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                @if (_booking.Status == "In Progress")
+                {
+                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                }
             </div>
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Tour Booking</h5>
                 <div>Name: @_tourInfo.Name</div>
                 <div>Duration: @_tourInfo.Duration days</div>
                 <div>Cost: £@_tourInfo.Cost</div>
-                <button class="btn btn-danger" @onclick="() => RemoveBooking(_tour, _tourInfo.Id)">Cancel</button>
+                @if (_booking.Status == "In Progress")
+                {
+                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                }
             </div>
         </div>
     }
@@ -48,10 +57,16 @@ else
                 <div>Start Date: @_startDate</div>
                 <div>End Date: @_endDate</div>
                 <div>Cost per night: £@_hotelInfo.RoomCost</div>
-                <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                @if (_booking.Status == "In Progress")
+                {
+                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                }
             </div>
             <div style="width:50%; float: left; display: inline-block;">
-                <div>No Tour booking. If you add a Tour and create a package, you'll receive a discount.</div>
+                @if (_booking.Status == "In Progress")
+                {
+                    <div>No Tour booking. If you add a Tour and create a package, you'll receive a discount.</div>
+                }
             </div>
         </div>
     }
@@ -64,17 +79,33 @@ else
                 <div>Name: @_tourInfo.Name</div>
                 <div>Duration: @_tourInfo.Duration days</div>
                 <div>Cost: £@_tourInfo.Cost</div>
-                <button class="btn btn-danger" @onclick="() => RemoveBooking(_tour, _tourInfo.Id)">Cancel</button>
+                @if (_booking.Status == "In Progress")
+                {
+                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                }
             </div>
             <div style="width:50%; float: left; display: inline-block;">
-                <div>No Hotel booking. If you add a Hotel and create a package, you'll receive a discount.</div>
+                @if (_booking.Status == "In Progress")
+                {
+                    <div>No Hotel booking. If you add a Hotel and create a package, you'll receive a discount.</div>
+                }
             </div>
         </div>
     } 
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <div>Total Cost: £@_totalCost</div>
-    <br/>
-    <button class="btn btn-primary" @onclick="ReserveBooking">Reserve Booking</button>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    @if (_booking.Status == "In Progress")
+    {
+        <div>Total Cost: £@_booking.TotalCost</div>
+        <br/>
+        <button class="btn btn-primary" @onclick="ReserveBooking">Reserve Booking</button>
+    }
+    else if (_booking.Status == "Reserved")
+    {
+        <div>Remaining amount must be paid 28 days before booking start date</div>
+        <br/>
+        <div>Left to pay: £@_booking.TotalCost</div>
+        <button class="btn btn-primary" >Confirm Booking</button>
+    }
 }
 
 
@@ -84,10 +115,9 @@ else
 
     TourBookingInfoDto? _tourInfo;
     HotelBookingInfoDto? _hotelInfo;
-    private int _totalCost = 0;
-    private string _bookingStatus = "";
-    private string _hotel = "hotel";
-    private string _tour = "tour";
+    private Booking? _booking;
+    private readonly string _hotel = "hotel";
+    private readonly string _tour = "tour";
     private DateOnly _startDate;
     private DateOnly _endDate;
 
@@ -96,14 +126,13 @@ else
         var authorized = await Http.GetFromJsonAsync<bool>($"api/Auth/IsAuthorized?id={Id}");
         if (!authorized)
         {
-            Console.WriteLine(authorized);
             NavigationManager.NavigateTo("/");
         }
+        
         var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>($"api/Booking/TourBookingInfo?id={Id}");
         var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>($"api/Booking/HotelBookingInfo?id={Id}");
         var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
-        _totalCost = bookingResult.TotalCost;
-        _bookingStatus = bookingResult.Status;
+        _booking = bookingResult;
 
         if (tourResult is null && hotelResult is null)
         {
@@ -143,4 +172,3 @@ else
 
     }
 }
-    

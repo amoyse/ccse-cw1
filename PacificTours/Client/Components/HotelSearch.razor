@@ -136,6 +136,7 @@
             RoomType = roomType
         };
         await Http.PostAsJsonAsync("/api/Booking/HotelBooking", hotelBookingInfo);
-        NavigationManager.NavigateTo("/BookingInfo");
+        var bookingResult = await Http.GetFromJsonAsync<Booking>("/api/Booking/GetBookingInfo");
+        NavigationManager.NavigateTo($"/BookingInfo/{bookingResult.Id}");
     }
 }

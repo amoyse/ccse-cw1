@@ -48,7 +48,6 @@ public class AuthController : ControllerBase
     {
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Id == id).ToListAsync();
         var booking = bookings.FirstOrDefault();
-        Console.WriteLine(booking.ToJson());
 
         if (booking is null)
         {
