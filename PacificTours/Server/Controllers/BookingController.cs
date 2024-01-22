@@ -28,10 +28,6 @@ public class BookingController : ControllerBase
     public async Task<ActionResult<Booking>> GetBookingInfo(int id)
     {
         var booking = await _context.Bookings.FindAsync(id);
-        // if (booking is null)
-        // {
-        //     return Ok(booking.ToJson());
-        // }
         return Ok(booking.ToJson());
     }
     
@@ -55,9 +51,6 @@ public class BookingController : ControllerBase
     [HttpGet("TourBookingInfo")]
     public async Task<ActionResult<List<TourBooking>>> GetTourBookingInfo(int id)
     {
-        // var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        // _booking = bookings.FirstOrDefault();
-
         _booking = await _context.Bookings.FindAsync(id);
         
         if (_booking is null)
@@ -90,8 +83,6 @@ public class BookingController : ControllerBase
     [HttpGet("HotelBookingInfo")]
     public async Task<ActionResult<List<HotelBooking>>> GetHotelBookingInfo(int id)
     {
-        // var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        // _booking = bookings.FirstOrDefault();
         _booking = await _context.Bookings.FindAsync(id);
         
         if (_booking is null)
@@ -352,6 +343,26 @@ public class BookingController : ControllerBase
         _context.Bookings.Update(booking);
         _context.HotelBookings.Remove(hotelBooking);
         await _context.SaveChangesAsync();
+        return Ok();
+    }
+
+    [HttpPost("VoidBooking")]
+    public async Task<ActionResult<Booking>> VoidBooking(int id)
+    {
+        Console.WriteLine(id);
+        var booking = await _context.Bookings.FindAsync(id);
+        Console.WriteLine(booking.ToJson());
+        if (booking is not null)
+        {
+            Console.WriteLine("did work");
+            booking.Status = "Voided";
+            _context.Bookings.Update(booking);
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            Console.WriteLine("didn't work");
+        }
         return Ok();
     }
 

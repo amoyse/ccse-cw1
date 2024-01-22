@@ -2,6 +2,7 @@
 @page "/BookingInfo/{Id:int}"
 @using PacificTours.Shared.Entities
 @using PacificTours.Shared
+@using System.Runtime.InteropServices.JavaScript
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
@@ -93,7 +94,11 @@ else
         </div>
     } 
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    @if (_booking.Status == "In Progress")
+    @if (_isVoided)
+    {
+        <div>Payment to confirm booking was not made in time, the booking has been voided, and the deposit forfeited.</div>
+    }
+    else if (_booking.Status == "In Progress")
     {
         <div>Total Cost: £@_booking.TotalCost</div>
         <br/>
@@ -120,6 +125,7 @@ else
     private readonly string _tour = "tour";
     private DateOnly _startDate;
     private DateOnly _endDate;
+    private bool _isVoided;
 
     protected override async Task OnInitializedAsync()
     {
@@ -148,6 +154,11 @@ else
             _startDate = DateOnly.FromDateTime(_hotelInfo.StartDate);
             _endDate = DateOnly.FromDateTime(_hotelInfo.EndDate);
         }
+
+        if (_booking?.Status != "Confirmed" && _booking is not null)
+        {
+            await CheckBooking(_booking.Id);
+        }
     }
     
     
@@ -175,6 +186,49 @@ else
             await Http.DeleteAsync($"api/Booking/DeleteTour?id={id}" );
             NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
         }
+    }
 
+    private async Task CheckBooking(int id)
+    {
+        var latestPay = DateTime.Now.AddDays(28).Date;
+        if (_tourInfo is not null && _hotelInfo is not null)
+        {
+            if (_tourInfo.StartDate.Date > _hotelInfo.StartDate.Date)
+            {
+                if (latestPay > _hotelInfo.StartDate.Date)
+                {
+                    _isVoided = true;
+                    await Http.PostAsync($"api/Booking/VoidBooking?id={id}", null);
+                    NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+                }
+            }
+            else
+            {
+                if (latestPay > _tourInfo.StartDate.Date)
+                {
+                    _isVoided = true;
+                    await Http.PostAsync($"api/Booking/VoidBooking?id={id}", null);
+                    NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+                }
+            }
+        }
+        else if (_tourInfo != null)
+        {
+            if (latestPay > _tourInfo.StartDate.Date)
+            {
+                _isVoided = true;
+                await Http.PostAsync($"api/Booking/VoidBooking?id={id}", null);
+                NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+            }
+        }
+        else if (_hotelInfo != null)
+        {
+            if (latestPay > _hotelInfo.StartDate.Date)
+            {
+                _isVoided = true;
+                await Http.PostAsync($"api/Booking/VoidBooking?id={id}", null);
+                NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+            }
+        }
     }
 }
