@@ -7,7 +7,7 @@
 
 <h3>Search Tour Availability</h3>
 
-<InputDate TValue="DateTime" @bind-Value="_date1" Placeholder="Enter Start Date"/>
+<InputDate TValue="DateTime" @bind-Value="_date1" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter Start Date"/>
 <button class="btn btn-primary" @onclick="GetToursOnDate">Submit</button>
 
 <br/><br/>
@@ -54,6 +54,7 @@
 
 @code {
     private DateTime _date1 = DateTime.Now.AddDays(1);
+    private DateTime _minStartDate = DateTime.Now.AddDays(28);
 
     private bool _display = false;
     List<Tour>? _tours;

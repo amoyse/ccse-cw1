@@ -5,7 +5,7 @@
 
 <h3>Search Hotel Availability</h3>
 
-<InputDate TValue="DateTime" @bind-Value="_date1" Placeholder="Enter Start Date"/>
+<InputDate TValue="DateTime" @bind-Value="_date1" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter Start Date"/>
 
 @* prevent user from entering a date before the previous date, or on the same day *@
 <InputDate TValue="DateTime" @bind-Value="_date2" min="@_date1.AddDays(1).ToString("yyyy-MM-dd")"  Placeholder="Enter End Date"/>
@@ -91,6 +91,8 @@
 @code {
     private DateTime _date1 = DateTime.Now.AddDays(1);
     private DateTime _date2 = DateTime.Now.AddDays(1);
+    
+    private DateTime _minStartDate = DateTime.Now.AddDays(28);
 
     private string _single = "Single";
     private string _double = "Double";
