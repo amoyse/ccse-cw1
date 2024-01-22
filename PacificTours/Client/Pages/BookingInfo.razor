@@ -41,7 +41,7 @@ else
                 <div>Cost: £@_tourInfo.Cost</div>
                 @if (_booking.Status == "In Progress")
                 {
-                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_tour, _tourInfo.Id)">Cancel</button>
                 }
             </div>
         </div>
@@ -81,7 +81,7 @@ else
                 <div>Cost: £@_tourInfo.Cost</div>
                 @if (_booking.Status == "In Progress")
                 {
-                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_hotel, _hotelInfo.Id)">Cancel</button>
+                    <button class="btn btn-danger" @onclick="() => RemoveBooking(_tour, _tourInfo.Id)">Cancel</button>
                 }
             </div>
             <div style="width:50%; float: left; display: inline-block;">

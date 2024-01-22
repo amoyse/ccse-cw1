@@ -34,6 +34,14 @@ public class BookingController : ControllerBase
         // }
         return Ok(booking.ToJson());
     }
+    
+    [HttpGet("GetBookingInfoInProgress")]
+    public async Task<ActionResult<Booking>> GetBookingInfoInProgress(int id)
+    {
+        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
+        var booking = bookings.FirstOrDefault();
+        return Ok(booking.ToJson());
+    }
 
     [HttpGet("GetAllUsersBookings")]
     public async Task<ActionResult<List<Booking>>> GetAllUsersBookings()

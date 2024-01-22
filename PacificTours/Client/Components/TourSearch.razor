@@ -92,7 +92,7 @@
         };
         
         await Http.PostAsJsonAsync("api/Booking/AddTourBooking", tourBookingInfo);
-        var bookingResult = await Http.GetFromJsonAsync<Booking>("/api/Booking/GetBookingInfo");
-        NavigationManager.NavigateTo($"/BookingInfo/{bookingResult.Id}");
+        var booking = Http.GetFromJsonAsync<Booking>("api/Booking/GetBookingInfoInProgress");
+        NavigationManager.NavigateTo($"/BookingInfo/{booking.Id}");
     }
 }

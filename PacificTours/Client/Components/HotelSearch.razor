@@ -135,8 +135,8 @@
             RoomCost = roomCost,
             RoomType = roomType
         };
-        await Http.PostAsJsonAsync("/api/Booking/HotelBooking", hotelBookingInfo);
-        var bookingResult = await Http.GetFromJsonAsync<Booking>("/api/Booking/GetBookingInfo");
-        NavigationManager.NavigateTo($"/BookingInfo/{bookingResult.Id}");
+        await Http.PostAsJsonAsync("api/Booking/HotelBooking", hotelBookingInfo);
+        var booking = Http.GetFromJsonAsync<Booking>("api/Booking/GetBookingInfoInProgress");
+        NavigationManager.NavigateTo($"/BookingInfo/{booking.Id}");
     }
 }
