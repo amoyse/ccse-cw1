@@ -118,12 +118,10 @@ else
     {
         @if (_canCancel)
         {
-            // Refund user, delete booking from database
             <button class="btn btn-primary" @onclick="Delete">Cancel Booking</button>
         }
         @if (_canModify)
         {
-            // This will "refund" user what they have paid so far, set Booking status to in progress, and set cost again
             <button class="btn btn-primary" >Modify Booking</button>
         }
     }
@@ -300,6 +298,11 @@ else
         if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete the booking?"))
             return;
         NavigationManager.NavigateTo($"/CancelledBooking/{Id}");
+    }
+
+    private void ModifyBooking()
+    {
+        NavigationManager.NavigateTo($"/ModifyBookingPage/{Id}");
     }
 
     private void CheckIfCanCancel()

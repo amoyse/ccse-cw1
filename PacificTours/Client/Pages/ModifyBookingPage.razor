@@ -1,0 +1,124 @@
+@page "/ModifyBookingPage"
+@page "/ModifyBookingPage/{Id:int}"
+@using PacificTours.Shared
+@using PacificTours.Shared.Entities
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Modify Booking</h3>
+<br/>
+<div>This page allows you to change the dates of your booking, but not the duration.</div>
+
+@if (_hotelInfo is null && _tourInfo is null)
+{
+    <br/>
+    <span>Loading Booking Info...</span>
+    <br/>
+}
+else
+{
+    <br/>
+    @if (_hotelInfo is not null && _tourInfo is not null)
+    {
+        <br/>
+        <div style="display:block; width:100%;">
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Hotel Booking</h5>
+                <div>Name: @_hotelInfo.Name</div>
+                <div>Current Start Date: @_hotelInfo.StartDate</div>
+                <div>Duration: @_duration days</div>
+                <br/>
+                <InputDate TValue="DateTime" @bind-Value="_newHotelStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
+                <button class="btn btn-primary"></button>
+            </div>
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Tour Booking</h5>
+                <div>Name: @_tourInfo.Name</div>
+                <div>Current Start Date: @_tourInfo.StartDate</div>
+                <div>Duration: @_tourInfo.Duration days</div>
+                <br/>
+                <InputDate TValue="DateTime" @bind-Value="_newTourStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
+                <button class="btn btn-primary"></button>
+            </div>
+        </div>
+    }
+    else if (_hotelInfo is not null)
+    {
+        <br/>
+        <div style="display:block; width:100%;">
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Hotel Booking</h5>
+                <div>Name: @_hotelInfo.Name</div>
+                <div>Duration: @_duration</div>
+                <div>Current Start Date: @_hotelInfo.StartDate</div>
+                <br/>
+                <InputDate TValue="DateTime" @bind-Value="_newHotelStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
+                <button class="btn btn-primary"></button>
+            </div>
+        </div>
+    }
+    else if (_tourInfo is not null)
+    {
+        <br/>
+        <div style="display:block; width:100%;">
+            <div style="width:50%; float: left; display: inline-block;">
+                <h5>Tour Booking</h5>
+                <div>Name: @_tourInfo.Name</div>
+                <div>Current Start Date: @_tourInfo.StartDate</div>
+                <div>Duration: @_tourInfo.Duration days</div>
+                <br/>
+                <InputDate TValue="DateTime" @bind-Value="_newTourStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
+                <button class="btn btn-primary"></button>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    
+    TourBookingInfoDto? _tourInfo;
+    HotelBookingInfoDto? _hotelInfo;
+    private Booking? _booking;
+    private int _duration;
+
+    private readonly DateTime _minStartDate = DateTime.Now.AddDays(28);
+    private DateTime _newHotelStart = DateTime.Now.AddDays(28);
+    private DateTime _newTourStart = DateTime.Now.AddDays(28);
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authorized = await Http.GetFromJsonAsync<bool>($"api/Auth/IsAuthorized?id={Id}");
+        if (!authorized)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        
+        var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>($"api/Booking/TourBookingInfo?id={Id}");
+        var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>($"api/Booking/HotelBookingInfo?id={Id}");
+        var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
+        
+        _booking = bookingResult;
+
+        if (tourResult is null && hotelResult is null)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        if (tourResult != null)
+        {
+            _tourInfo = tourResult;
+        }
+        if (hotelResult != null)
+        {
+            _hotelInfo = hotelResult;
+            _duration = (_hotelInfo.EndDate.Date - _hotelInfo.StartDate.Date).Days;
+        }
+    }
+
+    private async Task AttemptModification()
+    {
+        
+    }
+
+}
