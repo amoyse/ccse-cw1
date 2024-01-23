@@ -349,19 +349,12 @@ public class BookingController : ControllerBase
     [HttpPost("VoidBooking")]
     public async Task<ActionResult<Booking>> VoidBooking(int id)
     {
-        Console.WriteLine(id);
         var booking = await _context.Bookings.FindAsync(id);
-        Console.WriteLine(booking.ToJson());
         if (booking is not null)
         {
-            Console.WriteLine("did work");
             booking.Status = "Voided";
             _context.Bookings.Update(booking);
             await _context.SaveChangesAsync();
-        }
-        else
-        {
-            Console.WriteLine("didn't work");
         }
         return Ok();
     }

@@ -65,4 +65,12 @@ public class PaymentsController : ControllerBase
         _context.Bookings.Update(booking);
         await _context.SaveChangesAsync();
     }
+
+    [HttpGet("GetPayments")]
+    public async Task<ActionResult<List<Payment>>> GetPayments(int id)
+    {
+        var payments = await _context.Payments.Where(p => p.BookingId == id).ToListAsync();
+        return Ok(payments);
+    }
+        
 }

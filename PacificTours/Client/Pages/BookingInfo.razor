@@ -95,7 +95,7 @@ else
             </div>
         </div>
     } 
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
     @if (_isVoided)
     {
         <div>Payment to confirm booking was not made in time, the booking has been voided, and the deposit forfeited.</div>
@@ -112,6 +112,41 @@ else
         <br/>
         <div>Left to pay: £@_booking.TotalCost</div>
         <button class="btn btn-primary" @onclick="(() => ConfirmBooking(Id))" >Confirm Booking</button>
+    } 
+    else if (_booking.Status == "Confirmed")
+    {
+        @if (_canCancel)
+        {
+            <button class="btn btn-primary" >Cancel Booking</button>
+        }
+        @if (_canModify)
+        {
+            <button class="btn btn-primary" >Modify Booking</button>
+        }
+    }
+    @if (_payments?.Count > 0)
+    {
+        <br/><br/><br/>
+        <h4>Past payments</h4>
+        <table>
+            <thead>
+            <tr>
+                <th>Payment Id</th>
+                <th>Amount Paid</th>
+                <th>Payment Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var payment in _payments)
+            {
+                <tr>
+                    <td width="8%">@payment.Id</td>
+                    <td width="12%">£@payment.Amount</td>
+                    <td width="12%">@payment.Status</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     }
 }
 
@@ -123,11 +158,15 @@ else
     TourBookingInfoDto? _tourInfo;
     HotelBookingInfoDto? _hotelInfo;
     private Booking? _booking;
+    List<Payment>? _payments;
     private readonly string _hotel = "hotel";
     private readonly string _tour = "tour";
     private DateOnly _startDate;
     private DateOnly _endDate;
     private bool _isVoided;
+    private bool _canCancel;
+    private bool _canModify;
+    
 
     protected override async Task OnInitializedAsync()
     {
@@ -140,6 +179,13 @@ else
         var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>($"api/Booking/TourBookingInfo?id={Id}");
         var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>($"api/Booking/HotelBookingInfo?id={Id}");
         var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
+        var paymentResult = await Http.GetFromJsonAsync<List<Payment>>($"api/Payments/GetPayments?id={Id}");
+        
+        if (paymentResult != null)
+        {
+            _payments = paymentResult;
+        }
+        
         _booking = bookingResult;
 
         if (tourResult is null && hotelResult is null)
@@ -160,7 +206,7 @@ else
         if (_booking?.Status != "Confirmed" && _booking is not null)
         {
             await CheckBooking(_booking.Id);
-        }
+        } 
     }
     
     
