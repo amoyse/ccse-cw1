@@ -29,7 +29,7 @@ else
                 <div>Duration: @_duration days</div>
                 <br/>
                 <InputDate TValue="DateTime" @bind-Value="_newHotelStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
-                <button class="btn btn-primary"></button>
+                <button class="btn btn-primary" @onclick="AttemptModification">Submit</button>
             </div>
             <div style="width:50%; float: left; display: inline-block;">
                 <h5>Tour Booking</h5>
@@ -38,7 +38,7 @@ else
                 <div>Duration: @_tourInfo.Duration days</div>
                 <br/>
                 <InputDate TValue="DateTime" @bind-Value="_newTourStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
-                <button class="btn btn-primary"></button>
+                <button class="btn btn-primary" @onclick="AttemptModification">Submit</button>
             </div>
         </div>
     }
@@ -53,7 +53,7 @@ else
                 <div>Current Start Date: @_hotelInfo.StartDate</div>
                 <br/>
                 <InputDate TValue="DateTime" @bind-Value="_newHotelStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
-                <button class="btn btn-primary"></button>
+                <button class="btn btn-primary" @onclick="AttemptModification">Submit</button>
             </div>
         </div>
     }
@@ -68,7 +68,7 @@ else
                 <div>Duration: @_tourInfo.Duration days</div>
                 <br/>
                 <InputDate TValue="DateTime" @bind-Value="_newTourStart" min="@_minStartDate.ToString("yyyy-MM-dd")" Placeholder="Enter New Start Date"/>
-                <button class="btn btn-primary"></button>
+                <button class="btn btn-primary" @onclick="AttemptModification">Submit</button>
             </div>
         </div>
     }
@@ -82,6 +82,7 @@ else
     HotelBookingInfoDto? _hotelInfo;
     private Booking? _booking;
     private int _duration;
+    private bool _didntWork;
 
     private readonly DateTime _minStartDate = DateTime.Now.AddDays(28);
     private DateTime _newHotelStart = DateTime.Now.AddDays(28);
@@ -118,7 +119,27 @@ else
 
     private async Task AttemptModification()
     {
-        
+        var modificationInfo = new BookingModificationDto
+        {
+            Id = Id ?? default(int),
+            NewHotelStart = _newHotelStart,
+            NewTourStart = _newTourStart,
+        };
+        await Http.PutAsJsonAsync("api/Booking/ModifyBooking", modificationInfo);
+        var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
+
+        if (bookingResult is not null)
+        {
+            if (bookingResult.Status == "Modified")
+            {
+                NavigationManager.NavigateTo($"/Payment/{Id}");
+            }
+            else
+            {
+                _didntWork = true;
+                NavigationManager.NavigateTo("/", forceLoad:true);
+            }
+        }
     }
 
 }

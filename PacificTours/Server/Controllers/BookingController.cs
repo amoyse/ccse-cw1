@@ -42,7 +42,7 @@ public class BookingController : ControllerBase
     [HttpGet("GetAllUsersBookings")]
     public async Task<ActionResult<List<Booking>>> GetAllUsersBookings()
     {
-        string[] statuses = { "In Progress", "Reserved", "Confirmed", "Cancelled"}; 
+        string[] statuses = { "In Progress", "Reserved", "Confirmed", "Cancelled", "Modified"}; 
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && statuses.Contains(b.Status)).ToListAsync();
         return Ok(bookings);
     }
@@ -376,5 +376,106 @@ public class BookingController : ControllerBase
         _context.Bookings.Remove(booking);
         await _context.SaveChangesAsync();
         return Ok(totalPaid);
+    }
+
+    [HttpPut("ModifyBooking")]
+    public async Task<ActionResult<Booking>> ModifyBooking(BookingModificationDto bookingModificationDto)
+    {
+        var booking = await _context.Bookings.FindAsync(bookingModificationDto.Id);
+        var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == booking.Id).ToListAsync();
+        var hotelBooking = hotelBookings.FirstOrDefault();
+        var tourBookings = await _context.TourBookings.Where(tb => tb.BookingId == booking.Id).ToListAsync();
+        var tourBooking = tourBookings.FirstOrDefault();
+
+        if (hotelBooking is not null && tourBooking is not null)
+        {
+            var hotelDuration = (hotelBooking.EndDate - hotelBooking.StartDate).Days;
+            var tourDuration = (tourBooking.EndDate - tourBooking.StartDate).Days;
+            var newHotelEnd = bookingModificationDto.NewHotelStart?.AddDays(hotelDuration);
+            var newTourEnd = bookingModificationDto.NewTourStart?.AddDays(tourDuration);
+            var hotel = await _context.Hotels.FindAsync(hotelBooking.HotelId);
+            var tour = await _context.Tours.FindAsync(tourBooking.TourId);
+
+            var hotelAvailable = _context.HotelBookings
+                .Count(hb => hb.HotelId == hotel.Id && hb.RoomType == hotelBooking.RoomType &&
+                             hb.StartDate <= newHotelEnd && hb.EndDate >= bookingModificationDto.NewHotelStart) < 20;
+            
+            var tourAvailable = _context.TourBookings
+                .Count(tb => tb.TourId == tour.Id  &&
+                             tb.StartDate <= newTourEnd && tb.EndDate >= bookingModificationDto.NewTourStart) < 20;
+            
+            if (hotelAvailable && tourAvailable)
+            {
+                hotelBooking.StartDate = bookingModificationDto.NewHotelStart ?? default;
+                hotelBooking.EndDate = newHotelEnd ?? default;
+                
+                tourBooking.StartDate = bookingModificationDto.NewTourStart ?? default;
+                tourBooking.EndDate = newTourEnd ?? default;
+                booking.Status = "Modified";
+
+            }
+            else
+            {
+                return Ok(null);
+            }
+            
+        }
+        else if (hotelBooking is not null)
+        {
+            var hotelDuration = (hotelBooking.EndDate - hotelBooking.StartDate).Days;
+            var newHotelEnd = bookingModificationDto.NewHotelStart?.AddDays(hotelDuration);
+            var hotel = await _context.Hotels.FindAsync(hotelBooking.HotelId);
+            
+            var hotelAvailable = _context.HotelBookings
+                .Count(hb => hb.HotelId == hotel.Id && hb.RoomType == hotelBooking.RoomType &&
+                             hb.StartDate <= newHotelEnd && hb.EndDate >= bookingModificationDto.NewHotelStart) < 20;
+            
+            if (hotelAvailable)
+            {
+                hotelBooking.StartDate = bookingModificationDto.NewHotelStart ?? default;
+                hotelBooking.EndDate = newHotelEnd ?? default;
+                booking.Status = "Modified";
+            }
+            else
+            {
+                return Ok(null);
+            }
+        }
+        else
+        {
+            var tourDuration = (tourBooking.EndDate - tourBooking.StartDate).Days;
+            var newTourEnd = bookingModificationDto.NewTourStart?.AddDays(tourDuration);
+            var tour = await _context.Tours.FindAsync(tourBooking.TourId);
+            
+            var tourAvailable = _context.TourBookings
+                .Count(tb => tb.TourId == tour.Id  &&
+                             tb.StartDate <= newTourEnd && tb.EndDate >= bookingModificationDto.NewTourStart) < 20;
+
+            if (tourAvailable)
+            {
+                tourBooking.StartDate = bookingModificationDto.NewTourStart ?? default;
+                tourBooking.EndDate = newTourEnd ?? default;
+                booking.Status = "Modified";
+            }
+            else
+            {
+                return Ok(null);
+            }
+        }
+
+        if (hotelBooking is not null)
+        {
+            _context.HotelBookings.Update(hotelBooking);
+        }
+
+        if (tourBooking is not null)
+        {
+            _context.TourBookings.Update(tourBooking);
+        }
+
+        _context.Bookings.Update(booking);
+        await _context.SaveChangesAsync();
+
+        return Ok();
     }
 }

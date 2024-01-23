@@ -122,7 +122,7 @@ else
         }
         @if (_canModify)
         {
-            <button class="btn btn-primary" >Modify Booking</button>
+            <button class="btn btn-primary" @onclick="ModifyBooking" >Modify Booking</button>
         }
     }
     @if (_payments?.Count > 0)
