@@ -206,7 +206,7 @@ public class BookingController : ControllerBase
         var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
         _booking = bookings.FirstOrDefault();
         var booking = _booking;
-        var totalRoomCost = (hotelBookingInfo.RoomCost * ((hotelBookingInfo.EndDate - hotelBookingInfo.StartDate).Days + 1));
+        var totalRoomCost = (hotelBookingInfo.RoomCost * ((hotelBookingInfo.EndDate - hotelBookingInfo.StartDate).Days));
         
         if (booking is not null)
         {
