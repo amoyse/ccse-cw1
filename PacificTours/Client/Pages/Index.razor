@@ -22,6 +22,7 @@ else
     <h4>Your User ID is: @_userId</h4>
     
     <br/><br/><br/><br/>
+    
     @if (_showBookings)
     {
         <AllBookings /> 
@@ -43,11 +44,10 @@ else
         await AuthUser();
         var bookingResult = await Http.GetFromJsonAsync<List<Booking>>("api/Booking/GetAllUsersBookings");
 
-        if (bookingResult is not null && bookingResult.First().Status != "Voided")
+        if (bookingResult is not null)
         {
             _showBookings = true;
         }
-        await base.OnInitializedAsync();
     }
     
 

@@ -214,7 +214,6 @@ else
         {
             CheckIfCanCancel();
             CheckIfCanModify();
-            Console.WriteLine(_canCancel);
         }
     }
     
@@ -325,7 +324,7 @@ else
         }
         else if (_hotelInfo is not null)
         {
-            if (latestCancel > _hotelInfo.StartDate.Date)
+            if (latestCancel < _hotelInfo.StartDate.Date)
             {
                 _canCancel = true;
             }
