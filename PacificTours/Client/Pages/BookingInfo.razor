@@ -210,6 +210,12 @@ else
         {
             await CheckBooking(_booking.Id);
         } 
+        else if (_booking?.Status == "Confirmed" && _booking is not null)
+        {
+            CheckIfCanCancel();
+            CheckIfCanModify();
+            Console.WriteLine(_canCancel);
+        }
     }
     
     
@@ -287,8 +293,78 @@ else
     {
         if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete the booking?"))
             return;
+        NavigationManager.NavigateTo($"/CancelledBooking/{Id}");
+    }
 
-        
-        NavigationManager.NavigateTo($"/CancelledBooking{Id}");
+    private void CheckIfCanCancel()
+    {
+        var latestCancel = DateTime.Now.AddDays(5).Date;
+        if (_tourInfo is not null && _hotelInfo is not null)
+        {
+            if (_tourInfo.StartDate.Date > _hotelInfo.StartDate.Date)
+            {
+                if (latestCancel < _hotelInfo.StartDate.Date)
+                {
+                    _canCancel = true;
+                }
+            }
+            else
+            {
+                if (latestCancel < _tourInfo.StartDate.Date)
+                {
+                    _canCancel = true;
+                }
+            }
+        }
+        else if (_tourInfo is not null)
+        {
+            if (latestCancel < _tourInfo.StartDate.Date)
+            {
+                _canCancel = true;
+            }
+        }
+        else if (_hotelInfo is not null)
+        {
+            if (latestCancel > _hotelInfo.StartDate.Date)
+            {
+                _canCancel = true;
+            }
+        }
+    }
+    
+    private void CheckIfCanModify()
+    {
+        var latestModify = DateTime.Now.AddDays(14).Date;
+        if (_tourInfo is not null && _hotelInfo is not null)
+        {
+            if (_tourInfo.StartDate.Date > _hotelInfo.StartDate.Date)
+            {
+                if (latestModify < _hotelInfo.StartDate.Date)
+                {
+                    _canModify = true;
+                }
+            }
+            else
+            {
+                if (latestModify < _tourInfo.StartDate.Date)
+                {
+                    _canModify = true;
+                }
+            }
+        }
+        else if (_tourInfo != null)
+        {
+            if (latestModify < _tourInfo.StartDate.Date)
+            {
+                _canModify = true;
+            }
+        }
+        else if (_hotelInfo != null)
+        {
+            if (latestModify < _hotelInfo.StartDate.Date)
+            {
+                _canModify = true;
+            }
+        }
     }
 }
