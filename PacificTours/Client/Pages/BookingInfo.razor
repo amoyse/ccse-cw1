@@ -5,6 +5,7 @@
 @using System.Runtime.InteropServices.JavaScript
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <h3>Booking Info</h3>
 
@@ -117,10 +118,12 @@ else
     {
         @if (_canCancel)
         {
-            <button class="btn btn-primary" >Cancel Booking</button>
+            // Refund user, delete booking from database
+            <button class="btn btn-primary" @onclick="Delete">Cancel Booking</button>
         }
         @if (_canModify)
         {
+            // This will "refund" user what they have paid so far, set Booking status to in progress, and set cost again
             <button class="btn btn-primary" >Modify Booking</button>
         }
     }
@@ -278,5 +281,14 @@ else
                 NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
             }
         }
+    }
+    
+    async Task Delete()
+    {
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete the booking?"))
+            return;
+
+        await Http.DeleteAsync($"api/Booking/DeleteBooking?id={Id}");
+        
     }
 }

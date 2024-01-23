@@ -359,4 +359,12 @@ public class BookingController : ControllerBase
         return Ok();
     }
 
+    [HttpDelete("DeleteBooking")]
+    public async Task DeleteBooking(int id)
+    {
+        var booking = await _context.Bookings.FindAsync(id);
+        
+        _context.Bookings.Remove(booking);
+        await _context.SaveChangesAsync();
+    }
 }
