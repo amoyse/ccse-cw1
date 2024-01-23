@@ -36,7 +36,6 @@ public class PaymentsController : ControllerBase
             Status = "Reservation"
         };
 
-        booking.TotalCost -= paymentInfo.Amount;
         booking.Status = "Reserved";
 
         _context.Payments.Add(payment);
@@ -58,7 +57,6 @@ public class PaymentsController : ControllerBase
             Status = "Confirmation"
         };
 
-        booking.TotalCost -= paymentInfo.Amount;
         booking.Status = "Confirmed";
 
         _context.Payments.Add(payment);
@@ -71,6 +69,21 @@ public class PaymentsController : ControllerBase
     {
         var payments = await _context.Payments.Where(p => p.BookingId == id).ToListAsync();
         return Ok(payments);
+    }
+    
+    [HttpGet("GetTotalPaid")]
+    public async Task<ActionResult<int>> GetTotalPaid(int id)
+    {
+        var payments = await _context.Payments.Where(p => p.BookingId == id).ToListAsync();
+        var totalPaid = 0;
+        if (payments is not null)
+        {
+            foreach (var payment in payments)
+            {
+                totalPaid += payment.Amount;
+            }
+        }
+        return Ok(totalPaid);
     }
         
 }

@@ -44,6 +44,7 @@ else if (_booking?.Status == "Reserved")
             var tourResult = await Http.GetFromJsonAsync<TourBookingInfoDto>($"api/Booking/TourBookingInfo?id={Id}");
             var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>($"api/Booking/HotelBookingInfo?id={Id}");
             var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
+            var totalPaidResult = await Http.GetFromJsonAsync<int>($"api/Payments/GetTotalPaid?id={Id}");
             if (bookingResult is not null)
             {
                 _booking = bookingResult;
@@ -62,16 +63,14 @@ else if (_booking?.Status == "Reserved")
             {
                 if (_booking is not null)
                 {
-                    _toPay = _booking.TotalCost;
+                    _toPay = _booking.TotalCost - totalPaidResult;
                 }
             }
         }
         else
         {
             NavigationManager.NavigateTo("/");
-            
         }
-
     }
 
     private async Task AuthUser()

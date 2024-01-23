@@ -111,7 +111,7 @@ else
     {
         <div>Remaining amount must be paid 28 days before booking start date</div>
         <br/>
-        <div>Left to pay: £@_booking.TotalCost</div>
+        <div>Left to pay: £@_toPay</div>
         <button class="btn btn-primary" @onclick="(() => ConfirmBooking(Id))" >Confirm Booking</button>
     } 
     else if (_booking.Status == "Confirmed")
@@ -169,6 +169,7 @@ else
     private bool _isVoided;
     private bool _canCancel;
     private bool _canModify;
+    private int _toPay;
     
 
     protected override async Task OnInitializedAsync()
@@ -183,6 +184,7 @@ else
         var hotelResult = await Http.GetFromJsonAsync<HotelBookingInfoDto>($"api/Booking/HotelBookingInfo?id={Id}");
         var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
         var paymentResult = await Http.GetFromJsonAsync<List<Payment>>($"api/Payments/GetPayments?id={Id}");
+        var totalPaidResult = await Http.GetFromJsonAsync<int>($"api/Payments/GetTotalPaid?id={Id}");
         
         if (paymentResult != null)
         {
@@ -204,6 +206,11 @@ else
             _hotelInfo = hotelResult;
             _startDate = DateOnly.FromDateTime(_hotelInfo.StartDate);
             _endDate = DateOnly.FromDateTime(_hotelInfo.EndDate);
+        }
+
+        if (_booking is not null)
+        {
+            _toPay = _booking.TotalCost - totalPaidResult;
         }
 
         if (_booking?.Status != "Confirmed" && _booking is not null)
