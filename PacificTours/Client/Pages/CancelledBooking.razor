@@ -1,0 +1,35 @@
+@page "/CancelledBooking"
+@page "/CancelledBooking/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+
+<h3>Cancelled Booking Id: @Id </h3>
+
+<br/>
+<div>You have been refunded £@_refund</div>
+
+
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    private int _refund;
+    
+    
+    protected override async Task OnInitializedAsync()
+    {
+        
+        var authorized = await Http.GetFromJsonAsync<bool>($"api/Auth/IsAuthorized?id={Id}");
+        if (!authorized)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        
+        var totalPaidResult = await Http.DeleteAsync($"api/Booking/DeleteBooking?id={Id}");
+        var totalPaid = await totalPaidResult.Content.ReadFromJsonAsync<int>();
+        _refund = totalPaid;
+    }
+
+}

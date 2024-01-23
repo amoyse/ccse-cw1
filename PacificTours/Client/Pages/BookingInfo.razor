@@ -288,7 +288,7 @@ else
         if (!await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete the booking?"))
             return;
 
-        await Http.DeleteAsync($"api/Booking/DeleteBooking?id={Id}");
         
+        NavigationManager.NavigateTo($"/CancelledBooking{Id}");
     }
 }

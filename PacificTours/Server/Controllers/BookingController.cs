@@ -360,11 +360,21 @@ public class BookingController : ControllerBase
     }
 
     [HttpDelete("DeleteBooking")]
-    public async Task DeleteBooking(int id)
+    public async Task<ActionResult<int>> DeleteBooking(int id)
     {
         var booking = await _context.Bookings.FindAsync(id);
+        var payments = await _context.Payments.Where(p => p.BookingId == id).ToListAsync();
+        var totalPaid = 0;
+        if (payments is not null)
+        {
+            foreach (var payment in payments)
+            {
+                totalPaid += payment.Amount;
+            }
+        }
         
         _context.Bookings.Remove(booking);
         await _context.SaveChangesAsync();
+        return Ok(totalPaid);
     }
 }
