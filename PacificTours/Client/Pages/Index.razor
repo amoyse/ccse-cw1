@@ -46,7 +46,10 @@ else
 
         if (bookingResult is not null)
         {
-            _showBookings = true;
+            if (bookingResult.Count > 0)
+            {
+                _showBookings = true;
+            }
         }
     }
     
