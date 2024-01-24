@@ -46,7 +46,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         await AuthUser();
-        var isAdmin = await Http.GetFromJsonAsync<bool>("api/Auth/IsAuthorized");
+        var isAdmin = await Http.GetFromJsonAsync<bool>("api/Auth/IsManager");
+        Console.WriteLine(isAdmin);
         if (!isAdmin)
         {
             NavigationManager.NavigateTo("/");

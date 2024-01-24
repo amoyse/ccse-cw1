@@ -46,7 +46,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var isAdmin = await Http.GetFromJsonAsync<bool>("api/Auth/IsAuthorized");
+        var isAdmin = await Http.GetFromJsonAsync<bool>("api/Auth/IsManager");
         _isAdmin = isAdmin;
     }
 
