@@ -3,6 +3,7 @@
 @using PacificTours.Shared.Entities
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 
 <h3>Cancelled Booking Id: @Id </h3>
@@ -20,7 +21,7 @@
     
     protected override async Task OnInitializedAsync()
     {
-        
+        await AuthUser();
         var authorized = await Http.GetFromJsonAsync<bool>($"api/Auth/IsAuthorized?id={Id}");
         if (!authorized)
         {
@@ -39,6 +40,19 @@
             _refund = totalPaid;
         }
         
+    }
+    
+    private async Task AuthUser()
+    {
+        var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
+        var authState = await myStateProv.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.Name == "")
+        {
+            // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
+            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
+        }
     }
 
 }

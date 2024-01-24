@@ -1,0 +1,33 @@
+@page "/Manager"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h3>Manager</h3>
+
+@code {
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        await AuthUser();
+        var isAdmin = await Http.GetFromJsonAsync<bool>("api/Auth/IsAuthorized");
+        if (!isAdmin)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private async Task AuthUser()
+    {
+        var myStateProv = AuthenticationStateProvider as CustomAuthenticationStateProvider;
+        var authState = await myStateProv.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.Name == "")
+        {
+            // forceLoad needed to actually load the page, otherwise url changes, but redirect doesn't occur
+            NavigationManager.NavigateTo("/Identity/Account/Login", forceLoad: true);
+        }
+    }
+}

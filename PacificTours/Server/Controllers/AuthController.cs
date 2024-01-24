@@ -55,5 +55,13 @@ public class AuthController : ControllerBase
         }
         return Ok(true.ToJson());
     }
+    
+    [HttpGet("IsManager")]
+    public async Task<ActionResult<bool>> IsManager()
+    {
+        var user = await _context.Users.FindAsync(_userManager.GetUserId(User));
+        var isAdmin = user.IsAdmin;
+        return Ok(isAdmin.ToJson());
+    }
 
 }
