@@ -7,7 +7,7 @@
 
 <h3>Modify Booking</h3>
 <br/>
-<div>This page allows you to change the dates of your booking, but not the duration.</div>
+<div>This page allows you to change the dates of your booking (but not the duration) for a 5% surcharge.</div>
 
 @if (_hotelInfo is null && _tourInfo is null)
 {
@@ -125,12 +125,12 @@ else
             NewHotelStart = _newHotelStart,
             NewTourStart = _newTourStart,
         };
-        await Http.PutAsJsonAsync("api/Booking/ModifyBooking", modificationInfo);
+        await Http.PutAsJsonAsync("api/Booking/StartModifyingBooking", modificationInfo);
         var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
 
         if (bookingResult is not null)
         {
-            if (bookingResult.Status == "Modified")
+            if (bookingResult.Status == "Modifying")
             {
                 NavigationManager.NavigateTo($"/Payment/{Id}");
             }

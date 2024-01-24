@@ -18,7 +18,12 @@
 else if (_booking?.Status == "Reserved")
 {
     <br/>
-    <button class="btn btn-primary" @onclick="() => Confirm()">Pay £@_toPay and reserve</button>
+    <button class="btn btn-primary" @onclick="() => Confirm()">Pay £@_toPay and confirm</button>
+}
+else if (_booking?.Status == "Modifying")
+{
+    <br/>
+    <button class="btn btn-primary" @onclick="() => Modify()">Pay £@_toPay and modify booking</button>
 }
 
 
@@ -58,6 +63,10 @@ else if (_booking?.Status == "Reserved")
             if (_booking?.Status == "In Progress")
             {
                 _toPay = (int) (_booking.TotalCost * 0.2);
+            }
+            else if (_booking?.Status == "Modifying")
+            {
+                _toPay = (int)(_booking.TotalCost * 0.05);
             }
             else
             {
@@ -105,6 +114,18 @@ else if (_booking?.Status == "Reserved")
         };
         
         await Http.PostAsJsonAsync("/api/Payments/ConfirmBooking", paymentInfo);
+        NavigationManager.NavigateTo("/");
+    }
+    
+    private async Task Modify()
+    {
+        var paymentInfo = new PaymentInfoDto
+        {
+            BookingId = Id,
+            Amount = _toPay,
+        };
+        
+        await Http.PostAsJsonAsync("/api/Payments/ModifyBooking", paymentInfo);
         NavigationManager.NavigateTo("/");
     }
 }

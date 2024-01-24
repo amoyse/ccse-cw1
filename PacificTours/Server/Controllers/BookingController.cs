@@ -377,9 +377,9 @@ public class BookingController : ControllerBase
         await _context.SaveChangesAsync();
         return Ok(totalPaid);
     }
-
-    [HttpPut("ModifyBooking")]
-    public async Task<ActionResult<Booking>> ModifyBooking(BookingModificationDto bookingModificationDto)
+    
+    [HttpPut("StartModifyingBooking")]
+    public async Task<ActionResult<Booking>> StartModifyingBooking(BookingModificationDto bookingModificationDto)
     {
         var booking = await _context.Bookings.FindAsync(bookingModificationDto.Id);
         var hotelBookings = await _context.HotelBookings.Where(hb => hb.BookingId == booking.Id).ToListAsync();
@@ -411,7 +411,7 @@ public class BookingController : ControllerBase
                 
                 tourBooking.StartDate = bookingModificationDto.NewTourStart ?? default;
                 tourBooking.EndDate = newTourEnd ?? default;
-                booking.Status = "Modified";
+                booking.Status = "Modifying";
 
             }
             else
@@ -434,7 +434,7 @@ public class BookingController : ControllerBase
             {
                 hotelBooking.StartDate = bookingModificationDto.NewHotelStart ?? default;
                 hotelBooking.EndDate = newHotelEnd ?? default;
-                booking.Status = "Modified";
+                booking.Status = "Modifying";
             }
             else
             {
@@ -455,7 +455,7 @@ public class BookingController : ControllerBase
             {
                 tourBooking.StartDate = bookingModificationDto.NewTourStart ?? default;
                 tourBooking.EndDate = newTourEnd ?? default;
-                booking.Status = "Modified";
+                booking.Status = "Modifying";
             }
             else
             {

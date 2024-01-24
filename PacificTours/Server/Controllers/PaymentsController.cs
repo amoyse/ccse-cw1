@@ -86,4 +86,23 @@ public class PaymentsController : ControllerBase
         return Ok(totalPaid);
     }
         
+    [HttpPost("ModifyBooking")]
+    public async Task ModifyBooking(PaymentInfoDto paymentInfo)
+    {
+        var booking = await _context.Bookings.FindAsync(paymentInfo.BookingId);
+
+        var payment = new Payment
+        {
+            BookingId = booking.Id,
+            Amount = paymentInfo.Amount,
+            DatePaid = DateTime.Now,
+            Status = "Modification"
+        };
+
+        booking.Status = "Confirmed";
+
+        _context.Payments.Add(payment);
+        _context.Bookings.Update(booking);
+        await _context.SaveChangesAsync();
+    }
 }
