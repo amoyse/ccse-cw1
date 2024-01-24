@@ -1,12 +1,47 @@
 @page "/Manager"
+@using PacificTours.Shared.Entities
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+
 <h3>Manager</h3>
 
+@if (_bookings is null)
+{
+    <span>Loading Bookings...</span>
+}
+else
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Booking Id</th>
+            <th>User Id</th>
+            <th>Date Booked</th>
+            <th>Total Cost</th>
+            <th>Booking Status</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in _bookings)
+            {
+                <tr>
+                    <td width="8%">@booking.Id</td>
+                    <td width="8%">@booking.UserId</td>
+                    <td width="12%">@booking.BookingDate</td>
+                    <td width="12%">@booking.TotalCost</td>
+                    <td width="12%">@booking.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
 @code {
-    
+    List<Booking>? _bookings;
 
     protected override async Task OnInitializedAsync()
     {
@@ -15,6 +50,12 @@
         if (!isAdmin)
         {
             NavigationManager.NavigateTo("/");
+        }
+        
+        var result = await Http.GetFromJsonAsync<List<Booking>>("api/Booking/GetAllBookingsForAllUsers");
+        if (result != null)
+        {
+            _bookings = result;
         }
     }
 

@@ -478,4 +478,12 @@ public class BookingController : ControllerBase
 
         return Ok();
     }
+    
+    
+    [HttpGet("GetAllBookingsForAllUsers")]
+    public async Task<ActionResult<List<Booking>>> GetAllBookingsForAllUsers()
+    {
+        var bookings = await _context.Bookings.ToListAsync();
+        return Ok(bookings);
+    }
 }

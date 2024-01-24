@@ -99,6 +99,7 @@ else if (_booking?.Status == "Modifying")
     {
         var paymentInfo = new PaymentInfoDto
         {
+            BookingId = Id,
             Amount = _toPay,
         };
         
@@ -110,6 +111,7 @@ else if (_booking?.Status == "Modifying")
     {
         var paymentInfo = new PaymentInfoDto
         {
+            BookingId = Id,
             Amount = _toPay,
         };
         

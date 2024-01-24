@@ -25,8 +25,7 @@ public class PaymentsController : ControllerBase
     [HttpPost("ReserveBooking")]
     public async Task ReserveBooking(PaymentInfoDto paymentInfo)
     {
-        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "In Progress").ToListAsync();
-        var booking = bookings.FirstOrDefault();
+        var booking = await _context.Bookings.FindAsync(paymentInfo.BookingId);
 
         var payment = new Payment
         {
@@ -46,8 +45,7 @@ public class PaymentsController : ControllerBase
     [HttpPost("ConfirmBooking")]
     public async Task ConfirmBooking(PaymentInfoDto paymentInfo)
     {
-        var bookings = await _context.Bookings.Where(b => b.UserId == _userManager.GetUserId(User) && b.Status == "Reserved").ToListAsync();
-        var booking = bookings.FirstOrDefault();
+        var booking = await _context.Bookings.FindAsync(paymentInfo.BookingId);
 
         var payment = new Payment
         {

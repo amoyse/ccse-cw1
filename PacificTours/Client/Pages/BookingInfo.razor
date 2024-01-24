@@ -106,14 +106,14 @@ else
     {
         <div>Total Cost: £@_booking.TotalCost</div>
         <br/>
-        <button class="btn btn-primary" @onclick="(() => ReserveBooking(Id))">Reserve Booking</button>
+        <button class="btn btn-primary" @onclick="ReserveBooking">Reserve Booking</button>
     }
     else if (_booking.Status == "Reserved")
     {
         <div>Remaining amount must be paid 28 days before booking start date</div>
         <br/>
         <div>Left to pay: £@_toPay</div>
-        <button class="btn btn-primary" @onclick="(() => ConfirmBooking(Id))" >Confirm Booking</button>
+        <button class="btn btn-primary" @onclick="ConfirmBooking" >Confirm Booking</button>
     } 
     else if (_booking.Status == "Confirmed")
     {
@@ -241,16 +241,14 @@ else
         }
     }
     
-    private void ReserveBooking(int? id)
+    private void ReserveBooking()
     {
-        var paymentId = id ?? default(int);
-        NavigationManager.NavigateTo($"/Payment/{paymentId}");
+        NavigationManager.NavigateTo($"/Payment/{Id}");
     }
     
-    private void ConfirmBooking(int? id)
+    private void ConfirmBooking()
     {
-        var paymentId = id ?? default(int);
-        NavigationManager.NavigateTo($"/Payment/{paymentId}");
+        NavigationManager.NavigateTo($"/Payment/{Id}");
     }
     
     private async Task RemoveBooking(string type, int id)
