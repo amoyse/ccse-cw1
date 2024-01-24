@@ -1,5 +1,6 @@
 @page "/CancelledBooking"
 @page "/CancelledBooking/{Id:int}"
+@using PacificTours.Shared.Entities
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
@@ -8,7 +9,6 @@
 
 <br/>
 <div>You have been refunded £@_refund</div>
-
 
 
 @code {
@@ -26,10 +26,19 @@
         {
             NavigationManager.NavigateTo("/");
         }
+
+        var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
+        if (bookingResult?.Status != "Confirmed")
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            var totalPaidResult = await Http.DeleteAsync($"api/Booking/DeleteBooking?id={Id}");
+            var totalPaid = await totalPaidResult.Content.ReadFromJsonAsync<int>();
+            _refund = totalPaid;
+        }
         
-        var totalPaidResult = await Http.DeleteAsync($"api/Booking/DeleteBooking?id={Id}");
-        var totalPaid = await totalPaidResult.Content.ReadFromJsonAsync<int>();
-        _refund = totalPaid;
     }
 
 }

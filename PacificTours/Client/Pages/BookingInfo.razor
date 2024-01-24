@@ -190,6 +190,10 @@ else
         }
         
         _booking = bookingResult;
+        if (_booking?.Status == "Voided")
+        {
+            NavigationManager.NavigateTo("/");
+        }
 
         if (tourResult is null && hotelResult is null)
         {

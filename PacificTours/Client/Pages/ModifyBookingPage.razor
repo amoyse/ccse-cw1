@@ -101,6 +101,10 @@ else
         var bookingResult = await Http.GetFromJsonAsync<Booking>($"api/Booking/GetBookingInfo?id={Id}");
         
         _booking = bookingResult;
+        if (_booking?.Status != "Confirmed")
+        {
+            NavigationManager.NavigateTo("/");
+        }
 
         if (tourResult is null && hotelResult is null)
         {
