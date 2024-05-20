@@ -2598,7 +2598,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-            "version": "[7.0.15, 7.0.15]"
+            "version": "[7.0.19, 7.0.19]"
           }
         ],
         "frameworkReferences": {
@@ -2606,7 +2606,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.115/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.119/RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
