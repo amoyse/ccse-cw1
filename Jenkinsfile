@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-pat', branch: 'main', url: 'https://github.com/amoyse/pacific-tours.git'}
+                git credentialsId: 'github-pat', branch: 'cw2', url: 'https://github.com/amoyse/pacific-tours.git'}
         }
 
         stage('Build') {
