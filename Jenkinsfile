@@ -21,7 +21,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    sh 'docker build -t amoyse42/pacific-tours:$BUILD_NUMBER .'
+                    sh 'docker build -t amoyse42/pacific-tours .'
                 }
             }
         }
