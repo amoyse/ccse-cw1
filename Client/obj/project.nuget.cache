@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l1ARoA0V6RHSisIpRUNJpiiPT4YrA+tMCMc/zfXCnODPTIFzZhfOtUgOB162EOt9AlMcUrrP3+heK2yGbZOymw==",
+  "dgSpecHash": "e+v5WOBNnj9sUrP0Ngz7hTnNjRjBP6adM90dAJwDTWdmXERxEhJgUZI9cakbI6dgF0ucAS5+nd7aQba13Rvu5A==",
   "success": true,
-  "projectFilePath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/PacificTours.Client.csproj",
+  "projectFilePath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Client/PacificTours.Client.csproj",
   "expectedPackageFiles": [
     "/home/alex/.nuget/packages/microsoft.aspnetcore.authorization/7.0.14/microsoft.aspnetcore.authorization.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components/7.0.14/microsoft.aspnetcore.components.7.0.14.nupkg.sha512",

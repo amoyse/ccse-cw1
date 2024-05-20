@@ -681,11 +681,11 @@
           "buildTransitive/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets": {}
         }
       },
-      "Microsoft.AspNetCore.Components.Authorization/7.0.0": {
+      "Microsoft.AspNetCore.Components.Authorization/7.0.14": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Authorization": "7.0.0",
-          "Microsoft.AspNetCore.Components": "7.0.0"
+          "Microsoft.AspNetCore.Authorization": "7.0.14",
+          "Microsoft.AspNetCore.Components": "7.0.14"
         },
         "compile": {
           "lib/net7.0/Microsoft.AspNetCore.Components.Authorization.dll": {
@@ -5203,10 +5203,10 @@
         "microsoft.aspnetcore.components.analyzers.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Components.Authorization/7.0.0": {
-      "sha512": "9YmIsHP+YRhTSsvHcuQkbk5LO322rj4vYgtBulp1UPfhak/cjnmnqAu6Lu7D4ayzAlEEC4KaR86PZjz8PKOWPA==",
+    "Microsoft.AspNetCore.Components.Authorization/7.0.14": {
+      "sha512": "yqNaOADb0bn/gLVzkaJlQMI03VSzoSCpLyu4MCiZ78tJvOzv3FT0dmQL5Jtvp6tJ8d16W/BrBYJbUJmARw+WxA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.components.authorization/7.0.0",
+      "path": "microsoft.aspnetcore.components.authorization/7.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5214,7 +5214,7 @@
         "THIRD-PARTY-NOTICES.txt",
         "lib/net7.0/Microsoft.AspNetCore.Components.Authorization.dll",
         "lib/net7.0/Microsoft.AspNetCore.Components.Authorization.xml",
-        "microsoft.aspnetcore.components.authorization.7.0.0.nupkg.sha512",
+        "microsoft.aspnetcore.components.authorization.7.0.14.nupkg.sha512",
         "microsoft.aspnetcore.components.authorization.nuspec"
       ]
     },
@@ -12415,7 +12415,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "Microsoft.AspNetCore.Components.Authorization >= 7.0.0",
+      "Microsoft.AspNetCore.Components.Authorization >= 7.0.14",
       "Microsoft.AspNetCore.Components.WebAssembly.Authentication >= 7.0.0",
       "Microsoft.AspNetCore.Components.WebAssembly.Server >= 7.0.14",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 7.0.0",
@@ -12433,11 +12433,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/PacificTours.Server.csproj",
+      "projectUniqueName": "/home/alex/Desktop/2year/ccse/ccse-cw1/Server/PacificTours.Server.csproj",
       "projectName": "PacificTours.Server",
-      "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/PacificTours.Server.csproj",
+      "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Server/PacificTours.Server.csproj",
       "packagesPath": "/home/alex/.nuget/packages/",
-      "outputPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/obj/",
+      "outputPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Server/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/alex/.nuget/NuGet/NuGet.Config"
@@ -12452,11 +12452,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/PacificTours.Client.csproj": {
-              "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/PacificTours.Client.csproj"
+            "/home/alex/Desktop/2year/ccse/ccse-cw1/Client/PacificTours.Client.csproj": {
+              "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Client/PacificTours.Client.csproj"
             },
-            "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj": {
-              "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj"
+            "/home/alex/Desktop/2year/ccse/ccse-cw1/Shared/PacificTours.Shared.csproj": {
+              "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Shared/PacificTours.Shared.csproj"
             }
           }
         }
@@ -12473,7 +12473,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Components.Authorization": {
             "target": "Package",
-            "version": "[7.0.0, )"
+            "version": "[7.0.14, )"
           },
           "Microsoft.AspNetCore.Components.WebAssembly.Authentication": {
             "target": "Package",

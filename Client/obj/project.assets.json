@@ -2531,11 +2531,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/PacificTours.Client.csproj",
+      "projectUniqueName": "/home/alex/Desktop/2year/ccse/ccse-cw1/Client/PacificTours.Client.csproj",
       "projectName": "PacificTours.Client",
-      "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/PacificTours.Client.csproj",
+      "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Client/PacificTours.Client.csproj",
       "packagesPath": "/home/alex/.nuget/packages/",
-      "outputPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/obj/",
+      "outputPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Client/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/alex/.nuget/NuGet/NuGet.Config"
@@ -2550,8 +2550,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj": {
-              "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/PacificTours.Shared.csproj"
+            "/home/alex/Desktop/2year/ccse/ccse-cw1/Shared/PacificTours.Shared.csproj": {
+              "projectPath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Shared/PacificTours.Shared.csproj"
             }
           }
         }

@@ -60,6 +60,10 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<bool>> IsManager()
     {
         var user = await _context.Users.FindAsync(_userManager.GetUserId(User));
+        if (user == null)
+        {
+            return Ok(false.ToJson());
+        }
         var isAdmin = user.IsAdmin;
         return Ok(isAdmin.ToJson());
     }

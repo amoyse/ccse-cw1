@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IG5GX2NP/x35auH+zktzjYo/Qd/AymNGVbKoBfWrto9BaxiFJHi0j65gKuCKnybh4Mpr7MRNnlgte8VqN3876Q==",
+  "dgSpecHash": "x1Du3SumionPwbtGE05V43TKzxhaV4iQ1a8xu5oT0jq0Pd21Qma5he0LtTVmGvpzM8XMWparOPfBhbJbRUZMcw==",
   "success": true,
-  "projectFilePath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Server/PacificTours.Server.csproj",
+  "projectFilePath": "/home/alex/Desktop/2year/ccse/ccse-cw1/Server/PacificTours.Server.csproj",
   "expectedPackageFiles": [
     "/home/alex/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/home/alex/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
@@ -59,7 +59,7 @@
     "/home/alex/.nuget/packages/microsoft.aspnetcore.authorization/7.0.14/microsoft.aspnetcore.authorization.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components/7.0.14/microsoft.aspnetcore.components.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.analyzers/7.0.14/microsoft.aspnetcore.components.analyzers.7.0.14.nupkg.sha512",
-    "/home/alex/.nuget/packages/microsoft.aspnetcore.components.authorization/7.0.0/microsoft.aspnetcore.components.authorization.7.0.0.nupkg.sha512",
+    "/home/alex/.nuget/packages/microsoft.aspnetcore.components.authorization/7.0.14/microsoft.aspnetcore.components.authorization.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.forms/7.0.14/microsoft.aspnetcore.components.forms.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.web/7.0.14/microsoft.aspnetcore.components.web.7.0.14.nupkg.sha512",
     "/home/alex/.nuget/packages/microsoft.aspnetcore.components.webassembly/7.0.14/microsoft.aspnetcore.components.webassembly.7.0.14.nupkg.sha512",

@@ -9,81 +9,81 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = PacificTours.Client
 build_property.RootNamespace = PacificTours.Client
-build_property.ProjectDir = /home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/
+build_property.ProjectDir = /home/alex/Desktop/2year/ccse/ccse-cw1/Client/
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client
+build_property.MSBuildProjectDirectory = /home/alex/Desktop/2year/ccse/ccse-cw1/Client
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/App.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Components/AllBookings.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Components/AllBookings.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BbGxCb29raW5ncy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Components/AllHotels.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Components/AllHotels.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BbGxIb3RlbHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Components/AllTours.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Components/AllTours.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BbGxUb3Vycy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Components/HotelSearch.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Components/HotelSearch.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Ib3RlbFNlYXJjaC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Components/TourSearch.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Components/TourSearch.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Ub3VyU2VhcmNoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/BookingInfo.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/BookingInfo.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9va2luZ0luZm8ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/Bookings.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/Bookings.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9va2luZ3MucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/CancelledBooking.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/CancelledBooking.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FuY2VsbGVkQm9va2luZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/Hotels.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/Hotels.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG90ZWxzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/Index.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/Manager.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/Manager.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWFuYWdlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/ModifyBookingPage.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/ModifyBookingPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTW9kaWZ5Qm9va2luZ1BhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/PaymentPage.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/PaymentPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUGF5bWVudFBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Pages/Tours.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Pages/Tours.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVG91cnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/_Imports.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Shared/MainLayout.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-t5esp80lgr
 
-[/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/Shared/NavMenu.razor]
+[/home/alex/Desktop/2year/ccse/ccse-cw1/Client/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-hp2oc3hcfg

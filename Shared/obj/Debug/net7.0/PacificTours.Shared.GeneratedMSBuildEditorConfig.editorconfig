@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows,browser
 build_property.RootNamespace = PacificTours.Shared
-build_property.ProjectDir = /home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Shared/
+build_property.ProjectDir = /home/alex/Desktop/2year/ccse/ccse-cw1/Shared/
