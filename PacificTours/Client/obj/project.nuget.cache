@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CTdIiTit7LZ13rKyBnGfjYlroMqRdA5AYHyqpK0r9vUcKGj3P5Ovi+UNEAxHh/xZoPE8P5RODEtj09HFikqaPw==",
+  "dgSpecHash": "l1ARoA0V6RHSisIpRUNJpiiPT4YrA+tMCMc/zfXCnODPTIFzZhfOtUgOB162EOt9AlMcUrrP3+heK2yGbZOymw==",
   "success": true,
   "projectFilePath": "/home/alex/Desktop/2year/ccse/ccse-cw1/PacificTours/Client/PacificTours.Client.csproj",
   "expectedPackageFiles": [
@@ -44,7 +44,7 @@
     "/home/alex/.nuget/packages/system.io.pipelines/7.0.0/system.io.pipelines.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/home/alex/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
-    "/home/alex/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/7.0.15/microsoft.netcore.app.runtime.mono.browser-wasm.7.0.15.nupkg.sha512"
+    "/home/alex/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/7.0.19/microsoft.netcore.app.runtime.mono.browser-wasm.7.0.19.nupkg.sha512"
   ],
   "logs": []
 }
