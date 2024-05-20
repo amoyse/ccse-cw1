@@ -21,6 +21,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BlazorCorsPolicy", builder =>
+    {
+        builder.WithOrigins("http://localhost:8081") // Update this to the actual address of your Blazor WASM app
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
