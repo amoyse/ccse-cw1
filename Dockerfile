@@ -5,9 +5,9 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY *.sln .
 COPY PacificTours/*.csproj ./PacificTours/
-COPY PacificTours.Server/*.csproj ./PacificTours.Server/
-COPY PacificTours.Client/*.csproj ./PacificTours.Client/
-COPY PacificTours.Shared/*.csproj ./PacificTours.Shared/
+COPY Server/*.csproj ./PacificTours.Server/
+COPY Client/*.csproj ./PacificTours.Client/
+COPY Shared/*.csproj ./PacificTours.Shared/
 RUN dotnet restore
 
 # Copy everything else and build
