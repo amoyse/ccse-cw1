@@ -22,9 +22,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    dir('.') {
-                        sh 'docker build -f PacificTours/Dockerfile -t amoyse42/pacific-tours PacificTours'
-                    }
+                    sh 'docker build -t amoyse42/pacific-tours .'
                 }
             }
         }
@@ -47,3 +45,4 @@ pipeline {
         }
     }
 }
+
