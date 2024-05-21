@@ -1,32 +1,34 @@
 pipeline {
- 
     agent any
 
- 
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-pat', branch: 'main', url: 'https://github.com/amoyse/pacific-tours.git'}
+                git credentialsId: 'github-pat', branch: 'main', url: 'https://github.com/amoyse/pacific-tours.git'
+            }
         }
 
         stage('Build') {
             steps {
                 script {
-                    sh 'cd PacificTours'
-                    sh 'dotnet restore'
-                    sh 'dotnet build --configuration Release'
+                    dir('PacificTours') {
+                        sh 'dotnet restore'
+                        sh 'dotnet build --configuration Release'
+                    }
                 }
             }
         }
- 
+
         stage('Docker Build') {
             steps {
                 script {
-                    sh 'docker build -t amoyse42/pacific-tours .'
+                    dir('PacificTours') {
+                        sh 'docker build -t amoyse42/pacific-tours .'
+                    }
                 }
             }
         }
- 
+
         stage('Deploy') {
             steps {
                 script {
@@ -37,13 +39,11 @@ pipeline {
                 }
             }
         }
- 
- 
     }
-     post {
+
+    post {
         always {
             cleanWs()
         }
     }
 }
-
